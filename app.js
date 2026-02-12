@@ -1,6 +1,6 @@
 /* Gan-nan Hakka Dict — fuzzy search + import/export + record audio per entry + upload to YOUR Drive (Apps Script) */
 
-const DRIVE_UPLOAD_ENDPOINT = ""; // <-- 粘贴你的 Apps Script Web App URL（以 /exec 结尾）
+const DRIVE_UPLOAD_ENDPOINT = "https://script.google.com/macros/s/AKfycby7Poi19-pkfrG0Ey2JhF_GbiS4B6_CKcZ1sG6ThOta9kOYKsAh4uOnn4qDxfyB1HF5pw/exec"; // <-- 粘贴你的 Apps Script Web App URL（以 /exec 结尾）
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => Array.from(document.querySelectorAll(s));
