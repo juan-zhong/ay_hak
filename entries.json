@@ -1,0 +1,77 @@
+[
+  {
+    "id": "fuzhou_nong",
+    "headword": "侬",
+    "dialect": "fuzhou",
+    "dialectLabel": "福州话",
+    "pos": "part",
+    "posLabel": "语气词",
+    "romanization": "nòng",
+    "ipa": "[nɔŋ˨˩]",
+    "gloss": "你（第二人称）/ 也可作亲昵称呼",
+    "senses": [
+      "你（第二人称代词）",
+      "亲昵：类似“你呀/你这个”"
+    ],
+    "examples": [
+      {
+        "zh": "侬来伓？",
+        "note": "你来吗？"
+      },
+      {
+        "zh": "侬真会讲。",
+        "note": "你真会说（调侃/亲昵）。"
+      }
+    ],
+    "tags": [
+      "常用",
+      "口语"
+    ]
+  },
+  {
+    "id": "shanghai_ala",
+    "headword": "阿拉",
+    "dialect": "shanghainese",
+    "dialectLabel": "上海话",
+    "pos": "pron",
+    "posLabel": "代词",
+    "romanization": "a la",
+    "ipa": "[a˦ la˨]",
+    "gloss": "我们 / 我（视语境）",
+    "senses": [
+      "我们（也可作“我”）"
+    ],
+    "examples": [
+      {
+        "zh": "阿拉晓得。",
+        "note": "我/我们知道。"
+      }
+    ],
+    "tags": [
+      "常用"
+    ]
+  },
+  {
+    "id": "cantonese_nei5",
+    "headword": "你",
+    "dialect": "cantonese",
+    "dialectLabel": "粤语",
+    "pos": "pron",
+    "posLabel": "代词",
+    "romanization": "nei5",
+    "ipa": "[nei̯˩˧]",
+    "gloss": "你（第二人称）",
+    "senses": [
+      "你（第二人称代词）"
+    ],
+    "examples": [
+      {
+        "zh": "你食咗饭未？",
+        "note": "你吃饭了吗？"
+      }
+    ],
+    "tags": [
+      "常用"
+    ]
+  }
+]
