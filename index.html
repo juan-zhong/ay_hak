@@ -1,0 +1,94 @@
+
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>方言词典</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#search">查询</a></li>
+        <li><a href="#browse">浏览</a></li>
+        <li><a href="#about">关于</a></li>
+      </ul>
+    </nav>
+    <h1>DIALECT DICT</h1>
+  </header>
+
+  <section id="search" class="content-section">
+    <h2>查询</h2>
+    <h3>输入汉字 / 拼音 / IPA / 英文释义都可以</h3>
+
+    <div class="searchbar">
+      <input id="q" type="search" placeholder="例如：侬 / nang / [ŋɔŋ] / hello" autocomplete="off" />
+      <button id="btnSearch">搜索</button>
+    </div>
+
+    <div class="filters">
+      <div class="chip-group" aria-label="方言">
+        <button class="chip is-active" data-dialect="all">全部</button>
+        <button class="chip" data-dialect="fuzhou">福州话</button>
+        <button class="chip" data-dialect="shanghainese">上海话</button>
+        <button class="chip" data-dialect="cantonese">粤语</button>
+        <button class="chip" data-dialect="hainese">海南话</button>
+      </div>
+
+      <div class="chip-group" aria-label="词性">
+        <button class="chip is-active" data-pos="all">全部词性</button>
+        <button class="chip" data-pos="n">名词</button>
+        <button class="chip" data-pos="v">动词</button>
+        <button class="chip" data-pos="adj">形容词</button>
+        <button class="chip" data-pos="part">语气词</button>
+      </div>
+
+      <label class="toggle">
+        <input id="toggleIPA" type="checkbox" checked />
+        <span>显示 IPA</span>
+      </label>
+
+      <label class="toggle">
+        <input id="toggleAudio" type="checkbox" checked />
+        <span>显示发音</span>
+      </label>
+    </div>
+
+    <p class="muted" id="hint">
+      点击左侧结果，右侧会展开词条详情；手机上会自动切成上下布局。
+    </p>
+
+    <div id="browse" class="split">
+      <aside class="panel panel-left" aria-label="搜索结果">
+        <div class="panel-head">
+          <h3>结果</h3>
+          <p class="small" id="resultMeta">0 条</p>
+        </div>
+        <div id="results" class="results"></div>
+      </aside>
+
+      <main class="panel panel-right" aria-label="词条详情">
+        <div class="panel-head">
+          <h3>词条</h3>
+          <div class="head-actions">
+            <button id="btnStar" class="icon-btn" disabled title="收藏">☆</button>
+            <button id="btnCopy" class="icon-btn" disabled title="复制">⎘</button>
+          </div>
+        </div>
+        <div id="entry" class="entry empty">
+          <p>先搜一个词，或者点左侧示例结果。</p>
+        </div>
+      </main>
+    </div>
+  </section>
+
+  <footer>
+    <p>© DIALECT DICT</p>
+  </footer>
+
+  <script src="./app.js"></script>
+</body>
+</html>
