@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>方言词典</title>
+  <title>赣南客家话词典</title>
   <link rel="stylesheet" href="./style.css" />
 </head>
 
@@ -16,26 +16,22 @@
         <li><a href="#about">说明</a></li>
       </ul>
     </nav>
-    <h1>DIALECT DICT</h1>
+    <h1>GAN-NAN HAKKA DICT</h1>
   </header>
 
   <section id="search" class="content-section">
     <h2>查询</h2>
-    <h3>汉字 / 转写 / IPA / 释义 / 例句 都可搜</h3>
+    <h3>汉字 / 转写 / IPA / 释义 / 例句 都可搜（支持模糊）</h3>
 
     <div class="searchbar">
-      <input id="q" type="search" placeholder="例如：侬 / nang / [ŋɔŋ] / hello" autocomplete="off" />
+      <input id="q" type="search" placeholder="例如：侬 / nung2 / nung / [nuŋ] / second person" autocomplete="off" />
       <button id="btnSearch">搜索</button>
     </div>
 
     <div class="filters">
       <div class="chip-group" aria-label="方言">
         <button class="chip is-active" data-dialect="all">全部</button>
-        <button class="chip" data-dialect="fuzhou">福州话</button>
-        <button class="chip" data-dialect="shanghainese">上海话</button>
-        <button class="chip" data-dialect="cantonese">粤语</button>
-        <button class="chip" data-dialect="hainese">海南话</button>
-        <button class="chip" data-dialect="other">其他</button>
+        <button class="chip" data-dialect="gannan_hakka">赣南客家话</button>
       </div>
 
       <div class="chip-group" aria-label="词性">
@@ -60,7 +56,7 @@
     </div>
 
     <p class="muted" id="hint">
-      点击左侧结果看详情；在“发音”里可以录音并保存到本机浏览器（IndexedDB）。
+      点击左侧结果看详情；发音支持：录音→本机保存（IndexedDB）→上传到你的 Google Drive（需部署 Apps Script）。
     </p>
 
     <div class="split">
@@ -125,28 +121,28 @@
 
     <div class="card" style="margin-top:18px;">
       <h3>CSV 格式示例</h3>
-      <p class="muted">最少这几列：id, headword, dialect, dialectLabel, pos, posLabel, romanization, ipa, gloss, senses, examples, tags</p>
+      <p class="muted">列表字段：senses/tags 用 ||；examples 用 句子::注释，再用 || 分隔。</p>
       <pre class="codeblock" id="csvExample"></pre>
     </div>
 
     <div class="card" style="margin-top:18px;">
-      <h3>JSON Schema（简化）</h3>
+      <h3>JSON 示例</h3>
       <pre class="codeblock" id="jsonExample"></pre>
     </div>
   </section>
 
   <section id="about" class="content-section">
     <h2>说明</h2>
-    <h3>你可以怎么用它</h3>
+    <h3>Drive 上传怎么接</h3>
     <p>
-      1) 直接部署：把这些文件放进 GitHub Pages 就能用。<br/>
-      2) 换数据：把你的词条做成 CSV/JSON 导入即可。<br/>
-      3) 加后端：把录音上传到 Drive/Box/R2 之类，需要 OAuth/后端（我也能给你接）。
+      你需要把本包里的 <b>apps_script.gs</b> 复制到 Google Apps Script，部署成 Web App，
+      然后把生成的 URL 粘到 <b>app.js</b> 里的 <b>DRIVE_UPLOAD_ENDPOINT</b>。
+      上传会把录音保存到你指定的 Drive 文件夹里（默认 DialectAudio）。
     </p>
   </section>
 
   <footer>
-    <p>© DIALECT DICT</p>
+    <p>© GAN-NAN HAKKA DICT</p>
   </footer>
 
   <script src="./app.js"></script>

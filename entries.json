@@ -1,77 +1,87 @@
 [
   {
-    "id": "fuzhou_nong",
+    "id": "gn_hakka_nung2",
     "headword": "侬",
-    "dialect": "fuzhou",
-    "dialectLabel": "福州话",
-    "pos": "part",
-    "posLabel": "语气词",
-    "romanization": "nòng",
-    "ipa": "[nɔŋ˨˩]",
-    "gloss": "你（第二人称）/ 也可作亲昵称呼",
-    "senses": [
-      "你（第二人称代词）",
-      "亲昵：类似“你呀/你这个”"
-    ],
-    "examples": [
-      {
-        "zh": "侬来伓？",
-        "note": "你来吗？"
-      },
-      {
-        "zh": "侬真会讲。",
-        "note": "你真会说（调侃/亲昵）。"
-      }
-    ],
-    "tags": [
-      "常用",
-      "口语"
-    ]
-  },
-  {
-    "id": "shanghai_ala",
-    "headword": "阿拉",
-    "dialect": "shanghainese",
-    "dialectLabel": "上海话",
+    "dialect": "gannan_hakka",
+    "dialectLabel": "赣南客家话",
     "pos": "pron",
     "posLabel": "代词",
-    "romanization": "a la",
-    "ipa": "[a˦ la˨]",
-    "gloss": "我们 / 我（视语境）",
-    "senses": [
-      "我们（也可作“我”）"
-    ],
-    "examples": [
-      {
-        "zh": "阿拉晓得。",
-        "note": "我/我们知道。"
-      }
-    ],
-    "tags": [
-      "常用"
-    ]
-  },
-  {
-    "id": "cantonese_nei5",
-    "headword": "你",
-    "dialect": "cantonese",
-    "dialectLabel": "粤语",
-    "pos": "pron",
-    "posLabel": "代词",
-    "romanization": "nei5",
-    "ipa": "[nei̯˩˧]",
+    "pron": {
+      "roman": "nung2",
+      "ipa": "[nuŋ˧˥]",
+      "tone": "2",
+      "alt": [
+        "nung",
+        "nùng"
+      ]
+    },
     "gloss": "你（第二人称）",
     "senses": [
       "你（第二人称代词）"
     ],
     "examples": [
       {
-        "zh": "你食咗饭未？",
-        "note": "你吃饭了吗？"
+        "zh": "侬来无？",
+        "note": "你来吗？"
       }
     ],
     "tags": [
       "常用"
-    ]
+    ],
+    "syllables": [
+      "nung2"
+    ],
+    "search": {
+      "aliases": [
+        "你",
+        "侬仔"
+      ],
+      "keywords": [
+        "2sg",
+        "second person"
+      ]
+    }
+  },
+  {
+    "id": "gn_hakka_ngai5",
+    "headword": "𠊎",
+    "dialect": "gannan_hakka",
+    "dialectLabel": "赣南客家话",
+    "pos": "pron",
+    "posLabel": "代词",
+    "pron": {
+      "roman": "ngai5",
+      "ipa": "[ŋai˧˩]",
+      "tone": "5",
+      "alt": [
+        "ngai",
+        "ŋai5"
+      ]
+    },
+    "gloss": "我（第一人称）",
+    "senses": [
+      "我（第一人称代词）"
+    ],
+    "examples": [
+      {
+        "zh": "𠊎爱食。",
+        "note": "我喜欢吃。"
+      }
+    ],
+    "tags": [
+      "常用"
+    ],
+    "syllables": [
+      "ngai5"
+    ],
+    "search": {
+      "aliases": [
+        "我"
+      ],
+      "keywords": [
+        "1sg",
+        "first person"
+      ]
+    }
   }
 ]

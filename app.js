@@ -1,4 +1,6 @@
-/* Dialect Dict Pro (static) — search + import/export + record audio per entry (IndexedDB) */
+/* Gan-nan Hakka Dict — fuzzy search + import/export + record audio per entry + upload to YOUR Drive (Apps Script) */
+
+const DRIVE_UPLOAD_ENDPOINT = ""; // <-- 粘贴你的 Apps Script Web App URL（以 /exec 结尾）
 
 const $ = (s) => document.querySelector(s);
 const $$ = (s) => Array.from(document.querySelectorAll(s));
@@ -28,13 +30,13 @@ const els = {
 };
 
 const STORE_KEYS = {
-  entries: "dialect_dict_entries_v1",
-  stars: "dialect_dict_starred_v1",
+  entries: "gn_hakka_dict_entries_v1",
+  stars: "gn_hakka_dict_starred_v1",
 };
 
 // ---------- IndexedDB (audio blobs) ----------
 const AudioDB = (() => {
-  const DB_NAME = "dialect_dict_audio_db_v1";
+  const DB_NAME = "gn_hakka_audio_db_v1";
   const STORE = "audio";
   let db = null;
 
@@ -98,8 +100,8 @@ const AudioDB = (() => {
 })();
 
 // ---------- data/state ----------
-let baseEntries = [];     // from data/entries.json
-let entries = [];         // current (base or imported)
+let baseEntries = [];
+let entries = [];
 let state = {
   dialect: "all",
   pos: "all",
@@ -110,104 +112,201 @@ let state = {
   starred: new Set(JSON.parse(localStorage.getItem(STORE_KEYS.stars) || "[]")),
 };
 
-function saveStars() {
-  localStorage.setItem(STORE_KEYS.stars, JSON.stringify([...state.starred]));
-}
+function saveStars() { localStorage.setItem(STORE_KEYS.stars, JSON.stringify([...state.starred])); }
 function saveEntriesLocal(list) { localStorage.setItem(STORE_KEYS.entries, JSON.stringify(list)); }
 function loadEntriesLocal() {
   const raw = localStorage.getItem(STORE_KEYS.entries);
   if (!raw) return null;
   try { return JSON.parse(raw); } catch { return null; }
 }
+
+// ---------- fuzzy search ----------
 function norm(s) { return (s || "").toLowerCase().trim(); }
 
-function matches(entry) {
-  if (state.dialect !== "all" && entry.dialect !== state.dialect) return false;
-  if (state.pos !== "all" && entry.pos !== state.pos) return false;
+function normalizeRoman(s) {
+  // keep letters+numbers; strip spaces, hyphens, apostrophes, tone marks
+  return norm(s)
+    .replace(/[ \t\r\n\-_']/g, "")
+    // common superscript tone digits -> normal digits
+    .replace(/[¹]/g, "1").replace(/[²]/g, "2").replace(/[³]/g, "3")
+    .replace(/[⁴]/g, "4").replace(/[⁵]/g, "5").replace(/[⁶]/g, "6")
+    .replace(/[⁷]/g, "7").replace(/[⁸]/g, "8").replace(/[⁹]/g, "9")
+    // remove diacritics (nùng -> nung)
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
 
-  const q = norm(state.query);
-  if (!q) return true;
+function normalizeIPA(s) {
+  return norm(s)
+    .replace(/[\[\]\(\)]/g, "")
+    .replace(/[ˈˌːˑ]/g, "")
+    .replace(/\s+/g, "");
+}
 
-  const hay = [
-    entry.headword,
-    entry.romanization,
-    entry.ipa,
-    entry.gloss,
-    ...(entry.senses || []),
-    ...(entry.tags || []),
-    ...(entry.examples || []).map(x => `${x.zh} ${x.note || ""}`)
-  ].join(" ").toLowerCase();
+function buildSearchText(e) {
+  const pron = e.pron || {};
+  const search = e.search || {};
+  const parts = [
+    e.headword, e.gloss,
+    (pron.roman || ""), (pron.ipa || ""),
+    ...(pron.alt || []),
+    ...(e.senses || []),
+    ...(e.tags || []),
+    ...(e.examples || []).map(x => `${x.zh || ""} ${x.note || ""}`),
+    ...(search.aliases || []),
+    ...(search.keywords || []),
+    ...(e.syllables || []),
+  ];
+  return parts.filter(Boolean).join(" ");
+}
 
-  return hay.includes(q);
+function levenshtein(a, b) {
+  a = a || ""; b = b || "";
+  const m = a.length, n = b.length;
+  if (!m) return n;
+  if (!n) return m;
+  const dp = new Array(n + 1);
+  for (let j = 0; j <= n; j++) dp[j] = j;
+  for (let i = 1; i <= m; i++) {
+    let prev = dp[0];
+    dp[0] = i;
+    for (let j = 1; j <= n; j++) {
+      const tmp = dp[j];
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[j] = Math.min(dp[j] + 1, dp[j - 1] + 1, prev + cost);
+      prev = tmp;
+    }
+  }
+  return dp[n];
+}
+
+function scoreEntry(e, queryRaw) {
+  const q = norm(queryRaw);
+  if (!q) return 0;
+
+  const head = norm(e.headword || "");
+  const pron = e.pron || {};
+  const roman = normalizeRoman(pron.roman || "");
+  const ipa = normalizeIPA(pron.ipa || "");
+  const qRoman = normalizeRoman(q);
+  const qIPA = normalizeIPA(q);
+
+  // high confidence hits
+  if (q && head === q) return 1000;
+  if (qRoman && roman && roman === qRoman) return 900;
+  if (qIPA && ipa && ipa === qIPA) return 850;
+
+  // prefixes
+  if (q && head.startsWith(q)) return 700;
+  if (qRoman && roman.startsWith(qRoman)) return 650;
+
+  // substring in aggregated text
+  const hay = norm(e._searchText || "");
+  let s = 0;
+  if (hay.includes(q)) s += 300;
+
+  // roman substring
+  if (qRoman && roman.includes(qRoman)) s += 260;
+
+  // mild typo tolerance for roman
+  if (qRoman && roman) {
+    const dist = levenshtein(qRoman, roman);
+    if (dist <= 2) s += (200 - dist * 60);
+  }
+
+  // mild tolerance in headword (for 1-char/2-char miss) — optional
+  if (q.length >= 2 && head) {
+    const dist2 = levenshtein(q, head);
+    if (dist2 <= 1) s += 120;
+  }
+
+  return s;
+}
+
+function matchesFilters(e) {
+  if (state.dialect !== "all" && e.dialect !== state.dialect) return false;
+  if (state.pos !== "all" && e.pos !== state.pos) return false;
+  return true;
 }
 
 // ---------- UI render ----------
 function renderResults() {
-  const items = entries.filter(matches);
+  const q = els.q.value || "";
+  state.query = q;
+
+  const pool = entries.filter(matchesFilters);
+  const scored = pool.map(e => ({
+    e,
+    score: scoreEntry(e, q),
+  }));
+
+  // if empty query, keep stable order (score=0); else sort by score desc
+  const items = q.trim()
+    ? scored.filter(x => x.score > 0).sort((a,b) => b.score - a.score).map(x => x.e)
+    : pool;
+
   els.resultMeta.textContent = `${items.length} 条`;
 
   els.results.innerHTML = items.map(e => {
     const badge = `${e.dialectLabel || e.dialect || "—"} · ${e.posLabel || e.pos || "—"}`;
     const starred = state.starred.has(e.id) ? "★" : "☆";
+    const pron = e.pron || {};
+    const sub = [pron.roman, (state.showIPA ? pron.ipa : "")].filter(Boolean).join(" · ");
     return `
       <div class="result-item" data-id="${escapeHtml(e.id)}">
         <div class="result-top">
           <div class="word">${escapeHtml(e.headword || "—")}</div>
           <div class="badge">${starred} ${escapeHtml(badge)}</div>
         </div>
-        <p class="gloss">${escapeHtml(e.gloss || "")}</p>
+        <p class="gloss">${escapeHtml(e.gloss || "")}${sub ? " · " + escapeHtml(sub) : ""}</p>
       </div>
     `;
   }).join("");
 
-  $$(".result-item").forEach(el => {
-    el.addEventListener("click", () => selectEntry(el.dataset.id));
-  });
+  $$(".result-item").forEach(el => el.addEventListener("click", () => selectEntry(el.dataset.id)));
 
   if (!state.selectedId && items[0]) selectEntry(items[0].id);
 
   if (items.length === 0) {
     state.selectedId = null;
     els.entry.classList.add("empty");
-    els.entry.innerHTML = `<p>没有结果。换个关键词试试，或者切换筛选条件。</p>`;
+    els.entry.innerHTML = `<p>没有结果。换个关键词试试（支持 nung2 / nung / nùng / IPA / 英文关键词）。</p>`;
     els.btnStar.disabled = true;
     els.btnCopy.disabled = true;
   }
 }
 
-async function renderEntry(entry) {
-  const isStarred = state.starred.has(entry.id);
-
+async function renderEntry(e) {
+  const isStarred = state.starred.has(e.id);
+  const pron = e.pron || {};
   const metaBits = [
-    entry.dialectLabel ? `<span class="kv">${escapeHtml(entry.dialectLabel)}</span>` : "",
-    entry.posLabel ? `<span class="kv">${escapeHtml(entry.posLabel)}</span>` : (entry.pos ? `<span class="kv">${escapeHtml(entry.pos)}</span>` : ""),
-    entry.romanization ? `<span class="kv">${escapeHtml(entry.romanization)}</span>` : "",
-    (state.showIPA && entry.ipa) ? `<span class="kv">IPA ${escapeHtml(entry.ipa)}</span>` : "",
-    (entry.tags || []).map(t => `<span class="kv">${escapeHtml(t)}</span>`).join("")
+    e.dialectLabel ? `<span class="kv">${escapeHtml(e.dialectLabel)}</span>` : "",
+    e.posLabel ? `<span class="kv">${escapeHtml(e.posLabel)}</span>` : (e.pos ? `<span class="kv">${escapeHtml(e.pos)}</span>` : ""),
+    pron.roman ? `<span class="kv">${escapeHtml(pron.roman)}</span>` : "",
+    (state.showIPA && pron.ipa) ? `<span class="kv">IPA ${escapeHtml(pron.ipa)}</span>` : "",
+    (e.tags || []).map(t => `<span class="kv">${escapeHtml(t)}</span>`).join("")
   ].filter(Boolean).join("");
 
-  const senses = (entry.senses || []).map((s, i) => `<p class="example">${i + 1}. ${escapeHtml(s)}</p>`).join("");
-  const examples = (entry.examples || []).map(ex => `
+  const senses = (e.senses || []).map((s, i) => `<p class="example">${i + 1}. ${escapeHtml(s)}</p>`).join("");
+  const examples = (e.examples || []).map(ex => `
     <div class="example">
       <div>${escapeHtml(ex.zh || "")}</div>
       <div style="color:#999;margin-top:6px;">${escapeHtml(ex.note || "")}</div>
     </div>
   `).join("");
 
-  // audio from IndexedDB
-  const audioKey = `entry:${entry.id}`;
+  const audioKey = `entry:${e.id}`;
   const blob = state.showAudio ? await AudioDB.get(audioKey) : null;
   const hasBlob = !!blob;
   const blobUrl = hasBlob ? URL.createObjectURL(blob) : null;
 
   els.entry.classList.remove("empty");
   els.entry.innerHTML = `
-    <h3>${escapeHtml(entry.headword || "—")}</h3>
+    <h3>${escapeHtml(e.headword || "—")}</h3>
     <div class="meta">${metaBits || ""}</div>
 
     <div class="section">
       <h3>释义</h3>
-      <p style="margin-bottom:14px;">${escapeHtml(entry.gloss || "")}</p>
+      <p style="margin-bottom:14px;">${escapeHtml(e.gloss || "")}</p>
       ${senses || `<p class="muted">暂无更细分义项。</p>`}
     </div>
 
@@ -220,17 +319,19 @@ async function renderEntry(entry) {
       <div class="section">
         <h3>发音</h3>
         <p class="muted" style="margin-bottom:14px;">
-          录音会保存到你的浏览器本机（IndexedDB）。想“上传到云盘”，需要接后端/OAuth。
+          本机保存：IndexedDB。上传到 Drive：需要把 apps_script.gs 部署成 Web App。
         </p>
         <div class="controls">
           <button id="btnMic" class="btn">开启麦克风</button>
           <button id="btnRec" class="btn" disabled>开始录音</button>
           <button id="btnStop" class="btn" disabled>停止录音</button>
-          <button id="btnSaveAudio" class="btn" disabled>保存录音</button>
-          <button id="btnDelAudio" class="btn btn-ghost" ${hasBlob ? "" : "disabled"}>删除录音</button>
+          <button id="btnSaveAudio" class="btn" disabled>保存到本机</button>
+          <button id="btnUploadDrive" class="btn" ${hasBlob ? "" : "disabled"}>上传到我的 Drive</button>
+          <button id="btnDelAudio" class="btn btn-ghost" ${hasBlob ? "" : "disabled"}>删除本机录音</button>
           <button id="btnDownloadAudio" class="btn btn-ghost" ${hasBlob ? "" : "disabled"}>下载录音</button>
         </div>
-        <p class="small" id="audioStatus">${hasBlob ? "已保存录音 ✅" : "暂无录音"}</p>
+        <p class="small" id="audioStatus">${hasBlob ? "已保存本机录音 ✅" : "暂无录音"}</p>
+        <p class="small" id="driveStatus">—</p>
         <audio id="audioPlayer" controls style="width:100%; display:${hasBlob ? "block" : "none"}" src="${hasBlob ? blobUrl : ""}"></audio>
       </div>
     ` : ""}
@@ -240,17 +341,17 @@ async function renderEntry(entry) {
   els.btnStar.textContent = isStarred ? "★" : "☆";
   els.btnCopy.disabled = false;
 
-  if (state.showAudio) wireRecorder(audioKey, entry.headword || "audio");
+  if (state.showAudio) wireRecorderAndDrive(audioKey, e);
 }
 
 function selectEntry(id) {
-  const entry = entries.find(e => e.id === id);
-  if (!entry) return;
+  const e = entries.find(x => x.id === id);
+  if (!e) return;
   state.selectedId = id;
-  renderEntry(entry);
+  renderEntry(e);
 }
 
-// ---------- recorder ----------
+// ---------- recorder + Drive upload ----------
 function pickSupportedMimeType() {
   const candidates = [
     "audio/mp4;codecs=mp4a.40.2",
@@ -264,14 +365,57 @@ function pickSupportedMimeType() {
   return "";
 }
 
-function wireRecorder(audioKey, nameBase) {
+function safeFilename(s) {
+  return String(s || "audio").replace(/[\\/:*?"<>|]/g, "_").slice(0, 50);
+}
+
+function blobToBase64(blob) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = String(reader.result || "");
+      const idx = dataUrl.indexOf("base64,");
+      if (idx === -1) return reject(new Error("No base64"));
+      resolve(dataUrl.slice(idx + 7));
+    };
+    reader.onerror = () => reject(reader.error);
+    reader.readAsDataURL(blob);
+  });
+}
+
+async function uploadToDrive(entryId, headword, blob) {
+  if (!DRIVE_UPLOAD_ENDPOINT) {
+    throw new Error("DRIVE_UPLOAD_ENDPOINT 为空：请先粘贴 Apps Script Web App URL");
+  }
+  const mimeType = blob.type || "audio/webm";
+  const ext = mimeType.includes("mp4") ? "m4a" : (mimeType.includes("webm") ? "webm" : "dat");
+  const filename = `${safeFilename(headword || entryId)}_${entryId}_${new Date().toISOString().replace(/[:.]/g,"-")}.${ext}`;
+
+  const dataBase64 = await blobToBase64(blob);
+  const payload = { entryId, filename, mimeType, dataBase64 };
+
+  const resp = await fetch(DRIVE_UPLOAD_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+  const out = await resp.json();
+  if (!out.ok) throw new Error(out.error || "Upload failed");
+  return out;
+}
+
+function wireRecorderAndDrive(audioKey, entryObj) {
   const btnMic = $("#btnMic");
   const btnRec = $("#btnRec");
   const btnStop = $("#btnStop");
   const btnSave = $("#btnSaveAudio");
+  const btnUp = $("#btnUploadDrive");
   const btnDel = $("#btnDelAudio");
   const btnDl = $("#btnDownloadAudio");
   const audioStatus = $("#audioStatus");
+  const driveStatus = $("#driveStatus");
   const audioPlayer = $("#audioPlayer");
 
   let stream = null;
@@ -280,7 +424,8 @@ function wireRecorder(audioKey, nameBase) {
   let blob = null;
   let url = null;
 
-  function setA(msg){ if (audioStatus) audioStatus.textContent = msg; }
+  const setA = (m) => { if (audioStatus) audioStatus.textContent = m; };
+  const setD = (m) => { if (driveStatus) driveStatus.textContent = m; };
 
   btnMic?.addEventListener("click", async () => {
     if (!navigator.mediaDevices?.getUserMedia) {
@@ -303,6 +448,8 @@ function wireRecorder(audioKey, nameBase) {
     chunks = [];
     blob = null;
     btnSave.disabled = true;
+    btnUp.disabled = true;
+    setD("—");
 
     const mt = pickSupportedMimeType();
     recorder = new MediaRecorder(stream, mt ? { mimeType: mt } : undefined);
@@ -321,7 +468,6 @@ function wireRecorder(audioKey, nameBase) {
       btnSave.disabled = false;
       setA(`已停止（${Math.round(blob.size/1024)} KB），可保存`);
     };
-
     recorder.start();
   });
 
@@ -332,9 +478,10 @@ function wireRecorder(audioKey, nameBase) {
   btnSave?.addEventListener("click", async () => {
     if (!blob) return;
     await AudioDB.set(audioKey, blob);
-    setA("已保存录音 ✅");
+    setA("已保存本机录音 ✅");
     btnDel.disabled = false;
     btnDl.disabled = false;
+    btnUp.disabled = false;
 
     if (url) URL.revokeObjectURL(url);
     url = URL.createObjectURL(blob);
@@ -344,11 +491,28 @@ function wireRecorder(audioKey, nameBase) {
     }
   });
 
+  btnUp?.addEventListener("click", async () => {
+    try {
+      btnUp.disabled = true;
+      setD("上传中…");
+      const saved = await AudioDB.get(audioKey);
+      if (!saved) throw new Error("本机没有录音：先保存到本机");
+      const out = await uploadToDrive(entryObj.id, entryObj.headword, saved);
+      setD(`上传成功 ✅ ${out.fileName} ｜ 打开：${out.viewUrl}`);
+    } catch (e) {
+      console.error(e);
+      setD(`上传失败：${e.message || e}`);
+    } finally {
+      btnUp.disabled = false;
+    }
+  });
+
   btnDel?.addEventListener("click", async () => {
     await AudioDB.del(audioKey);
-    setA("已删除录音");
+    setA("已删除本机录音");
     btnDel.disabled = true;
     btnDl.disabled = true;
+    btnUp.disabled = true;
     if (audioPlayer) {
       audioPlayer.pause();
       audioPlayer.removeAttribute("src");
@@ -363,7 +527,7 @@ function wireRecorder(audioKey, nameBase) {
     if (!saved) return;
     const type = saved.type || "audio/webm";
     const ext = type.includes("mp4") ? "m4a" : (type.includes("webm") ? "webm" : "dat");
-    const fn = `${safeFilename(nameBase)}_${new Date().toISOString().replace(/[:.]/g,"-")}.${ext}`;
+    const fn = `${safeFilename(entryObj.headword || entryObj.id)}_${new Date().toISOString().replace(/[:.]/g,"-")}.${ext}`;
     const a = document.createElement("a");
     a.href = URL.createObjectURL(saved);
     a.download = fn;
@@ -393,8 +557,30 @@ function csvToEntries(csvText) {
       return { zh: (zh||"").trim(), note: (note||"").trim() };
     }).filter(x => x.zh) : [];
 
-    if (!obj.id) obj.id = `${obj.dialect || "x"}_${obj.headword || "entry"}_${i}`;
+    // pron fields (optional in CSV)
+    const pron = {};
+    if (obj.roman) pron.roman = obj.roman;
+    if (obj.ipa) pron.ipa = obj.ipa;
+    if (obj.alt) pron.alt = obj.alt.split("||").map(s=>s.trim()).filter(Boolean);
+    if (obj.tone) pron.tone = obj.tone;
+    obj.pron = pron;
+
+    if (obj.syllables) obj.syllables = obj.syllables.split("||").map(s=>s.trim()).filter(Boolean);
+    else obj.syllables = pron.roman ? [pron.roman] : [];
+
+    const search = {};
+    if (obj.aliases) search.aliases = obj.aliases.split("||").map(s=>s.trim()).filter(Boolean);
+    if (obj.keywords) search.keywords = obj.keywords.split("||").map(s=>s.trim()).filter(Boolean);
+    obj.search = search;
+
+    if (!obj.id) obj.id = `${obj.dialect || "gn_hakka"}_${obj.headword || "entry"}_${i}`;
     if (!obj.headword) obj.headword = obj.word || "";
+    if (!obj.dialect) obj.dialect = "gannan_hakka";
+    if (!obj.dialectLabel) obj.dialectLabel = "赣南客家话";
+
+    // cleanup
+    delete obj.roman; delete obj.ipa; delete obj.alt; delete obj.tone; delete obj.aliases; delete obj.keywords;
+
     out.push(obj);
   }
   return out;
@@ -444,6 +630,12 @@ async function importFile() {
     list.forEach((e, idx) => {
       if (!e.id) e.id = `entry_${idx}`;
       if (!e.headword) e.headword = e.word || "";
+      if (!e.dialect) e.dialect = "gannan_hakka";
+      if (!e.dialectLabel) e.dialectLabel = "赣南客家话";
+      e.pron = e.pron || {};
+      e.search = e.search || {};
+      e.syllables = e.syllables || (e.pron.roman ? [e.pron.roman] : []);
+      e._searchText = buildSearchText(e);
     });
 
     entries = list;
@@ -459,15 +651,17 @@ async function importFile() {
 }
 
 function exportJson() {
-  const text = JSON.stringify(entries, null, 2);
-  const fn = `dialect_dict_entries_${new Date().toISOString().slice(0,10)}.json`;
+  const clean = entries.map(({ _searchText, ...rest }) => rest);
+  const text = JSON.stringify(clean, null, 2);
+  const fn = `gn_hakka_entries_${new Date().toISOString().slice(0,10)}.json`;
   downloadText(fn, text);
   els.exportStatus.textContent = `已导出：${fn}`;
 }
 
 async function resetData() {
   localStorage.removeItem(STORE_KEYS.entries);
-  entries = [...baseEntries];
+  entries = baseEntries.map(e => ({ ...e }));
+  entries.forEach(e => e._searchText = buildSearchText(e));
   state.selectedId = null;
   renderResults();
   els.resetStatus.textContent = "已重置 ✅";
@@ -512,17 +706,17 @@ function wireTopActions() {
   });
 
   els.btnCopy.addEventListener("click", async () => {
-    const entry = entries.find(e => e.id === state.selectedId);
-    if (!entry) return;
-
+    const e = entries.find(x => x.id === state.selectedId);
+    if (!e) return;
+    const pron = e.pron || {};
     const text = [
-      `词：${entry.headword || ""}`,
-      `方言：${entry.dialectLabel || entry.dialect || ""}`,
-      `词性：${entry.posLabel || entry.pos || ""}`,
-      entry.romanization ? `转写：${entry.romanization}` : "",
-      entry.ipa ? `IPA：${entry.ipa}` : "",
-      `释义：${entry.gloss || ""}`,
-      (entry.examples && entry.examples[0]) ? `例句：${entry.examples[0].zh}${entry.examples[0].note ? "（" + entry.examples[0].note + "）" : ""}` : ""
+      `词：${e.headword || ""}`,
+      `方言：${e.dialectLabel || e.dialect || ""}`,
+      `词性：${e.posLabel || e.pos || ""}`,
+      pron.roman ? `转写：${pron.roman}` : "",
+      pron.ipa ? `IPA：${pron.ipa}` : "",
+      `释义：${e.gloss || ""}`,
+      (e.examples && e.examples[0]) ? `例句：${e.examples[0].zh}${e.examples[0].note ? "（" + e.examples[0].note + "）" : ""}` : ""
     ].filter(Boolean).join("\n");
 
     try {
@@ -536,7 +730,6 @@ function wireTopActions() {
 }
 
 function doSearch() {
-  state.query = els.q.value || "";
   state.selectedId = null;
   renderResults();
 }
@@ -550,9 +743,6 @@ function escapeHtml(s) {
     .replace(/"/g, "&quot;")
     .replace(/'/g, "&#039;");
 }
-function safeFilename(s) {
-  return String(s || "audio").replace(/[\\/:*?"<>|]/g, "_").slice(0, 40);
-}
 
 // ---------- init ----------
 async function loadBaseEntries() {
@@ -563,24 +753,25 @@ async function loadBaseEntries() {
 
 function fillExamples() {
   els.csvExample.textContent =
-`id,headword,dialect,dialectLabel,pos,posLabel,romanization,ipa,gloss,senses,examples,tags
-fuzhou_nong,侬,fuzhou,福州话,part,语气词,nòng,[nɔŋ˨˩],你（第二人称）,"你（第二人称）||亲昵用法","侬来伓？::你来吗？||侬真会讲。::你真会说（亲昵/调侃）","常用||口语"`;
+`id,headword,dialect,dialectLabel,pos,posLabel,roman,ipa,alt,tone,gloss,senses,examples,tags,syllables,aliases,keywords
+gn_hakka_nung2,侬,gannan_hakka,赣南客家话,pron,代词,nung2,[nuŋ˧˥],"nung||nùng",2,你（第二人称）,"你（第二人称代词）","侬来无？::你来吗？","常用","nung2","你||侬仔","2sg||second person"`;
 
   els.jsonExample.textContent =
 `[
   {
-    "id": "fuzhou_nong",
+    "id": "gn_hakka_nung2",
     "headword": "侬",
-    "dialect": "fuzhou",
-    "dialectLabel": "福州话",
-    "pos": "part",
-    "posLabel": "语气词",
-    "romanization": "nòng",
-    "ipa": "[nɔŋ˨˩]",
-    "gloss": "你（第二人称）/ 也可作亲昵称呼",
-    "senses": ["你（第二人称代词）", "亲昵：类似“你呀/你这个”"],
-    "examples": [{"zh": "侬来伓？", "note": "你来吗？"}],
-    "tags": ["常用", "口语"]
+    "dialect": "gannan_hakka",
+    "dialectLabel": "赣南客家话",
+    "pos": "pron",
+    "posLabel": "代词",
+    "pron": { "roman": "nung2", "ipa": "[nuŋ˧˥]", "tone": "2", "alt": ["nung", "nùng"] },
+    "gloss": "你（第二人称）",
+    "senses": ["你（第二人称代词）"],
+    "examples": [{"zh":"侬来无？","note":"你来吗？"}],
+    "tags": ["常用"],
+    "syllables": ["nung2"],
+    "search": { "aliases": ["你","侬仔"], "keywords": ["2sg","second person"] }
   }
 ]`;
 }
@@ -590,17 +781,22 @@ async function init() {
   await AudioDB.open();
 
   baseEntries = await loadBaseEntries();
+  baseEntries.forEach(e => e._searchText = buildSearchText(e));
+
   const local = loadEntriesLocal();
-  entries = Array.isArray(local) && local.length ? local : [...baseEntries];
+  entries = Array.isArray(local) && local.length ? local : baseEntries.map(e => ({ ...e }));
+  entries.forEach(e => e._searchText = e._searchText || buildSearchText(e));
 
   wireChips();
   wireTopActions();
 
   els.btnSearch.addEventListener("click", doSearch);
-  els.q.addEventListener("keydown", (e) => { if (e.key === "Enter") doSearch(); });
+  els.q.addEventListener("keydown", (ev) => { if (ev.key === "Enter") doSearch(); });
+  els.q.addEventListener("input", () => { renderResults(); });
 
   els.toggleIPA.addEventListener("change", () => {
     state.showIPA = !!els.toggleIPA.checked;
+    renderResults();
     if (state.selectedId) selectEntry(state.selectedId);
   });
 
