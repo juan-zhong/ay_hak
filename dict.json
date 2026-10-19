@@ -1,0 +1,48 @@
+{
+  "name": "AYHAK 安远话词典",
+  "note": "示例数据：三个词条的 IPA 取自 AYHAK 页面的图片标题，乡镇和例句待补。正式数据替换本文件即可。",
+  "entries": [
+    {
+      "id": "vu-xa",
+      "hanzi": "屋下",
+      "roman": "",
+      "ipa": "vu⁴⁵.xɑ³⁴",
+      "pos": "n",
+      "variety": "",
+      "senses": ["家；家里"],
+      "examples": [],
+      "tags": ["示例", "居住"],
+      "audio": "",
+      "notes": "",
+      "speaker": ""
+    },
+    {
+      "id": "xian-cheng",
+      "hanzi": "县城",
+      "roman": "",
+      "ipa": "ɥʊ̃ŋ⁴⁵.t͡sʰɜ̃ŋ³²⁴",
+      "pos": "n",
+      "variety": "",
+      "senses": ["县城（安远县城）"],
+      "examples": [],
+      "tags": ["示例", "地名"],
+      "audio": "",
+      "notes": "",
+      "speaker": ""
+    },
+    {
+      "id": "xinshan-da-shichang",
+      "hanzi": "欣山大市场",
+      "roman": "",
+      "ipa": "siŋ³⁴.sɑ̃³⁴.tʰɑ⁴⁵.si⁵².tsɑŋ⁴¹",
+      "pos": "n",
+      "variety": "",
+      "senses": ["欣山大市场（县城的农贸市场）"],
+      "examples": [],
+      "tags": ["示例", "地名"],
+      "audio": "",
+      "notes": "",
+      "speaker": ""
+    }
+  ]
+}

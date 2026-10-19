@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>AYHAK · 安远话植物图集</title>
+  <meta name="description" content="拍植物，记语言：安远话可食植物图集。照片、汉字和 IPA 叫法、录音、学名，以及生长环境和吃法。网页版与附二维码的纸质版。" />
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <a class="skip" href="#about">跳到正文</a>
+
+  <nav class="page-nav" aria-label="站点导航">
+    <a href="https://juan-zhong.github.io/me/fieldwork-zh.html">← AYHAK</a>
+    <a href="./index.html">词典</a>
+    <a href="./plants.html" aria-current="page">植物图集</a>
+    <a href="#example">从田里到厨房</a>
+    <a href="#atlas">图集</a>
+    <a href="#method">拍照也是记录</a>
+    <a href="#join">参与</a>
+  </nav>
+
+  <header class="hero">
+    <p class="kicker">AYHAK · ETHNOBOTANY</p>
+    <h1>安远话植物图集</h1>
+    <p class="subtitle">拍植物，记语言</p>
+    <p class="intro">我们为安远本地 22 种能吃的植物做了一本图集。每种植物都有不同生长阶段的照片，有汉字和 IPA 写下的安远话叫法、录音和学名，还有它长在哪里、怎么吃的记录。</p>
+    <div class="buttons">
+      <a class="btn primary" href="#atlas">看图集</a>
+      <a class="btn" href="#example">从田里到厨房</a>
+      <a class="btn" href="#join">提供叫法和照片</a>
+    </div>
+    <p class="status" id="plantStatus">22 种 · 江西安远</p>
+  </header>
+
+  <main>
+    <!-- ========= 关于 ========= -->
+    <section id="about" class="content-section">
+      <h2>关于</h2>
+      <p>安远话是江西安远县中部说的一种客家话。年轻一代上学、工作都用普通话，长辈们关于本地植物的知识越来越难传下去。</p>
+      <p>植物的叫法很难只靠词表记录。一个叫法的意思，离不开这种植物长什么样、长在哪里、什么季节有、怎么做来吃。所以图集里的每一种植物，都把这些放在一起：</p>
+
+      <div class="pillars">
+        <div class="card"><span class="num">01</span><h3>照片</h3><p class="muted">不同生长阶段的样子，从地里到做好的菜。</p></div>
+        <div class="card"><span class="num">02</span><h3>叫法</h3><p class="muted">汉字和 IPA，标明是哪里的说法。</p></div>
+        <div class="card"><span class="num">03</span><h3>录音</h3><p class="muted">发音人说的叫法，网页上点一下就能听。</p></div>
+        <div class="card"><span class="num">04</span><h3>学名</h3><p class="muted">能确定的，附上植物学名。</p></div>
+        <div class="card"><span class="num">05</span><h3>环境和吃法</h3><p class="muted">长在哪里、什么时候采、怎么做。</p></div>
+      </div>
+    </section>
+
+    <!-- ========= 例子：薯 ========= -->
+    <section id="example" class="content-section">
+      <h2>从田里到厨房</h2>
+      <p>以 <b>薯</b> <span class="ipa">/sé/</span> 为例。薯是本地种的大薯（<i>Dioscorea alata</i>）。给薯拍照的时候，我们自然会问：什么时候挖？怎么处理？接着再拍用薯做的东西，又问出了更多叫法。</p>
+
+      <div class="flow" aria-label="从薯到薯做的食物">
+        <figure class="flow-root">
+          <img src="images/plants/shu-tuber.jpg" alt="薯" loading="lazy" />
+          <figcaption><b>薯</b> <span class="ipa">/sé/</span></figcaption>
+        </figure>
+        <div class="flow-arrow" aria-hidden="true">→</div>
+        <div class="flow-items">
+          <figure><img src="images/plants/shu-ban.jpg" alt="薯粄" loading="lazy" /><figcaption><b>薯粄</b> <span class="ipa">/sé.pɑ̃̌/</span><br><span class="small">薯做的米粄</span></figcaption></figure>
+          <figure><img src="images/plants/shu-bao.jpg" alt="薯包" loading="lazy" /><figcaption><b>薯包</b> <span class="ipa">/sé.pō/</span></figcaption></figure>
+          <figure><img src="images/plants/shu-jiu.jpg" alt="薯酒" loading="lazy" /><figcaption><b>薯酒</b> <span class="ipa">/sé.tsy̌/</span><br><span class="small">薯酿的酒</span></figcaption></figure>
+        </div>
+      </div>
+
+      <p>跟着一种植物从田里走到厨房，我们记下了一串复合词，还有挖、处理、做菜时用的说法。这些是单靠一张词表问不出来的。</p>
+    </section>
+
+    <!-- ========= 图集 ========= -->
+    <section id="atlas" class="content-section wide">
+      <h2>图集</h2>
+      <h3>点小图换照片，点 ▶ 听发音；打开“二维码”可以预览纸质版</h3>
+
+      <div class="plant-tools">
+        <div class="searchbar" style="flex:1 1 280px;margin:0;">
+          <input id="pq" type="search" placeholder="搜安远话、IPA、普通话、学名…" autocomplete="off" aria-label="搜索植物" />
+        </div>
+        <div class="chip-group" id="catChips" aria-label="类别">
+          <span class="chip-label">类别</span>
+          <button class="chip is-active" data-cat="all">全部</button>
+        </div>
+        <label class="toggle"><input id="toggleQR" type="checkbox" /> <span>二维码</span></label>
+        <button class="btn sm btn-ghost" id="btnPrint">打印 / 存 PDF</button>
+      </div>
+
+      <div class="plant-grid" id="plantGrid">
+        <p class="muted">载入中…</p>
+      </div>
+    </section>
+
+    <!-- ========= 方法 ========= -->
+    <section id="method" class="content-section">
+      <h2>拍照也是记录</h2>
+      <p>在很多田野调查里，图片只是用来引出说法的道具。在这本图集里，照片是在记录的过程中拍的，本身就是记录的一部分：拍什么、拍植物的哪个阶段，决定了接下来会问到什么、录下什么。</p>
+
+      <div class="pillars three">
+        <div class="card">
+          <span class="num">01</span>
+          <h3>引出说法</h3>
+          <p class="muted">拍植物，引出采收和处理的说法；拍做好的食物，又引出新的复合词。</p>
+        </div>
+        <div class="card">
+          <span class="num">02</span>
+          <h3>扩展记录</h3>
+          <p class="muted">每个条目把一个叫法和一张照片、一个地方、一种做法、一段录音连在一起。</p>
+        </div>
+        <div class="card">
+          <span class="num">03</span>
+          <h3>带回社区</h3>
+          <p class="muted">网页版把照片和录音连在一起；纸质版用二维码播放同样的录音。孩子、学说安远话的人、不常用手机的长辈，都能用自己习惯的方式看、听。</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:40px;">我们怎么做</h3>
+      <ol>
+        <li><b>拍照</b>：在菜园、田里、山上和市场，拍植物不同阶段的样子，也拍用它做出来的食物。</li>
+        <li><b>问叫法</b>：请发音人看照片说叫法，并说明是哪个乡镇、哪个村的说法。</li>
+        <li><b>追问</b>：顺着照片问什么时候采、怎么处理、做成什么，记下新出现的词。</li>
+        <li><b>录音、转写</b>：每个叫法录两三遍，用 IPA 转写，和发音人一起核对。</li>
+        <li><b>回馈</b>：网页版免费开放，纸质版先送给参与的发音人和家乡的学校。</li>
+      </ol>
+      <p class="muted">录音和照片都会先征得发音人同意，署名方式由发音人决定。</p>
+    </section>
+
+    <!-- ========= 参与 ========= -->
+    <section id="join" class="content-section">
+      <h2>参与</h2>
+      <p>你家里人怎么叫这些植物？你们村有没有别的叫法？用它们做过什么吃的？欢迎发来照片、叫法或者一段录音，会说多少都可以。</p>
+      <div class="buttons" style="justify-content:flex-start;">
+        <a class="btn primary" href="mailto:juanzhon@buffalo.edu?subject=AYHAK%20植物图集">发邮件给我们</a>
+        <a class="btn" href="https://juan-zhong.github.io/me/fieldwork-zh.html#join">参加安远话复健会</a>
+      </div>
+    </section>
+
+    <!-- ========= 会议（暂时隐藏：评审结束、录用后删掉这一行和下面的 HIDDEN-END 那一行即可恢复）=========
+    <section id="icldc" class="content-section">
+      <h2>会议报告</h2>
+      <p class="pub" lang="en"><b>Photographing Plants, Documenting Language: An Ethnobotanical Photo Book as a Documentation Method for Anyuan Hakka</b></p>
+      <p class="muted">投稿：ICLDC 2027（International Conference on Language Documentation and Conservation），会议主题 Arts Sustaining Language。</p>
+      <p class="muted">报告讨论：当拍照成为记录流程的一部分，而不只是传播成果的工具时，会发生什么。我们认为拍照在三个环节起作用：影响问出什么说法，扩大“记录”所包含的内容，以及开辟把语言带回社区的新途径。</p>
+    </section>
+    HIDDEN-END -->
+  </main>
+
+  <footer>
+    <p>AYHAK · 联系方式：juanzhon AT buffalo DOT edu</p>
+    <p>© <span id="year">2026</span> Juan Zhong · 照片与录音未经许可请勿转载</p>
+  </footer>
+
+  <script src="./vendor/qrcode.js" defer></script>
+  <script src="./plants.js" defer></script>
+</body>
+</html>
