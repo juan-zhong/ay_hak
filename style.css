@@ -2,7 +2,7 @@
    AYHAK · 安远话 — shared stylesheet
    Visual language follows juan-zhong.github.io/me (fieldwork page):
    Helvetica Neue light, wide letter-spacing, uppercase h2,
-   hairlines and square buttons. AYHAK adds its own palette (paper, mugwort olive, yam purple) and serif CJK headwords.
+   hairlines and square buttons. AYHAK adds its own palette (paper, mugwort olive, yam purple); one sans-serif family throughout.
    ========================================================= */
 
 :root {
@@ -22,10 +22,11 @@
   --accent-soft: #e7e9db;
   --ipa: #7a5f7d;         /* 薯：灰紫，用于 IPA */
   --danger: #a33;
-  --font: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  /* 词头：拉丁字母仍用 Helvetica，汉字用宋体，呼应纸质图集 */
-  --head-font: 'Helvetica Neue', Helvetica, Arial, 'Songti SC', 'STSong', 'Noto Serif SC', 'Noto Serif CJK SC', 'Source Han Serif SC', 'SimSun', serif;
-  --ipa-font: 'Charis SIL', 'Doulos SIL', 'Gentium Plus', 'Noto Sans', 'Helvetica Neue', Arial, sans-serif;
+  --font: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Source Han Sans SC', 'Microsoft YaHei', Arial, sans-serif;
+  /* 全站一套无衬线：拉丁字母 Helvetica Neue，汉字苹方（与 juan-zhong.github.io/me 一致） */
+  --head-font: var(--font);
+  /* IPA：用覆盖国际音标的无衬线系统字体，避免和正文混出两种字形；不加载外部字体（国内可能打不开） */
+  --ipa-font: 'Lucida Grande', 'Segoe UI', 'Noto Sans', 'DejaVu Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -253,7 +254,7 @@ p {
 }
 .result:hover { background: var(--hover); }
 .result.is-active { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); }
-.result .hw { font-family: var(--head-font); font-size: 21px; font-weight: 400; color: var(--ink); letter-spacing: 0.08em; }
+.result .hw { font-family: var(--head-font); font-size: 21px; font-weight: 300; color: var(--ink); letter-spacing: 0.08em; }
 .result .ipa { font-size: 14px; margin-left: 6px; }
 .result .gl { font-size: 13px; color: var(--faint); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .result .star { float: right; color: var(--faint); font-size: 13px; }
@@ -261,7 +262,7 @@ p {
 
 .entry { padding: 26px 26px 30px; }
 .entry.empty p { color: var(--faint); font-size: 15px; }
-.entry .headword { font-family: var(--head-font); font-size: 42px; font-weight: 400; color: var(--ink); letter-spacing: 0.12em; line-height: 1.3; }
+.entry .headword { font-family: var(--head-font); font-size: 42px; font-weight: 300; color: var(--ink); letter-spacing: 0.12em; line-height: 1.3; }
 .entry .pron { margin: 6px 0 14px; font-size: 18px; }
 .entry .pron .roman { color: var(--muted); margin-right: 12px; letter-spacing: 0.06em; }
 .entry .meta { margin-bottom: 18px; }
@@ -322,7 +323,7 @@ code { font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 0.9em; bac
 .plant .photo img { width: 100%; height: 100%; object-fit: cover; }
 .plant .photo .nophoto { height: 100%; display: flex; align-items: center; justify-content: center; color: var(--faintest); font-size: 13px; letter-spacing: 0.15em; }
 .plant .body { padding: 18px 20px 20px; flex: 1; display: flex; flex-direction: column; }
-.plant .name { font-family: var(--head-font); font-size: 30px; font-weight: 400; color: var(--ink); letter-spacing: 0.12em; line-height: 1.3; }
+.plant .name { font-family: var(--head-font); font-size: 30px; font-weight: 300; color: var(--ink); letter-spacing: 0.12em; line-height: 1.3; }
 .plant .name .ipa { font-size: 16px; margin-left: 8px; letter-spacing: 0.02em; }
 .plant dl { display: grid; grid-template-columns: auto 1fr; gap: 3px 14px; margin: 12px 0; font-size: 14px; }
 .plant dt { color: var(--faintest); letter-spacing: 0.1em; font-size: 12px; padding-top: 2px; }
@@ -428,7 +429,7 @@ footer p {
   padding: 14px 2px 4px;
 }
 .pillars .num { color: var(--accent); font-weight: 600; }
-.flow figcaption b, .derived .dname b { font-family: var(--head-font); font-weight: 600; }
+.flow figcaption b, .derived .dname b { font-family: var(--head-font); font-weight: 500; }
 .status { color: var(--faint); }
 ::selection { background: var(--accent-soft); }
 
@@ -444,12 +445,12 @@ footer p {
 .cards .card .more { margin-top: auto; font-size: 13px; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; }
 .cards .card .more:hover { color: var(--ink); }
 
-.faq dt { font-weight: 600; margin-top: 22px; color: var(--text); font-size: 17px; }
+.faq dt { font-weight: 500; margin-top: 22px; color: var(--text); font-size: 17px; }
 .faq dt::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--accent); margin-right: 10px; vertical-align: middle; }
 .faq dd { margin: 6px 0 0 16px; color: var(--muted); font-weight: 300; font-size: 17px; line-height: 1.8; }
 
 .gallery-group { margin-bottom: 48px; }
-.gallery-group h3 { color: var(--text); font-family: var(--head-font); font-size: 22px; font-weight: 400; margin-bottom: 18px; }
+.gallery-group h3 { color: var(--text); font-family: var(--head-font); font-size: 22px; font-weight: 300; margin-bottom: 18px; }
 .gallery-group h3 .en { font-family: var(--font); font-size: 14px; color: var(--faint); letter-spacing: 0.12em; text-transform: uppercase; margin-right: 8px; }
 .gallery-group h3 .ipa { font-size: 15px; margin-left: 6px; }
 .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
@@ -470,7 +471,11 @@ a.proj:hover img { opacity: 0.85; }
 a.proj:hover { color: inherit; }
 .proj .tag { align-self: flex-start; margin: 12px 0 6px; }
 .proj .tag.live { border-color: var(--accent); color: var(--accent); }
-.proj b { font-family: var(--head-font); font-weight: 600; font-size: 19px; color: var(--ink); letter-spacing: 0.06em; }
+.proj b { font-family: var(--head-font); font-weight: 500; font-size: 19px; color: var(--ink); letter-spacing: 0.06em; }
 .proj span.desc { font-size: 15px; color: var(--muted); font-weight: 300; line-height: 1.7; margin-top: 4px; }
 .proj .more { font-size: 13px; letter-spacing: 0.08em; color: var(--accent); font-weight: 600; margin-top: 8px; }
 .proj img.cutout { object-fit: contain; padding: 10px; }
+
+/* 小标题统一：中等字重、正文色 */
+.card h3, .pillars .card h3 { font-weight: 500; color: var(--text); letter-spacing: 0.06em; }
+strong, b { font-weight: 500; }
