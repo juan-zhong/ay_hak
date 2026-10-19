@@ -3,174 +3,150 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>AYHAK · 安远话词典</title>
-  <meta name="description" content="安远话（江西安远客家话）社区词典：汉字、IPA、释义、例句与录音。" />
-  <link rel="stylesheet" href="./style.css" />
+  <title>AYHAK · 安远话记录计划</title>
+  <meta name="description" content="AYHAK 安远话记录计划：记录江西安远客家话的词汇、语音和故事。安远话词典、植物图集、复健会。" />
+  <link rel="alternate" hreflang="en" href="./en.html" />
+  <link rel="stylesheet" href="./style.css?v=20261019b" />
 </head>
 
 <body>
-  <a class="skip" href="#search">跳到正文</a>
+  <a class="skip" href="#main">跳到正文</a>
 
   <nav class="page-nav" aria-label="站点导航">
-    <a href="https://juan-zhong.github.io/me/fieldwork-zh.html">← AYHAK</a>
-    <a href="./index.html" aria-current="page">词典</a>
+    <a href="https://juan-zhong.github.io/me/">← Juan Zhong</a>
+    <a href="./index.html" aria-current="page">AYHAK</a>
+    <a href="./dict.html">词典</a>
     <a href="./plants.html">植物图集</a>
-    <a href="#manage">数据</a>
-    <a href="#about">说明</a>
+    <a href="#join">复健会</a>
+    <a href="#questions">常见问题</a>
+    <a href="#gallery">安远影像</a>
+    <a href="./en.html" lang="en">English</a>
   </nav>
 
   <header class="hero">
-    <p class="kicker">AYHAK DICTIONARY</p>
-    <h1>安远话词典</h1>
-    <p class="subtitle">一个词一个词地记下来</p>
-    <p class="intro">收录安远话的词汇、发音、释义和例句。每个乡镇、每个村的说法都算数，同一个意思可以有好几种说法。</p>
+    <p class="kicker">AYHAK</p>
+    <h1>安远话记录计划</h1>
+    <p class="subtitle">一起来讲安远话</p>
+    <p class="intro">安远话是江西省安远县人日常说的地方话。现在会说的年轻人越来越少。我们记录安远话的词汇、语音和故事，一起讲安远话，学安远话。</p>
     <div class="buttons">
-      <a class="btn primary" href="#search">开始查词</a>
-      <a class="btn" href="./plants.html">安远话植物图集</a>
-      <a class="btn" href="mailto:juanzhon@buffalo.edu?subject=AYHAK%20词典">补充说法</a>
+      <a class="btn primary" href="#projects">看看项目</a>
+      <a class="btn" href="#join">参加复健会</a>
+      <a class="btn" href="mailto:juanzhon@buffalo.edu">联系我们</a>
     </div>
-    <p class="status" id="heroStatus">— 条词条</p>
+    <p class="status">2021 年至今 · 江西安远</p>
   </header>
 
-  <main>
-    <section id="search" class="content-section wide">
-      <h2>查询</h2>
-      <h3>汉字 / 拼写 / IPA / 释义 / 例句 都可以搜，支持模糊匹配</h3>
-
-      <div class="searchbar">
-        <input id="q" type="search" placeholder="例如：屋下 / vu xa / [vu⁴⁵] / 家" autocomplete="off" aria-label="搜索词条" />
-        <button id="btnSearch" class="btn primary">搜索</button>
-      </div>
-
-      <div class="filters">
-        <div class="chip-group" id="varietyChips" aria-label="乡镇">
-          <span class="chip-label">乡镇</span>
-          <button class="chip is-active" data-variety="all">全部</button>
-        </div>
-
-        <div class="chip-group" id="posChips" aria-label="词性">
-          <span class="chip-label">词性</span>
-          <button class="chip is-active" data-pos="all">全部</button>
-          <button class="chip" data-pos="n">名词</button>
-          <button class="chip" data-pos="v">动词</button>
-          <button class="chip" data-pos="adj">形容词</button>
-          <button class="chip" data-pos="pron">代词</button>
-          <button class="chip" data-pos="part">语气词</button>
-          <button class="chip" data-pos="other">其他</button>
-        </div>
-      </div>
-
-      <div class="filters">
-        <label class="toggle"><input id="toggleIPA" type="checkbox" checked /> <span>显示 IPA</span></label>
-        <label class="toggle"><input id="toggleAudio" type="checkbox" checked /> <span>显示发音</span></label>
-        <label class="toggle"><input id="toggleStarred" type="checkbox" /> <span>只看收藏</span></label>
-      </div>
-
-      <div class="split">
-        <aside class="panel panel-left" aria-label="搜索结果">
-          <div class="panel-head">
-            <h3>结果</h3>
-            <p class="small" id="resultMeta">0 条</p>
-          </div>
-          <div id="results" class="results" role="listbox"></div>
-        </aside>
-
-        <article class="panel panel-right" aria-label="词条详情" aria-live="polite">
-          <div class="panel-head">
-            <h3>词条</h3>
-            <div class="head-actions">
-              <button id="btnStar" class="icon-btn" disabled title="收藏" aria-label="收藏">☆</button>
-              <button id="btnLink" class="icon-btn" disabled title="复制链接" aria-label="复制链接">🔗</button>
-              <button id="btnCopy" class="icon-btn" disabled title="复制词条" aria-label="复制词条">⎘</button>
-            </div>
-          </div>
-          <div id="entry" class="entry empty">
-            <p>先搜一个词，或者点左边的结果。</p>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section id="manage" class="content-section wide">
-      <h2>数据</h2>
-      <h3>导入 / 导出 / 重置 · 纯静态网页，可以直接放在 GitHub Pages</h3>
-      <p class="muted">网页默认读取仓库里的 <code>data/dict.json</code>。在这里导入的数据只保存在你自己的浏览器里，别人看不到；要正式更新词典，请把导出的 JSON 替换掉仓库里的 <code>data/dict.json</code>。</p>
-
-      <div class="manage-grid">
-        <div class="card">
-          <h3>导入（JSON / CSV）</h3>
-          <p class="muted">导入后会覆盖当前浏览器里的词条。</p>
-          <div class="controls">
-            <input id="fileImport" type="file" accept=".json,.csv,text/csv,application/json" />
-            <button id="btnImport" class="btn sm">导入</button>
-          </div>
-          <p class="small" id="importStatus">未导入</p>
-        </div>
-
-        <div class="card">
-          <h3>导出</h3>
-          <p class="muted">导出的是词条文本。浏览器里的录音存在 IndexedDB，不会打包进 JSON。</p>
-          <div class="controls">
-            <button id="btnExport" class="btn sm">导出 JSON</button>
-            <button id="btnExportCSV" class="btn sm btn-ghost">导出 CSV</button>
-            <button id="btnClearAudio" class="btn sm btn-ghost">清空本机录音</button>
-          </div>
-          <p class="small" id="exportStatus">—</p>
-        </div>
-
-        <div class="card">
-          <h3>重置</h3>
-          <p class="muted">丢掉浏览器里的修改，回到仓库里的 <code>data/dict.json</code>。</p>
-          <div class="controls">
-            <button id="btnReset" class="btn sm btn-danger">重置数据</button>
-          </div>
-          <p class="small" id="resetStatus">当前数据来源：—</p>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:20px;">
-        <h3>CSV 格式</h3>
-        <p class="muted">第一行是表头。<code>senses</code> 和 <code>tags</code> 用 <code>||</code> 分隔；<code>examples</code> 写成 <code>例句::IPA::翻译</code>（IPA 可省略，写成 <code>例句::翻译</code>），多条之间用 <code>||</code> 分隔。</p>
-        <pre class="codeblock" id="csvExample"></pre>
-      </div>
-
-      <div class="card" style="margin-top:20px;">
-        <h3>JSON 格式</h3>
-        <pre class="codeblock" id="jsonExample"></pre>
-      </div>
-    </section>
-
+  <main id="main">
     <section id="about" class="content-section">
-      <h2>说明</h2>
-
-      <h3>关于这部词典</h3>
-      <p>这是 <a href="https://juan-zhong.github.io/me/fieldwork-zh.html">AYHAK 安远话记录计划</a> 的一部分。词条来自和安远发音人的合作记录。每个词条都标了乡镇，因为安远话没有唯一的“标准说法”。</p>
-      <p>发现说法不一样、写错了，或者想补充你们村的说法，欢迎<a href="mailto:juanzhon@buffalo.edu?subject=AYHAK%20词典">写信告诉我们</a>。</p>
-
-      <h3>发音</h3>
+      <h2>关于</h2>
+      <p>AYHAK 是由安远本地人发起的社区项目。我们遵循几条简单的原则：</p>
       <ul>
-        <li>词条里的 <code>audio</code> 字段可以指向仓库里的录音文件，例如 <code>audio/vu-xa.mp3</code>。</li>
-        <li>也可以在词条页直接录音：录音先保存在本机浏览器（IndexedDB），可以试听、下载，或者上传到 Google Drive。</li>
-        <li>录音前请先征得发音人同意。</li>
+        <li>说安远话的人是合作伙伴。</li>
+        <li>每个乡镇、每个村的说法都算数，安远话没有唯一的“标准说法”。</li>
+        <li>做出来的东西首先回馈给家乡。</li>
       </ul>
+    </section>
 
-      <h3>上传到 Google Drive</h3>
-      <ol>
-        <li>打开 <a href="https://script.google.com">script.google.com</a>，新建项目，把仓库里的 <code>apps_script.gs</code> 全部粘进去。</li>
-        <li>改掉脚本顶部的 <code>UPLOAD_TOKEN</code>（随便设一串只有你知道的字符）。</li>
-        <li>部署 → 新部署 → 类型选 Web App；执行身份选“我”，访问权限选“任何人”。</li>
-        <li>把生成的 URL 填进 <code>app.js</code> 顶部的 <code>DRIVE_UPLOAD_ENDPOINT</code>，把同一串口令填进 <code>DRIVE_UPLOAD_TOKEN</code>。</li>
-        <li>录音会保存到你 Drive 里的 <code>AYHAK-Audio</code> 文件夹。</li>
-      </ol>
-      <p class="muted">注意：GitHub Pages 是公开网页，<code>app.js</code> 里的口令任何人都能看到，它只能挡住随手乱传，不是真正的安全措施。上传功能建议只在采录期间开启，平时把 <code>DRIVE_UPLOAD_ENDPOINT</code> 留空即可。</p>
+    <section id="projects" class="content-section">
+      <h2>项目</h2>
+      <div class="cards">
+        <div class="card">
+          <span class="tag live">上线</span>
+          <h3>安远话词典</h3>
+          <p>汉字、IPA、释义、例句和录音，每个说法都标明乡镇。</p>
+          <a class="more" href="./dict.html">查词 →</a>
+        </div>
+        <div class="card">
+          <span class="tag">进行中</span>
+          <h3>安远话语音描写</h3>
+          <p>描写安远话的发音系统，并附上录音。</p>
+        </div>
+        <div class="card">
+          <span class="tag">即将推出</span>
+          <h3>安远话植物图集</h3>
+          <p>收录本地植物的安远话叫法和录音，计划推出网页版和纸质版。</p>
+          <a class="more" href="./plants.html">先睹为快 →</a>
+        </div>
+        <div class="card">
+          <span class="tag">2024</span>
+          <h3>用安远话学习语言学</h3>
+          <p>用安远话为安远人讲授语言学入门课程。</p>
+        </div>
+        <div class="card">
+          <span class="tag">即将推出</span>
+          <h3>安远话入门十讲</h3>
+          <p>用普通话讲解安远话的发音，词汇，以及语法，欢迎所有人参加。</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="join" class="content-section">
+      <h2>安远话复健会</h2>
+      <p>复健会面向所有想继续说安远话的安远人，不管你现在在哪里。我们隔周五晚上（北京时间）在腾讯会议见面，一半时间自由聊天，一半时间聊一个主题。参加时请在昵称后面写上你的乡镇或村名，大家就能听到各地说法的不同。</p>
+      <p>把活动日程加到日历：<a href="webcal://p54-caldav.icloud.com/published/2/MTEzODIwMDE0NDExMzgyMMFgVCDCDaKoMtNCKBn1EhfA-79njfZBbu5WWxrAYHy4s1xKDF6rgkBgKywDp8NgCctA90rvas5HTKUIKwTFqRs">2025</a></p>
+      <p>想参加的话，<a href="mailto:juanzhon@buffalo.edu">发邮件给我们</a>获取会议链接。</p>
+    </section>
+
+    <section id="questions" class="content-section">
+      <h2>常见问题</h2>
+      <dl class="faq">
+        <dt>安远话是语言还是方言？</dt>
+        <dd>在中国一般叫方言。它是客家话的一种，有自己的特点。</dd>
+        <dt>我是安远人，怎么参与？</dt>
+        <dd>来参加复健会，分享你家乡的说法和故事，或者帮忙录音都可以。会说多少都欢迎。</dd>
+        <dt>我不会说安远话，可以参加吗？</dt>
+        <dd>可以。即将推出的安远话入门课将使用普通话讲授，复健会也欢迎旁听。</dd>
+      </dl>
+    </section>
+
+    <section id="gallery" class="content-section">
+      <h2>安远影像</h2>
+
+      <div class="gallery-group">
+        <h3>县城 <span class="ipa">[ɥʊ̃ŋ⁴⁵.t͡sʰɜ̃ŋ³²⁴]</span></h3>
+        <div class="gallery-grid">
+          <figure class="solo"><img src="images/gallery/琴行旧址.jpg" alt="琴行旧址" loading="lazy" /><figcaption>琴行旧址</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="gallery-group">
+        <h3>欣山大市场 <span class="ipa">[siŋ³⁴.sɑ̃³⁴.tʰɑ⁴⁵.si⁵².tsɑŋ⁴¹]</span></h3>
+        <div class="gallery-grid">
+          <figure><img src="images/gallery/欣山大市场03.jpg" alt="欣山大市场" loading="lazy" /></figure>
+          <figure><img src="images/gallery/欣山大市场01.jpg" alt="欣山大市场" loading="lazy" /></figure>
+          <figure><img src="images/gallery/欣山大市场02.jpg" alt="欣山大市场" loading="lazy" /></figure>
+          <figure><img src="images/gallery/干货.jpg" alt="干货" loading="lazy" /><figcaption>干货</figcaption></figure>
+          <figure><img src="images/gallery/母女.jpg" alt="母女" loading="lazy" /><figcaption>母女</figcaption></figure>
+          <figure><img src="images/gallery/捶捶鱼.jpg" alt="捶捶鱼" loading="lazy" /><figcaption>捶捶鱼</figcaption></figure>
+          <figure><img src="images/gallery/荔枝与.jpg" alt="荔枝" loading="lazy" /><figcaption>荔枝</figcaption></figure>
+          <figure><img src="images/gallery/葱子.jpg" alt="葱子" loading="lazy" /><figcaption>葱子</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="gallery-group">
+        <h3>屋下 <span class="ipa">[vu⁴⁵.xɑ³⁴]</span></h3>
+        <div class="gallery-grid">
+          <figure><img src="images/gallery/柴火.jpg" alt="柴火" loading="lazy" /><figcaption>柴火</figcaption></figure>
+          <figure><img src="images/gallery/篓子.jpg" alt="篓子" loading="lazy" /><figcaption>篓子</figcaption></figure>
+          <figure><img src="images/gallery/桌子凳子.jpg" alt="桌子凳子" loading="lazy" /><figcaption>桌子凳子</figcaption></figure>
+          <figure><img src="images/gallery/门窗.jpg" alt="门窗" loading="lazy" /><figcaption>门窗</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="gallery-group">
+        <h3>瓜果蔬菜</h3>
+        <div class="gallery-grid">
+          <figure><img src="images/gallery/猪膏花.jpg" alt="猪膏花" loading="lazy" /><figcaption>猪膏花</figcaption></figure>
+          <figure><img src="images/gallery/瓜田.jpg" alt="瓜田" loading="lazy" /><figcaption>瓜田</figcaption></figure>
+          <figure><img src="images/gallery/鲜鸡蛋.jpg" alt="鲜鸡蛋" loading="lazy" /><figcaption>鲜鸡蛋</figcaption></figure>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
     <p>AYHAK · 联系方式：juanzhon AT buffalo DOT edu</p>
-    <p>© <span id="year">2026</span> Juan Zhong</p>
+    <p>© 2026 Juan Zhong</p>
   </footer>
-
-  <script src="./app.js"></script>
 </body>
 </html>

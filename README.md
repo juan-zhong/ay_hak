@@ -1,27 +1,35 @@
 # AYHAK · 安远话
 
-AYHAK 安远话记录计划的独立网站：**安远话词典**和**安远话植物图集**。纯静态网页，不需要服务器，直接放在 GitHub Pages 上就能用。
+AYHAK 安远话记录计划的网站：项目主页、**安远话词典**和**安远话植物图集**。纯静态网页，不需要服务器，放在 GitHub Pages 上。
 
-- 项目主页：<https://juan-zhong.github.io/me/fieldwork-zh.html>
-- 本站：<https://juan-zhong.github.io/ay_hak/>
+- 项目主页：<https://juan-zhong.github.io/ay_hak/>（English: <https://juan-zhong.github.io/ay_hak/en.html>）
+- 词典：<https://juan-zhong.github.io/ay_hak/dict.html>
+- 植物图集：<https://juan-zhong.github.io/ay_hak/plants.html>
 - 仓库：<https://github.com/juan-zhong/ay_hak>
+
+原来个人网站上的 `me/fieldwork-zh.html` 和 `me/fieldwork.html` 已经搬到这里，旧网址会自动跳转过来。
 
 ## 文件
 
 ```
 ay_hak/
-├── index.html          词典页
+├── index.html          项目主页（中文）
+├── en.html             项目主页（English）
+├── dict.html           词典页
 ├── app.js              词典逻辑（搜索、筛选、收藏、录音、导入导出）
 ├── plants.html         植物图集页
-├── plants.js           图集逻辑（筛选、二维码、打印）
-├── style.css           两页共用样式（沿用个人网站 AYHAK 页面的风格）
-├── apps_script.gs      可选：录音上传到 Google Drive 的 Apps Script
+├── plants.js           图集逻辑（照片切换、二维码、打印）
+├── style.css           全站样式（艾草绿 + 薯紫）
+├── apps_script.gs      录音上传到 Google Drive 的 Apps Script
 ├── data/
 │   ├── dict.json       词典数据
 │   └── plants.json     植物数据
-├── images/plants/      植物照片（JPG）
+├── images/
+│   ├── gallery/        首页“安远影像”的照片
+│   └── plants/         植物图集照片
 ├── audio/              录音文件（mp3 / m4a / wav）
 ├── vendor/qrcode.js    二维码库（qrcode-generator，MIT），本地存放，不依赖 CDN
+├── LICENSE
 └── .nojekyll           让 GitHub Pages 按原样发布
 ```
 
@@ -39,6 +47,8 @@ git push
 ```
 
 > 仓库名或域名改了的话，记得同步修改 `plants.js` 顶部的 `CANONICAL_URL`，否则纸质版上的二维码会指错地址。
+>
+> 改了 `style.css` 或 `.js` 之后，把各个 HTML 里 `?v=20261019b` 这样的版本号改成新的（比如当天日期），浏览器才会读取新文件。
 
 ## 本地预览
 
@@ -48,7 +58,7 @@ git push
 python3 -m http.server 8000
 ```
 
-然后打开 <http://localhost:8000>。
+然后打开 <http://localhost:8000>（首页）或 <http://localhost:8000/dict.html>（词典）。
 
 ## 更新词典
 
@@ -63,7 +73,7 @@ python3 -m http.server 8000
 
 | 字段 | 说明 |
 |---|---|
-| `id` | 唯一编号，用在链接里（`index.html?w=vu-xa`）。建议用拼音或英文，不要改动 |
+| `id` | 唯一编号，用在链接里（`dict.html?w=vu-xa`）。建议用拼音或英文，不要改动 |
 | `hanzi` | 汉字写法 |
 | `roman` | 拼写（可选） |
 | `ipa` | IPA，不带方括号，例如 `vu⁴⁵.xɑ³⁴` |

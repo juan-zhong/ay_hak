@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>AYHAK · 安远话词典</title>
+  <meta name="description" content="安远话（江西安远客家话）社区词典：汉字、IPA、释义、例句与录音。" />
+  <link rel="stylesheet" href="./style.css?v=20261019b" />
+</head>
+
+<body>
+  <a class="skip" href="#search">跳到正文</a>
+
+  <nav class="page-nav" aria-label="站点导航">
+    <a href="./index.html">AYHAK</a>
+    <a href="./dict.html" aria-current="page">词典</a>
+    <a href="./plants.html">植物图集</a>
+    <a href="#manage">数据</a>
+    <a href="#about">说明</a>
+  </nav>
+
+  <header class="hero">
+    <p class="kicker">AYHAK DICTIONARY</p>
+    <h1>安远话词典</h1>
+    <p class="subtitle">一个词一个词地记下来</p>
+    <p class="intro">收录安远话的词汇、发音、释义和例句。每个乡镇、每个村的说法都算数，同一个意思可以有好几种说法。</p>
+    <div class="buttons">
+      <a class="btn primary" href="#search">开始查词</a>
+      <a class="btn" href="./plants.html">安远话植物图集</a>
+      <a class="btn" href="mailto:juanzhon@buffalo.edu?subject=AYHAK%20词典">补充说法</a>
+    </div>
+    <p class="status" id="heroStatus">— 条词条</p>
+  </header>
+
+  <main>
+    <section id="search" class="content-section wide">
+      <h2>查询</h2>
+      <h3>汉字 / 拼写 / IPA / 释义 / 例句 都可以搜，支持模糊匹配</h3>
+
+      <div class="searchbar">
+        <input id="q" type="search" placeholder="例如：屋下 / vu xa / [vu⁴⁵] / 家" autocomplete="off" aria-label="搜索词条" />
+        <button id="btnSearch" class="btn primary">搜索</button>
+      </div>
+
+      <div class="filters">
+        <div class="chip-group" id="varietyChips" aria-label="乡镇">
+          <span class="chip-label">乡镇</span>
+          <button class="chip is-active" data-variety="all">全部</button>
+        </div>
+
+        <div class="chip-group" id="posChips" aria-label="词性">
+          <span class="chip-label">词性</span>
+          <button class="chip is-active" data-pos="all">全部</button>
+          <button class="chip" data-pos="n">名词</button>
+          <button class="chip" data-pos="v">动词</button>
+          <button class="chip" data-pos="adj">形容词</button>
+          <button class="chip" data-pos="pron">代词</button>
+          <button class="chip" data-pos="part">语气词</button>
+          <button class="chip" data-pos="other">其他</button>
+        </div>
+      </div>
+
+      <div class="filters">
+        <label class="toggle"><input id="toggleIPA" type="checkbox" checked /> <span>显示 IPA</span></label>
+        <label class="toggle"><input id="toggleAudio" type="checkbox" checked /> <span>显示发音</span></label>
+        <label class="toggle"><input id="toggleStarred" type="checkbox" /> <span>只看收藏</span></label>
+      </div>
+
+      <div class="split">
+        <aside class="panel panel-left" aria-label="搜索结果">
+          <div class="panel-head">
+            <h3>结果</h3>
+            <p class="small" id="resultMeta">0 条</p>
+          </div>
+          <div id="results" class="results" role="listbox"></div>
+        </aside>
+
+        <article class="panel panel-right" aria-label="词条详情" aria-live="polite">
+          <div class="panel-head">
+            <h3>词条</h3>
+            <div class="head-actions">
+              <button id="btnStar" class="icon-btn" disabled title="收藏" aria-label="收藏">☆</button>
+              <button id="btnLink" class="icon-btn" disabled title="复制链接" aria-label="复制链接">🔗</button>
+              <button id="btnCopy" class="icon-btn" disabled title="复制词条" aria-label="复制词条">⎘</button>
+            </div>
+          </div>
+          <div id="entry" class="entry empty">
+            <p>先搜一个词，或者点左边的结果。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="manage" class="content-section wide">
+      <h2>数据</h2>
+      <h3>导入 / 导出 / 重置 · 纯静态网页，可以直接放在 GitHub Pages</h3>
+      <p class="muted">网页默认读取仓库里的 <code>data/dict.json</code>。在这里导入的数据只保存在你自己的浏览器里，别人看不到；要正式更新词典，请把导出的 JSON 替换掉仓库里的 <code>data/dict.json</code>。</p>
+
+      <div class="manage-grid">
+        <div class="card">
+          <h3>导入（JSON / CSV）</h3>
+          <p class="muted">导入后会覆盖当前浏览器里的词条。</p>
+          <div class="controls">
+            <input id="fileImport" type="file" accept=".json,.csv,text/csv,application/json" />
+            <button id="btnImport" class="btn sm">导入</button>
+          </div>
+          <p class="small" id="importStatus">未导入</p>
+        </div>
+
+        <div class="card">
+          <h3>导出</h3>
+          <p class="muted">导出的是词条文本。浏览器里的录音存在 IndexedDB，不会打包进 JSON。</p>
+          <div class="controls">
+            <button id="btnExport" class="btn sm">导出 JSON</button>
+            <button id="btnExportCSV" class="btn sm btn-ghost">导出 CSV</button>
+            <button id="btnClearAudio" class="btn sm btn-ghost">清空本机录音</button>
+          </div>
+          <p class="small" id="exportStatus">—</p>
+        </div>
+
+        <div class="card">
+          <h3>重置</h3>
+          <p class="muted">丢掉浏览器里的修改，回到仓库里的 <code>data/dict.json</code>。</p>
+          <div class="controls">
+            <button id="btnReset" class="btn sm btn-danger">重置数据</button>
+          </div>
+          <p class="small" id="resetStatus">当前数据来源：—</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:20px;">
+        <h3>CSV 格式</h3>
+        <p class="muted">第一行是表头。<code>senses</code> 和 <code>tags</code> 用 <code>||</code> 分隔；<code>examples</code> 写成 <code>例句::IPA::翻译</code>（IPA 可省略，写成 <code>例句::翻译</code>），多条之间用 <code>||</code> 分隔。</p>
+        <pre class="codeblock" id="csvExample"></pre>
+      </div>
+
+      <div class="card" style="margin-top:20px;">
+        <h3>JSON 格式</h3>
+        <pre class="codeblock" id="jsonExample"></pre>
+      </div>
+    </section>
+
+    <section id="about" class="content-section">
+      <h2>说明</h2>
+
+      <h3>关于这部词典</h3>
+      <p>这是 <a href="./index.html">AYHAK 安远话记录计划</a> 的一部分。词条来自和安远发音人的合作记录。每个词条都标了乡镇，因为安远话没有唯一的“标准说法”。</p>
+      <p>发现说法不一样、写错了，或者想补充你们村的说法，欢迎<a href="mailto:juanzhon@buffalo.edu?subject=AYHAK%20词典">写信告诉我们</a>。</p>
+
+      <h3>发音</h3>
+      <ul>
+        <li>词条里的 <code>audio</code> 字段可以指向仓库里的录音文件，例如 <code>audio/vu-xa.mp3</code>。</li>
+        <li>也可以在词条页直接录音：录音先保存在本机浏览器（IndexedDB），可以试听、下载，或者上传到 Google Drive。</li>
+        <li>录音前请先征得发音人同意。</li>
+      </ul>
+
+      <h3>上传到 Google Drive</h3>
+      <ol>
+        <li>打开 <a href="https://script.google.com">script.google.com</a>，新建项目，把仓库里的 <code>apps_script.gs</code> 全部粘进去。</li>
+        <li>改掉脚本顶部的 <code>UPLOAD_TOKEN</code>（随便设一串只有你知道的字符）。</li>
+        <li>部署 → 新部署 → 类型选 Web App；执行身份选“我”，访问权限选“任何人”。</li>
+        <li>把生成的 URL 填进 <code>app.js</code> 顶部的 <code>DRIVE_UPLOAD_ENDPOINT</code>，把同一串口令填进 <code>DRIVE_UPLOAD_TOKEN</code>。</li>
+        <li>录音会保存到你 Drive 里的 <code>AYHAK-Audio</code> 文件夹。</li>
+      </ol>
+      <p class="muted">注意：GitHub Pages 是公开网页，<code>app.js</code> 里的口令任何人都能看到，它只能挡住随手乱传，不是真正的安全措施。上传功能建议只在采录期间开启，平时把 <code>DRIVE_UPLOAD_ENDPOINT</code> 留空即可。</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>AYHAK · 联系方式：juanzhon AT buffalo DOT edu</p>
+    <p>© <span id="year">2026</span> Juan Zhong</p>
+  </footer>
+
+  <script src="./app.js?v=20261019b"></script>
+</body>
+</html>
