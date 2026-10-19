@@ -2,19 +2,19 @@
 
 AYHAK 安远话记录计划的网站：项目主页、**安远话词典**和**安远话植物图集**。纯静态网页，不需要服务器，放在 GitHub Pages 上。
 
-- 项目主页：<https://juan-zhong.github.io/ay_hak/>（English: <https://juan-zhong.github.io/ay_hak/en.html>）
+- 项目主页：<https://juan-zhong.github.io/ay_hak/>（English）· <https://juan-zhong.github.io/ay_hak/index-zh.html>（中文）
 - 词典：<https://juan-zhong.github.io/ay_hak/dict.html>
 - 植物图集：<https://juan-zhong.github.io/ay_hak/plants.html>
 - 仓库：<https://github.com/juan-zhong/ay_hak>
 
-原来个人网站上的 `me/fieldwork-zh.html` 和 `me/fieldwork.html` 已经搬到这里，旧网址会自动跳转过来。
+原来个人网站上的 `me/fieldwork.html` 和 `me/fieldwork-zh.html` 已经搬到这里，分别成为 `index.html`（English）和 `index-zh.html`（中文）。
 
 ## 文件
 
 ```
 ay_hak/
-├── index.html          项目主页（中文）
-├── en.html             项目主页（English）
+├── index.html          项目主页（English）
+├── index-zh.html       项目主页（中文）
 ├── dict.html           词典页
 ├── app.js              词典逻辑（搜索、筛选、收藏、录音、导入导出）
 ├── plants.html         植物图集页
@@ -58,7 +58,7 @@ git push
 python3 -m http.server 8000
 ```
 
-然后打开 <http://localhost:8000>（首页）或 <http://localhost:8000/dict.html>（词典）。
+然后打开 <http://localhost:8000>（英文主页）、<http://localhost:8000/index-zh.html>（中文主页）或 <http://localhost:8000/dict.html>（词典）。
 
 ## 更新词典
 
