@@ -1,4 +1,14 @@
 {
   "note": "已经发布到网站的五百句录音（审核“公开”后用 tools/publish_recordings.py 生成）。file 指向仓库里的 audio/sentences/ 文件，国内外都能直接播放。",
-  "recordings": []
+  "recordings": [
+    {
+      "rid": "r261020092126308",
+      "sid": "s009",
+      "file": "audio/sentences/s009_r261020092126308.m4a",
+      "place": "欣山镇",
+      "nick": "JZ",
+      "hanzi": "",
+      "date": "2026-10-20"
+    }
+  ]
 }
