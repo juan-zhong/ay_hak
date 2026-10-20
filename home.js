@@ -64,6 +64,32 @@
     });
   }
 
+
+  // 先听一句：从已经公开的五百句录音里挑最新的一条
+  async function sample() {
+    const box = $('#sample'); if (!box) return;
+    try {
+      const [r, d] = await Promise.all(['recordings', 'sentences'].map((n) => fetch(`./data/${n}.json`, { cache: 'no-cache' }).then((x) => x.json())));
+      const rec = (r.recordings || []).filter((x) => x.file).sort((a, b) => (b.date || '').localeCompare(a.date || ''))[0];
+      if (!rec) return;
+      const s = (d.sentences || []).find((x) => x.id === rec.sid);
+      if (!s) return;
+      const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      const zh = lang === 'zh';
+      box.innerHTML = `<button class="play" type="button" aria-label="${zh ? '播放' : 'Play'}">▶</button>
+        <span>${zh ? '先听一句：' : 'Listen first: '}<b>${esc(rec.hanzi || s.zh)}</b> <span class="small">${esc(rec.place)}</span></span>
+        <a href="./sentences.html">${zh ? '你们那里怎么说？去录一句 →' : 'How do you say it? Record one →'}</a>`;
+      const audio = new Audio(); audio.preload = 'none';
+      const btn = $('.play', box);
+      btn.addEventListener('click', () => {
+        if (!audio.src) audio.src = rec.file;
+        if (audio.paused) { audio.currentTime = 0; audio.play(); btn.textContent = '❚❚'; } else { audio.pause(); btn.textContent = '▶'; }
+      });
+      audio.addEventListener('ended', () => { btn.textContent = '▶'; });
+      box.hidden = false;
+    } catch { /* 没有录音就不显示 */ }
+  }
+
   // 每日一词：按日期从词典里挑一个，每天换一个
   async function wordOfDay() {
     const box = $('#wotd'); if (!box) return;
@@ -84,4 +110,5 @@
   nextMeetup();
   lightbox();
   wordOfDay();
+  sample();
 })();

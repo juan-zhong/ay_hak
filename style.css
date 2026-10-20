@@ -627,3 +627,14 @@ h2 { margin-bottom: 30px; }
   .content-section { padding: 44px 16px; }
   .hero.compact { padding: 28px 16px 22px; }
 }
+
+/* 首页：先听一句、还在弄的、影像标题连词典 */
+.sample { margin: 22px 0 0; padding: 14px 16px; background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-lg); display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 15px; }
+.sample .play { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--plum); background: var(--plum-soft); color: var(--plum); font-size: 13px; cursor: pointer; flex: none; }
+.sample .play:hover { background: var(--plum); color: #fff; }
+.sample b { font-weight: 500; color: var(--ink); }
+.sample a { color: var(--accent); font-weight: 600; margin-left: auto; }
+.also { margin: 18px 0 0; font-size: 15px; color: var(--muted); line-height: 1.8; }
+.also b { color: var(--ink); font-weight: 500; }
+a.to-dict { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
+a.to-dict:hover { color: var(--accent); text-decoration-color: var(--accent); }
