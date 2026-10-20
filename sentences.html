@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>AYHAK · 实用安远话五百句</title>
+  <meta name="description" content="实用安远话五百句：五百句日常用语，大家用手机录下自己家乡的说法，审核后所有人都能点播。" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./style.css?v=20261020e" />
+</head>
+
+<body>
+  <a class="skip" href="#list">跳到正文</a>
+
+  <nav class="page-nav" aria-label="站点导航">
+    <a href="./index-zh.html">AYHAK</a>
+    <a href="./dict.html">查安远话</a>
+    <a href="./sentences.html" aria-current="page">五百句</a>
+    <a href="./plants.html">植物图集</a>
+    <a href="./gallery.html">安远影像</a>
+    <a href="./index-zh.html#join">一起参与</a>
+    <a href="./index-zh.html#about">关于</a>
+    <a href="./index.html" lang="en">English</a>
+  </nav>
+
+  <header class="hero">
+    <p class="kicker">AYHAK · 500 SENTENCES</p>
+    <h1>实用安远话五百句</h1>
+    <p class="subtitle">一句一句，用你家乡的话说出来</p>
+    <p class="intro">这里有五百句天天用得上的话。挑一句，用手机录下你们那里怎么说。录音审核后会公开在这里，大家都能点开听，听听各个乡镇、各个村说得有什么不一样。</p>
+    <div class="buttons">
+      <a class="btn primary" href="#list">开始录</a>
+      <a class="btn" href="#how">怎么录</a>
+    </div>
+    <p class="status" id="sStatus">500 句</p>
+  </header>
+
+  <main>
+    <section id="how" class="content-section">
+      <h2>怎么录</h2>
+      <div class="pillars three">
+        <div class="card"><span class="num">01</span><h3>挑一句</h3><p class="muted">按类别找，或者搜一个词。先挑还没人录的句子。</p></div>
+        <div class="card"><span class="num">02</span><h3>按“我来录”</h3><p class="muted">用手机直接录，录完可以先听一遍，不满意就重录。也可以上传手机里已有的录音。</p></div>
+        <div class="card"><span class="num">03</span><h3>写上你的乡镇或村</h3><p class="muted">昵称可以不填。审核后公开，大家都能点播。</p></div>
+      </div>
+      <div class="note-box">
+        <h3>录音会怎么用</h3>
+        <ul>
+          <li>只有你勾选“同意公开”的录音，审核后才会放到网站上。</li>
+          <li>“同意用于研究”是另外的选项，可以不勾。</li>
+          <li>想修改或撤回自己的录音，发邮件告诉我们录音编号就行。</li>
+        </ul>
+      </div>
+      <p class="small" id="svcNote"></p>
+    </section>
+
+    <section id="list" class="content-section wide">
+      <h2>五百句</h2>
+      <div class="plant-tools">
+        <div class="searchbar" style="flex:1 1 260px;margin:0;">
+          <input id="sq" type="search" placeholder="搜一句话或一个词，例如：吃饭 / 谢谢" autocomplete="off" aria-label="搜索句子" />
+        </div>
+        <label class="toggle"><input id="onlyEmpty" type="checkbox" /> <span>只看还没人录的</span></label>
+        <label class="toggle"><input id="onlyHas" type="checkbox" /> <span>只看有录音的</span></label>
+      </div>
+      <div class="chip-group cat-chips" id="catChips" aria-label="类别"></div>
+      <p class="small" id="listMeta"></p>
+      <div id="sentenceList" class="sentence-list"><p class="muted">载入中…</p></div>
+    </section>
+  </main>
+
+  <!-- 录音面板 -->
+  <div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" hidden>
+    <div class="sheet-card">
+      <button class="sheet-close" id="sheetClose" aria-label="关闭">×</button>
+      <p class="small" id="sheetNo"></p>
+      <h3 id="sheetTitle" class="sheet-zh"></h3>
+
+      <div class="rec-area">
+        <button class="rec-btn" id="recBtn" type="button"><span class="dot"></span><span id="recLabel">按一下开始录</span></button>
+        <span class="small" id="recTime"></span>
+      </div>
+      <audio id="recPreview" controls hidden></audio>
+      <p class="small">或者 <label class="file-pick">上传手机里的录音<input id="recFile" type="file" accept="audio/*" /></label>（一分钟以内）</p>
+
+      <form id="recForm" class="rec-form">
+        <label>乡镇 / 村 <span class="req">*</span><input name="place" required maxlength="40" placeholder="例如：欣山镇、孔田镇某村" /></label>
+        <label>昵称（可空）<input name="nick" maxlength="30" placeholder="想怎么署名" /></label>
+        <label>你们那里怎么写（可空）<input name="hanzi" maxlength="200" placeholder="用汉字写出你说的这句话" /></label>
+        <input name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <label class="check"><input type="checkbox" name="consentPublic" required /> 我同意这条录音审核后在网站上公开播放 <span class="req">*</span></label>
+        <label class="check"><input type="checkbox" name="consentResearch" /> 我也同意这条录音用于语言研究</label>
+        <button class="btn primary" id="recSubmit" type="submit" disabled>提交录音</button>
+        <p class="small" id="recMsg" aria-live="polite"></p>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>AYHAK · 联系方式：juanzhon AT buffalo DOT edu</p>
+    <p>© 2026 Juan Zhong</p>
+    <p class="license">代码 CC0 · 文字与照片 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans">CC BY-NC 4.0</a> · 录音按发音人授权使用，未经许可请勿转载 · <a href="https://github.com/juan-zhong/ay_hak/blob/main/CONTENT-LICENSE.md">授权说明</a></p>
+  </footer>
+
+  <script src="./sentences.js?v=20261020e" defer></script>
+</body>
+</html>

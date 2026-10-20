@@ -43,7 +43,8 @@
     if (!imgs.length) return;
     const lb = document.createElement('div');
     lb.className = 'lightbox';
-    lb.innerHTML = '<button class="lb-close" aria-label="关闭">×</button><figure><img alt="" /><figcaption></figcaption></figure>';
+    lb.innerHTML = '<button class="lb-close" aria-label="关闭">×</button><figure><figcaption></figcaption></figure>';
+    const big = document.createElement('img');
     document.body.appendChild(lb);
     const close = () => lb.classList.remove('open');
     lb.addEventListener('click', (e) => { if (e.target === lb || e.target.closest('.lb-close')) close(); });
@@ -51,8 +52,9 @@
     imgs.forEach((img) => {
       img.tabIndex = 0;
       const open = () => {
-        $('img', lb).src = img.currentSrc || img.src;
-        $('img', lb).alt = img.alt;
+        big.src = img.currentSrc || img.src;
+        big.alt = img.alt;
+        if (!big.isConnected) $('figure', lb).prepend(big);
         const cap = img.closest('figure')?.querySelector('figcaption');
         $('figcaption', lb).innerHTML = cap ? cap.innerHTML : img.alt;
         lb.classList.add('open');
@@ -62,6 +64,24 @@
     });
   }
 
+  // 每日一词：按日期从词典里挑一个，每天换一个
+  async function wordOfDay() {
+    const box = $('#wotd'); if (!box) return;
+    try {
+      const j = await (await fetch('./data/dict.json', { cache: 'no-cache' })).json();
+      const list = (Array.isArray(j) ? j : j.entries || []).filter((e) => e.hanzi && e.senses && e.senses.length);
+      if (!list.length) return;
+      const d = new Date(); const day = Math.floor(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) / 86400000);
+      const e = list[day % list.length];
+      const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+      box.href = `./dict.html?w=${encodeURIComponent(e.id)}`;
+      box.innerHTML = `<span class="wotd-label">${lang === 'zh' ? '今天学一个词' : 'Word of the day'}</span>
+        <div class="wotd-hw">${esc(e.hanzi)}${e.ipa ? `<span class="ipa">[${esc(e.ipa)}]</span>` : ''}</div>
+        <div class="wotd-gl">${esc(e.senses[0])}${e.variety ? ` · ${esc(e.variety)}` : ''}</div>`;
+    } catch { /* 词典读不到就不显示 */ }
+  }
+
   nextMeetup();
   lightbox();
+  wordOfDay();
 })();

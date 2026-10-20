@@ -19,7 +19,9 @@
   const IDB_NAME = 'ayhak-audio';
   const IDB_STORE = 'recordings';
 
-  const POS_LABEL = { n: '名词', v: '动词', adj: '形容词', pron: '代词', part: '语气词', other: '其他' };
+  const POS_LABEL = { n: '名词', v: '动词', adj: '形容词', pron: '代词', num: '数词', part: '语气词', other: '其他' };
+  // 这些标签不当作“主题”
+  const NON_THEME = new Set(['2021 词表', '示例']);
 
   /* ---------- 小工具 ---------- */
   const $ = (s, r = document) => r.querySelector(s);
@@ -38,7 +40,7 @@
     return String(s ?? '')
       .toLowerCase()
       .normalize('NFD')
-      .replace(/[̀-ͯ͜͡]/g, '')
+      .replace(/[̀-ͯ͜͡]/g, '')
       .replace(new RegExp(`[${SUP}0-9]`, 'g'), '')
       .replace(/[\[\]\/().,，。、;；:：!?！？"'“”‘’\-_·ˑː‿]/g, '')
       .replace(/\s+/g, '');
@@ -69,6 +71,8 @@
       audio: String(raw.audio || '').trim(),
       notes: String(raw.notes || '').trim(),
       speaker: String(raw.speaker || '').trim(),
+      // 连读时的读音（变调后），可空
+      sandhi: String(raw.sandhi || '').trim(),
       // 其他地方的说法：[{ form, ipa, variety, note }]；CSV 写成 形式::IPA::乡镇，用 || 分隔
       variants: [],
       // 是否已和发音人核实
@@ -84,9 +88,11 @@
     }).filter((x) => x.text);
     const vs = Array.isArray(raw.variants) ? raw.variants : toList(raw.variants);
     e.variants = vs.map((x) => {
-      if (typeof x === 'object' && x) return { form: String(x.form || '').trim(), ipa: String(x.ipa || '').trim(), variety: String(x.variety || '').trim(), note: String(x.note || '').trim() };
-      const [form = '', ipa = '', variety = '', note = ''] = String(x).split('::').map((t) => t.trim());
-      return { form, ipa, variety, note };
+      const yes = (v) => v === true || ['true', '1', '是'].includes(String(v).toLowerCase());
+      if (typeof x === 'object' && x) return { form: String(x.form || '').trim(), ipa: String(x.ipa || '').trim(), variety: String(x.variety || '').trim(), note: String(x.note || '').trim(), audio: String(x.audio || '').trim(), sandhi: String(x.sandhi || '').trim(), verified: yes(x.verified) };
+      // CSV：说法::IPA::乡镇::备注::录音::连读::核实
+      const [form = '', ipa = '', variety = '', note = '', audio = '', sandhi = '', verified = ''] = String(x).split('::').map((t) => t.trim());
+      return { form, ipa, variety, note, audio, sandhi, verified: yes(verified) };
     }).filter((x) => x.form || x.ipa);
     if (!e.id) e.id = slug(e);
     return e;
@@ -117,6 +123,7 @@
     q: '',
     variety: 'all',
     pos: 'all',
+    theme: 'all',
     starredOnly: false,
     showIPA: true,
     showAudio: true,
@@ -153,6 +160,7 @@
     for (const e of state.entries) {
       if (state.variety !== 'all' && e.variety !== state.variety) continue;
       if (state.pos !== 'all' && e.pos !== state.pos) continue;
+      if (state.theme !== 'all' && !e.tags.includes(state.theme)) continue;
       if (state.starredOnly && !state.stars.has(e.id)) continue;
       const s = score(e, nq, rawq);
       if (s > 0) out.push([s, e]);
@@ -217,10 +225,8 @@
           ${x.gloss ? `<div class="tr">${esc(x.gloss)}</div>` : ''}
         </div>`).join('')}` : ''}
 
-      <h4>其他地方的说法</h4>
-      ${e.variants.length ? `<ul class="variants">${e.variants.map((v) => `
-        <li><b>${esc(v.form || e.hanzi)}</b>${state.showIPA && v.ipa ? ` <span class="ipa">[${esc(v.ipa)}]</span>` : ''}${v.variety ? ` <span class="tag">${esc(v.variety)}</span>` : ''}${v.note ? `<span class="small"> ${esc(v.note)}</span>` : ''}</li>`).join('')}</ul>`
-        : '<p class="small">还没有记录到其他说法。</p>'}
+      <h4>各地读音</h4>
+      ${readingsTable(e)}
       <p class="small"><a href="mailto:juanzhon@buffalo.edu?subject=${encodeURIComponent(`AYHAK 词典：${e.hanzi}`)}">你们那里怎么说？告诉我们 →</a></p>
 
       ${e.notes ? `<h4>备注</h4><p class="notes">${esc(e.notes)}</p>` : ''}
@@ -230,6 +236,40 @@
       ${e.speaker ? `<p class="credit">发音人 / 提供者：${esc(e.speaker)}</p>` : ''}
     `;
     if (state.showAudio) renderAudio(e);
+  }
+
+  /* ---------- 征集中的词 ---------- */
+  async function renderWanted() {
+    const box = $('#wantedList'); if (!box) return;
+    try {
+      const j = await (await fetch('./data/wanted.json', { cache: 'no-cache' })).json();
+      const have = new Set(state.entries.map((e) => e.hanzi));
+      box.innerHTML = (j.groups || []).map((g) => {
+        const ws = g.words.filter((w) => !have.has(w.replace(/（.*?）/g, '')));
+        if (!ws.length) return '';
+        return `<div class="wanted-group"><h3 class="wg-title">${esc(g.name)} <span class="small">${ws.length}</span></h3><div class="try">${ws.map((w) =>
+          `<a class="chip-link" href="mailto:juanzhon@buffalo.edu?subject=${encodeURIComponent(`AYHAK 征集：${w.replace(/（.*?）/g, '')}`)}&body=${encodeURIComponent(`“${w}”在我们这里说：\n\n我的乡镇或村子：\n`)}">${esc(w)}</a>`).join('')}</div></div>`;
+      }).join('') || '<p class="muted">都已经收到啦，谢谢大家！</p>';
+    } catch { box.innerHTML = ''; }
+  }
+
+  /* ---------- 各地读音表 ---------- */
+  function readingsTable(e) {
+    const rows = [
+      { form: e.hanzi, ipa: e.ipa, sandhi: e.sandhi, variety: e.variety, audio: e.audio, verified: e.verified, note: '', main: true },
+      ...e.variants.map((v) => ({ ...v, form: v.form || e.hanzi })),
+    ];
+    const ipaCell = (v) => (v ? `<span class="ipa">[${esc(v)}]</span>` : '<span class="small">—</span>');
+    return `<div class="readings-wrap"><table class="readings">
+      <thead><tr><th>说法</th>${state.showIPA ? '<th>本调</th><th>连读</th>' : ''}<th>地方</th><th>录音</th><th>状态</th></tr></thead>
+      <tbody>${rows.map((r) => `<tr${r.main ? ' class="main"' : ''}>
+        <td><b>${esc(r.form)}</b>${r.note ? `<br><span class="small">${esc(r.note)}</span>` : ''}</td>
+        ${state.showIPA ? `<td>${ipaCell(r.ipa)}</td><td>${ipaCell(r.sandhi)}</td>` : ''}
+        <td>${r.variety ? esc(r.variety) : '<span class="tag pending">待补</span>'}</td>
+        <td>${r.audio ? `<button class="play" data-play="${esc(r.audio)}" aria-label="播放 ${esc(r.form)} 的录音">▶</button>` : '<span class="small">—</span>'}</td>
+        <td>${r.verified ? '<span class="tag done">已核实</span>' : '<span class="tag pending">待核实</span>'}</td>
+      </tr>`).join('')}</tbody></table></div>
+      ${e.variants.length ? '' : '<p class="small">还没有记录到其他地方的说法。</p>'}`;
   }
 
   /* ---------- 录音：IndexedDB ---------- */
@@ -356,6 +396,15 @@
       r.readAsDataURL(blob);
     });
   }
+  // 读后台返回：不是 JSON 时多半是部署权限没设成“任何人”，给出能看懂的提示
+  async function readBackend(res) {
+    const text = await res.text();
+    try { return JSON.parse(text); } catch {
+      if (/need access|Access Denied|accounts\.google\.com|ServiceLogin|需要访问权限/i.test(text)) throw new Error('录音后台没有对外开放（Apps Script 部署的访问权限需要设成“任何人”）');
+      if (/Authorization is required|授权/i.test(text)) throw new Error('录音后台还没有授权（请在 Apps Script 里运行一次并允许权限）');
+      throw new Error(`录音后台返回了无法识别的内容（HTTP ${res.status}）`);
+    }
+  }
   async function upload(e, rec, btn) {
     if (!rec || !DRIVE_UPLOAD_ENDPOINT) return;
     btn.disabled = true; btn.textContent = '上传中…';
@@ -373,14 +422,14 @@
       };
       // text/plain 避免 CORS 预检，Apps Script 才能收到
       const res = await fetch(DRIVE_UPLOAD_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
-      const j = await res.json();
+      const j = await readBackend(res);
       if (!j.ok) throw new Error(j.error || '上传失败');
       rec.driveUrl = j.url || j.viewUrl || '';
       await recPut(rec);
       renderAudio(e);
     } catch (err) {
       btn.disabled = false; btn.textContent = '重试上传';
-      alert(`上传失败：${err.message || err}`);
+      alert(`上传失败：${(err instanceof TypeError ? '连不上录音后台。可能是 Apps Script 部署的访问权限没有设成“任何人”，或者当前网络打不开 Google。' : (err.message || err))}`);
     }
   }
 
@@ -422,7 +471,23 @@
     group.innerHTML = `<span class="chip-label">乡镇</span>` +
       [['all', '全部'], ...vs.map((v) => [v, v])].map(([v, l]) => `<button class="chip${state.variety === v ? ' is-active' : ''}" data-variety="${esc(v)}">${esc(l)}</button>`).join('');
   }
+  function renderThemeChips() {
+    const group = $('#themeChips');
+    if (!group) return;
+    const count = {};
+    state.entries.forEach((e) => e.tags.forEach((t) => { if (!NON_THEME.has(t)) count[t] = (count[t] || 0) + 1; }));
+    const themes = Object.keys(count).sort((a, b) => count[b] - count[a] || a.localeCompare(b, 'zh-Hans-CN'));
+    if (state.theme !== 'all' && !themes.includes(state.theme)) state.theme = 'all';
+    group.innerHTML = '<span class="chip-label">主题</span>' +
+      [['all', '全部'], ...themes.map((t) => [t, `${t} ${count[t]}`])].map(([v, l]) => `<button class="chip${state.theme === v ? ' is-active' : ''}" data-theme="${esc(v)}">${esc(l)}</button>`).join('');
+  }
   function bindChips() {
+    $('#themeChips')?.addEventListener('click', (ev) => {
+      const b = ev.target.closest('[data-theme]'); if (!b) return;
+      state.theme = b.dataset.theme;
+      $$('#themeChips .chip').forEach((c) => c.classList.toggle('is-active', c === b));
+      runSearch();
+    });
     $('#varietyChips').addEventListener('click', (ev) => {
       const b = ev.target.closest('[data-variety]'); if (!b) return;
       state.variety = b.dataset.variety;
@@ -438,7 +503,7 @@
   }
 
   /* ---------- CSV ---------- */
-  const CSV_COLS = ['id', 'hanzi', 'roman', 'ipa', 'pos', 'variety', 'senses', 'examples', 'variants', 'tags', 'audio', 'notes', 'speaker', 'verified'];
+  const CSV_COLS = ['id', 'hanzi', 'roman', 'ipa', 'sandhi', 'pos', 'variety', 'senses', 'examples', 'variants', 'tags', 'audio', 'notes', 'speaker', 'verified'];
   function parseCSV(text) {
     const rows = []; let row = []; let cell = ''; let q = false;
     text = text.replace(/^﻿/, '');
@@ -466,7 +531,7 @@
         let v = e[k];
         if (k === 'senses' || k === 'tags') v = v.join('||');
         if (k === 'examples') v = v.map((x) => [x.text, x.ipa, x.gloss].filter((p, i) => i !== 1 || p).join('::')).join('||');
-        if (k === 'variants') v = v.map((x) => [x.form, x.ipa, x.variety, x.note].join('::').replace(/(::)+$/, '')).join('||');
+        if (k === 'variants') v = v.map((x) => [x.form, x.ipa, x.variety, x.note, x.audio, x.sandhi, x.verified ? 'true' : ''].join('::').replace(/(::)+$/, '')).join('||');
         if (k === 'verified') v = v ? 'true' : '';
         return csvCell(String(v ?? ''));
       }).join(','));
@@ -490,6 +555,7 @@
     $('#heroStatus').textContent = `${state.entries.length} 条词条 · ${[...new Set(state.entries.map((e) => e.variety).filter(Boolean))].length} 个乡镇/村`;
     $('#resetStatus').textContent = `当前数据来源：${source === 'local' ? '本机浏览器（已导入）' : '仓库 data/dict.json'}`;
     renderVarietyChips();
+    renderThemeChips();
     runSearch();
   }
   async function loadRepo() {
@@ -541,9 +607,10 @@
 
   function renderExamples() {
     const sample = [{
-      id: 'vu-xa', hanzi: '屋下', roman: 'vu xa', ipa: 'vu⁴⁵.xɑ³⁴', pos: 'n', variety: '欣山镇',
+      id: 'vu-xa', hanzi: '屋下', roman: 'vu xa', ipa: 'vu⁴⁵.ha³⁴', pos: 'n', variety: '欣山镇',
       senses: ['家；家里'], examples: [{ text: '（例句）', ipa: '', gloss: '（普通话翻译）' }],
-      variants: [{ form: '（另一种说法）', ipa: '', variety: '（某乡镇）', note: '' }],
+      sandhi: '',
+      variants: [{ form: '（另一种说法）', ipa: '', variety: '（某乡镇）', note: '', audio: '', sandhi: '', verified: false }],
       tags: ['居住'], audio: 'audio/vu-xa.mp3', notes: '', speaker: '', verified: false,
     }];
     $('#jsonExample').textContent = JSON.stringify({ entries: sample }, null, 2);
@@ -564,6 +631,13 @@
     });
     $('#btnSearch').addEventListener('click', () => { doSearch(); if (state.shown[0]) select(state.shown[0].id); });
     $('#results').addEventListener('click', (ev) => { const b = ev.target.closest('.result'); if (b) select(b.dataset.id); });
+    let player = null;
+    $('#entry').addEventListener('click', (ev) => {
+      const p = ev.target.closest('[data-play]'); if (!p) return;
+      if (player) player.pause();
+      player = new Audio(p.dataset.play);
+      player.play().catch(() => alert('录音载入失败'));
+    });
 
     $('#toggleIPA').addEventListener('change', (ev) => { state.showIPA = ev.target.checked; ls.set(LS_PREFS, { showIPA: state.showIPA, showAudio: state.showAudio }); renderResults(); renderEntry(); });
     $('#toggleAudio').addEventListener('change', (ev) => { state.showAudio = ev.target.checked; ls.set(LS_PREFS, { showIPA: state.showIPA, showAudio: state.showAudio }); renderEntry(); });
@@ -585,6 +659,7 @@
 
     bindChips();
     bindManage();
+    renderWanted();
     renderExamples();
 
     const local = ls.get(LS_DATA, null);

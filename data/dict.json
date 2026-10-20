@@ -1,17 +1,22 @@
 {
   "name": "AYHAK 安远话词典",
-  "note": "示例数据：三个词条的 IPA 取自 AYHAK 页面的图片标题，乡镇和例句待补。正式数据替换本文件即可。",
+  "note": "示例 3 条 + 2021 年词表 65 条。2021 词表的记音放在 notes 里，未标声调，按现行体例转写后再填入 ipa。",
   "entries": [
     {
       "id": "vu-xa",
       "hanzi": "屋下",
       "roman": "",
-      "ipa": "vu⁴⁵.xɑ³⁴",
+      "ipa": "vu⁴⁵.ha³⁴",
       "pos": "n",
       "variety": "",
-      "senses": ["家；家里"],
+      "senses": [
+        "家；家里"
+      ],
       "examples": [],
-      "tags": ["示例", "居住"],
+      "tags": [
+        "示例",
+        "居住"
+      ],
       "audio": "",
       "notes": "",
       "speaker": ""
@@ -20,12 +25,17 @@
       "id": "xian-cheng",
       "hanzi": "县城",
       "roman": "",
-      "ipa": "ɥʊ̃ŋ⁴⁵.t͡sʰɜ̃ŋ³²⁴",
+      "ipa": "ɥuŋ⁴⁵.tsʰɜŋ³²⁴",
       "pos": "n",
       "variety": "",
-      "senses": ["县城（安远县城）"],
+      "senses": [
+        "县城（安远县城）"
+      ],
       "examples": [],
-      "tags": ["示例", "地名"],
+      "tags": [
+        "示例",
+        "地名"
+      ],
       "audio": "",
       "notes": "",
       "speaker": ""
@@ -34,15 +44,1450 @@
       "id": "xinshan-da-shichang",
       "hanzi": "欣山大市场",
       "roman": "",
-      "ipa": "siŋ³⁴.sɑ̃³⁴.tʰɑ⁴⁵.si⁵².tsɑŋ⁴¹",
+      "ipa": "siŋ³⁴.sɑ̃³⁴.tʰa⁴⁵.si⁵³.tsaŋ⁴¹",
       "pos": "n",
       "variety": "",
-      "senses": ["欣山大市场（县城的农贸市场）"],
+      "senses": [
+        "欣山大市场（县城的农贸市场）"
+      ],
       "examples": [],
-      "tags": ["示例", "地名"],
+      "tags": [
+        "示例",
+        "地名"
+      ],
       "audio": "",
       "notes": "",
       "speaker": ""
+    },
+    {
+      "id": "w21-orange",
+      "hanzi": "柑",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "adj",
+      "variety": "欣山镇",
+      "senses": [
+        "柑（orange）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "颜色",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：tsʰən（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-thousand",
+      "hanzi": "千",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "千（thousand）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ci（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-breast",
+      "hanzi": "胸",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "胸（breast）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ɕiən（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-snow-white",
+      "hanzi": "雪白",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "adj",
+      "variety": "欣山镇",
+      "senses": [
+        "雪白（snow-white）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "颜色",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ɕiəpʰa; ɕiəɕiəpʰa（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-knee",
+      "hanzi": "膝头盖",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "膝盖（膝头盖）（knee）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ɕiətʰykuei（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-hand",
+      "hanzi": "手",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "手（hand）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ɕy（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-monkey",
+      "hanzi": "猴",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "猴（monkey）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ɕy（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-duck",
+      "hanzi": "鸭",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "鸭（duck）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ə（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-tiger",
+      "hanzi": "虎",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "虎（tiger）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：fu（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-jaw",
+      "hanzi": "下巴",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "下巴（jaw）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：hapʰa（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-one",
+      "hanzi": "一",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "一（one）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：iə（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-waist",
+      "hanzi": "腰",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "腰（waist）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：iɔ（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-goat",
+      "hanzi": "羊",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "羊（goat）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：jaŋ（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-chicken",
+      "hanzi": "鸡",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "鸡（chicken）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：kei（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-yellowish",
+      "hanzi": "黄",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "adj",
+      "variety": "欣山镇",
+      "senses": [
+        "黄（yellowish）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "颜色",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：kʰʌnvaŋ; kʰʌnkʰʌnvaŋ（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-dragon",
+      "hanzi": "龙",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "龙（dragon）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：tiŋ（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-blue",
+      "hanzi": "蓝",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "adj",
+      "variety": "欣山镇",
+      "senses": [
+        "蓝（blue）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "颜色",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：lʌn（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-two",
+      "hanzi": "二",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "二（two）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：m（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-five",
+      "hanzi": "五",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "五（five）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：m（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-you",
+      "hanzi": "你",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "pron",
+      "variety": "欣山镇",
+      "senses": [
+        "你（you）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "代词",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：m（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-no",
+      "hanzi": "不",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "other",
+      "variety": "欣山镇",
+      "senses": [
+        "不（no）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "否定",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：m（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-fish",
+      "hanzi": "鱼",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "鱼（fish）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：n（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-yall",
+      "hanzi": "你们",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "pron",
+      "variety": "欣山镇",
+      "senses": [
+        "你们（y‘all）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "代词",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：m-tsʰən-ɲən（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-horse",
+      "hanzi": "马",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "马（horse）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ma（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-brow",
+      "hanzi": "眉毛",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "眉毛（brow）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：meimɔ（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-blackish",
+      "hanzi": "黑",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "adj",
+      "variety": "欣山镇",
+      "senses": [
+        "黑（blackish）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "颜色",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：miavu; miamiavu（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-cow",
+      "hanzi": "牛",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "牛（cow）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ɲy（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-i-me",
+      "hanzi": "我",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "pron",
+      "variety": "欣山镇",
+      "senses": [
+        "我（I/me）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "代词",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ŋa（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-we-us",
+      "hanzi": "我众人",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "pron",
+      "variety": "欣山镇",
+      "senses": [
+        "我们（我众人）（we/us）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "代词",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ŋa-cən-ɲiən（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-eye",
+      "hanzi": "眼",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "眼（eye）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ŋʌn（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-forehead",
+      "hanzi": "额头",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "额头（？门）（forehead）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ŋʌnmən（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-eyeball",
+      "hanzi": "眼珠",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "眼珠（eyeball）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ŋʌnzi（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-hundred",
+      "hanzi": "百",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "百（hundred）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：pa（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-eight",
+      "hanzi": "八",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "八（eight）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：pə（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-white",
+      "hanzi": "白",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "adj",
+      "variety": "欣山镇",
+      "senses": [
+        "白（white）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "颜色",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：pʰa（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-nose",
+      "hanzi": "鼻",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "鼻（nose）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：pʰikən（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-snake",
+      "hanzi": "蛇",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "蛇（snake）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：sa（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-mouse",
+      "hanzi": "鼠",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "鼠（mouse）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：sei（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-ten",
+      "hanzi": "十",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "十（ten）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：sə（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-four",
+      "hanzi": "四",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "四（four）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：si（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-three",
+      "hanzi": "三",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "三（three）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：sʌn（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-seven",
+      "hanzi": "七",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "七（seven）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：t͡ɕʰiə（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-blue-green",
+      "hanzi": "青",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "adj",
+      "variety": "欣山镇",
+      "senses": [
+        "青（blue-green）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "颜色",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：t͡ɕʰiʌn（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-she-he-it",
+      "hanzi": "她",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "pron",
+      "variety": "欣山镇",
+      "senses": [
+        "她/他/它（she/he/it）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "代词",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：t͡ɕi（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-they",
+      "hanzi": "她们",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "pron",
+      "variety": "欣山镇",
+      "senses": [
+        "她们/他们（they）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "代词",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：t͡ɕi-cən-ɲiən（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-foot",
+      "hanzi": "脚",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "脚（foot）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：t͡ɕiou（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-thigh",
+      "hanzi": "脚臂",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "腿（脚臂）（thigh）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：t͡ɕioupi（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-shoulder",
+      "hanzi": "肩头",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "肩头（shoulder）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：t͡ɕitʰy（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-neck",
+      "hanzi": "颈脖",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "颈脖（neck）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：t͡ɕjʌnpʌn（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-nine",
+      "hanzi": "九",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "九（nine）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：t͡ɕy（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-dog",
+      "hanzi": "狗",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "狗（dog）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：t͡ɕy（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-rabbit",
+      "hanzi": "兔",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "兔（rabbit）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：tʰu（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-head",
+      "hanzi": "头",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "头（head）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：tʰy（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-hair",
+      "hanzi": "头发",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "头发（hair）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：tʰyfə（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-head-2",
+      "hanzi": "头脑",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "头脑（head）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：tʰyna（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-six",
+      "hanzi": "六",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "六（six）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ti（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-green",
+      "hanzi": "绿",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "adj",
+      "variety": "欣山镇",
+      "senses": [
+        "绿（green）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "颜色",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：ti（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-belly",
+      "hanzi": "肚",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "肚（belly）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：tu（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-finless-eel",
+      "hanzi": "黄鳝",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "黄鳝（finless eel）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：vaɱɕiuŋ（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-yellow",
+      "hanzi": "黄",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "adj",
+      "variety": "欣山镇",
+      "senses": [
+        "黄（yellow）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "颜色",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：vaŋ（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-black",
+      "hanzi": "乌",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "adj",
+      "variety": "欣山镇",
+      "senses": [
+        "黑（乌）（black）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "颜色",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：vu（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-ten-thousand",
+      "hanzi": "万",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "num",
+      "variety": "欣山镇",
+      "senses": [
+        "万（ten thousand）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "数字",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：vʌn（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-pig",
+      "hanzi": "猪",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "猪（pig）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "动物",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：zei（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-purple",
+      "hanzi": "紫",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "adj",
+      "variety": "欣山镇",
+      "senses": [
+        "紫（purple）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "颜色",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：zi（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
+    },
+    {
+      "id": "w21-mouth",
+      "hanzi": "嘴",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "欣山镇",
+      "senses": [
+        "嘴（mouth）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "身体",
+        "2021 词表"
+      ],
+      "audio": "",
+      "notes": "2021 年初步记音：zuei（未标声调，待按现行体例重新转写）",
+      "speaker": "Juan Zhong（2021）",
+      "verified": false
     }
   ]
 }

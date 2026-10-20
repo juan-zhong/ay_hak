@@ -6,7 +6,7 @@
   <title>AYHAK · 安远话词典</title>
   <meta name="description" content="安远话（江西安远客家话）社区词典：汉字、IPA、释义、例句与录音。" />
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="./style.css?v=20261020b" />
+  <link rel="stylesheet" href="./style.css?v=20261020e" />
 </head>
 
 <body>
@@ -15,6 +15,7 @@
   <nav class="page-nav" aria-label="站点导航">
     <a href="./index-zh.html">AYHAK</a>
     <a href="./dict.html" aria-current="page">查安远话</a>
+    <a href="./sentences.html">五百句</a>
     <a href="./plants.html">植物图集</a>
     <a href="./gallery.html">安远影像</a>
     <a href="./index-zh.html#join">一起参与</a>
@@ -58,9 +59,14 @@
           <button class="chip" data-pos="v">动词</button>
           <button class="chip" data-pos="adj">形容词</button>
           <button class="chip" data-pos="pron">代词</button>
+          <button class="chip" data-pos="num">数词</button>
           <button class="chip" data-pos="part">语气词</button>
           <button class="chip" data-pos="other">其他</button>
         </div>
+      </div>
+
+      <div class="filters">
+        <div class="chip-group" id="themeChips" aria-label="主题"></div>
       </div>
 
       <div class="filters">
@@ -92,6 +98,12 @@
           </div>
         </article>
       </div>
+    </section>
+
+    <section id="wanted" class="content-section wide">
+      <h2>我们在找这些词</h2>
+      <p>下面这些词还没有记录到安远话的说法。你们家里、你们村怎么说？点一个词就能发邮件告诉我们，写上你的乡镇或村名。</p>
+      <div id="wantedList"><p class="muted">载入中…</p></div>
     </section>
 
     <section id="manage" class="content-section wide">
@@ -133,7 +145,7 @@
 
       <div class="card" style="margin-top:20px;">
         <h3>CSV 格式</h3>
-        <p class="muted">第一行是表头。<code>senses</code> 和 <code>tags</code> 用 <code>||</code> 分隔；<code>examples</code> 写成 <code>例句::IPA::翻译</code>（IPA 可省略，写成 <code>例句::翻译</code>），多条之间用 <code>||</code> 分隔。<code>variants</code>（其他地方的说法）写成 <code>说法::IPA::乡镇::备注</code>，多条用 <code>||</code> 分隔；<code>verified</code> 填 <code>true</code> 表示已和发音人核实。</p>
+        <p class="muted">第一行是表头。<code>senses</code> 和 <code>tags</code> 用 <code>||</code> 分隔；<code>examples</code> 写成 <code>例句::IPA::翻译</code>（IPA 可省略，写成 <code>例句::翻译</code>），多条之间用 <code>||</code> 分隔。<code>sandhi</code> 是连读时的读音（变调后）。<code>variants</code>（其他地方的说法）写成 <code>说法::IPA::乡镇::备注::录音::连读::核实</code>，后面几项可以省略，多条用 <code>||</code> 分隔；<code>verified</code> 填 <code>true</code> 表示已和发音人核实。</p>
         <pre class="codeblock" id="csvExample"></pre>
       </div>
 
@@ -175,6 +187,6 @@
     <p class="license">代码 CC0 · 文字与照片 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans">CC BY-NC 4.0</a> · 录音按发音人授权使用，未经许可请勿转载 · <a href="https://github.com/juan-zhong/ay_hak/blob/main/CONTENT-LICENSE.md">授权说明</a></p>
   </footer>
 
-  <script src="./app.js?v=20261020b"></script>
+  <script src="./app.js?v=20261020e"></script>
 </body>
 </html>

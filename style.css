@@ -585,3 +585,29 @@ h3.sub:first-of-type { margin-top: 0; }
 }
 footer p.license { text-transform: none; letter-spacing: 0.04em; font-size: 12px; color: var(--faintest); max-width: 760px; margin: 8px auto 0; line-height: 1.7; }
 footer p.license a { color: var(--faint); text-decoration: underline; text-decoration-color: var(--line-strong); }
+
+/* 各地读音表（借鉴 SeeDict“各地方音”） */
+.readings-wrap { overflow-x: auto; margin: 0 0 6px; border: 1px solid var(--line); border-radius: var(--r-sm); }
+.readings { width: 100%; border-collapse: collapse; font-size: 14px; }
+.readings th { text-align: left; font-weight: 500; color: var(--faint); font-size: 12px; letter-spacing: 0.1em; padding: 8px 10px; background: var(--tint); white-space: nowrap; }
+.readings td { padding: 8px 10px; border-top: 1px solid var(--line); vertical-align: middle; color: var(--text); white-space: nowrap; }
+.readings td:first-child { white-space: normal; }
+.readings tr.main td { background: var(--accent-soft); }
+.readings .tag { margin: 0; }
+.readings b { font-weight: 500; font-size: 16px; }
+
+/* 征集中的词 */
+.wanted-group { margin-bottom: 20px; }
+.wg-title { color: var(--ink); font-size: 16px; font-weight: 500; margin: 0 0 8px; letter-spacing: 0.06em; }
+.wg-title .small { color: var(--plum); margin-left: 4px; }
+#wanted .chip-link { border-style: dashed; border-color: #cdb5cf; }
+#wanted .chip-link:hover { border-style: solid; border-color: var(--plum); color: var(--plum); }
+
+/* 每日一词 */
+.wotd { display: block; margin: 0 0 22px; padding: 16px 20px; border-radius: var(--r-lg); background: var(--paper); border: 1px solid var(--line); color: inherit; }
+.wotd:hover { border-color: var(--accent); color: inherit; }
+.wotd .wotd-label { font-size: 12px; letter-spacing: 0.15em; color: var(--accent); font-weight: 600; }
+.wotd .wotd-hw { font-size: 30px; font-weight: 300; color: var(--ink); letter-spacing: 0.12em; margin: 2px 0 0; }
+.wotd .wotd-hw .ipa { font-size: 16px; letter-spacing: 0.02em; margin-left: 10px; }
+.wotd .wotd-gl { font-size: 15px; color: var(--muted); }
+.wotd:empty { display: none; }
