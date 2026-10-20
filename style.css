@@ -611,3 +611,19 @@ footer p.license a { color: var(--faint); text-decoration: underline; text-decor
 .wotd .wotd-hw .ipa { font-size: 16px; letter-spacing: 0.02em; margin-left: 10px; }
 .wotd .wotd-gl { font-size: 15px; color: var(--muted); }
 .wotd:empty { display: none; }
+
+/* =========================================================
+   精简（2026-10-20）：管理工具只在 ?admin=1 时显示；标题区和留白收紧
+   ========================================================= */
+.admin-only { display: none !important; }
+html.admin .admin-only { display: revert !important; }
+html.admin section.admin-only { display: block !important; }
+.hero.compact { padding: 40px 20px 32px; }
+.hero.compact .subtitle { margin-bottom: 12px; }
+.hero.compact .intro { margin-bottom: 14px; }
+.content-section { padding: 64px 20px; }
+h2 { margin-bottom: 30px; }
+@media (max-width: 640px) {
+  .content-section { padding: 44px 16px; }
+  .hero.compact { padding: 28px 16px 22px; }
+}

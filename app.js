@@ -116,6 +116,17 @@
     return e;
   }
 
+  /* ---------- 管理模式：网址加 ?admin=1 打开（会记住），?admin=0 关闭 ---------- */
+  const ADMIN = (() => {
+    const v = new URL(location.href).searchParams.get('admin');
+    try {
+      if (v === '1') localStorage.setItem('ayhak.admin', '1');
+      if (v === '0') localStorage.removeItem('ayhak.admin');
+      return localStorage.getItem('ayhak.admin') === '1';
+    } catch { return v === '1'; }
+  })();
+  if (ADMIN) document.documentElement.classList.add('admin');
+
   /* ---------- 状态 ---------- */
   const state = {
     entries: [],
@@ -132,6 +143,7 @@
     shown: [],
   };
   Object.assign(state, (({ showIPA = true, showAudio = true }) => ({ showIPA, showAudio }))(ls.get(LS_PREFS, {})));
+  if (!ADMIN) state.showAudio = false;      // 录音、上传只在管理模式里出现；公众在“各地读音”表里点 ▶ 听
 
   /* ---------- 搜索 ---------- */
   function score(e, nq, rawq) {

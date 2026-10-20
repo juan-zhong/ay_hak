@@ -31,6 +31,7 @@
     const j = await (await fetch('./data/sentences.json', { cache: 'no-cache' })).json();
     state.cats = j.categories || [];
     state.sentences = j.sentences || [];
+    if (state.cats.length) state.cat = state.cats[0].id;   // 默认先显示第一类，不一次铺开五百句
   }
   // 已发布到网站的录音（放在仓库 audio/sentences/，国内也能播）
   async function loadStatic() {
@@ -84,7 +85,7 @@
   }
 
   function matches(s) {
-    if (state.cat && s.cat !== state.cat) return false;
+    if (state.cat && !state.q.trim() && s.cat !== state.cat) return false;   // 搜索时在全部五百句里找
     const n = (state.recs[s.id] || []).length;
     if (state.onlyEmpty && n) return false;
     if (state.onlyHas && !n) return false;

@@ -6,7 +6,7 @@
   <title>AYHAK · 安远话植物图集</title>
   <meta name="description" content="拍植物，记语言：安远话可食植物图集。照片、汉字和 IPA 叫法、录音、学名，以及生长环境和吃法。网页版与附二维码的纸质版。" />
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="./style.css?v=20261020f" />
+  <link rel="stylesheet" href="./style.css?v=20261020g" />
 </head>
 
 <body>
@@ -76,7 +76,7 @@
     <!-- ========= 图集 ========= -->
     <section id="atlas" class="content-section wide">
       <h2>图集</h2>
-      <h3>点小图换照片，点 ▶ 听发音；打开“二维码”可以预览纸质版</h3>
+      <h3>点小图换照片，点 ▶ 听发音</h3>
 
       <div class="plant-tools">
         <div class="searchbar" style="flex:1 1 280px;margin:0;">
@@ -86,8 +86,8 @@
           <span class="chip-label">类别</span>
           <button class="chip is-active" data-cat="all">全部</button>
         </div>
-        <label class="toggle"><input id="toggleQR" type="checkbox" /> <span>二维码</span></label>
-        <button class="btn sm btn-ghost" id="btnPrint">打印 / 存 PDF</button>
+        <label class="toggle admin-only"><input id="toggleQR" type="checkbox" /> <span>二维码</span></label>
+        <button class="btn sm btn-ghost admin-only" id="btnPrint">打印 / 存 PDF</button>
       </div>
 
       <div class="plant-grid" id="plantGrid">
@@ -117,15 +117,6 @@
           <p class="muted">网页版把照片和录音连在一起；纸质版用二维码播放同样的录音。孩子、学说安远话的人、不常用手机的长辈，都能用自己习惯的方式看、听。</p>
         </div>
       </div>
-
-      <h3 style="margin-top:40px;">我们怎么做</h3>
-      <ol>
-        <li><b>拍照</b>：在菜园、田里、山上和市场，拍植物不同阶段的样子，也拍用它做出来的食物。</li>
-        <li><b>问叫法</b>：请发音人看照片说叫法，并说明是哪个乡镇、哪个村的说法。</li>
-        <li><b>追问</b>：顺着照片问什么时候采、怎么处理、做成什么，记下新出现的词。</li>
-        <li><b>录音、转写</b>：每个叫法录两三遍，用 IPA 转写，和发音人一起核对。</li>
-        <li><b>回馈</b>：网页版免费开放，纸质版先送给参与的发音人和家乡的学校。</li>
-      </ol>
       <p class="muted">录音和照片都会先征得发音人同意，署名方式由发音人决定。</p>
     </section>
 
@@ -155,7 +146,7 @@
     <p class="license">代码 CC0 · 文字与照片 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans">CC BY-NC 4.0</a> · 录音按发音人授权使用，未经许可请勿转载 · <a href="https://github.com/juan-zhong/ay_hak/blob/main/CONTENT-LICENSE.md">授权说明</a></p>
   </footer>
 
-  <script src="./vendor/qrcode.js?v=20261020f" defer></script>
-  <script src="./plants.js?v=20261020f" defer></script>
+  <script src="./vendor/qrcode.js?v=20261020g" defer></script>
+  <script src="./plants.js?v=20261020g" defer></script>
 </body>
 </html>

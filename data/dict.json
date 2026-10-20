@@ -283,7 +283,7 @@
       "id": "w21-one",
       "hanzi": "一",
       "roman": "",
-      "ipa": "",
+      "ipa": "jɜ⁴¹",
       "sandhi": "",
       "pos": "num",
       "variety": "欣山镇",
@@ -297,7 +297,7 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：iə（未标声调，待按现行体例重新转写）",
+      "notes": "2021 年初步记音：iə（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -459,7 +459,7 @@
       "id": "w21-five",
       "hanzi": "五",
       "roman": "",
-      "ipa": "",
+      "ipa": "ʔŋ̍⁴¹",
       "sandhi": "",
       "pos": "num",
       "variety": "欣山镇",
@@ -473,7 +473,7 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：m（未标声调，待按现行体例重新转写）",
+      "notes": "2021 年初步记音：m（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -789,7 +789,7 @@
       "id": "w21-eight",
       "hanzi": "八",
       "roman": "",
-      "ipa": "",
+      "ipa": "pɜ⁴¹",
       "sandhi": "",
       "pos": "num",
       "variety": "欣山镇",
@@ -803,7 +803,7 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-eight_20261019-212302.m4a",
-      "notes": "2021 年初步记音：pə（未标声调，待按现行体例重新转写）",
+      "notes": "2021 年初步记音：pə（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -899,7 +899,7 @@
       "id": "w21-ten",
       "hanzi": "十",
       "roman": "",
-      "ipa": "",
+      "ipa": "sɜ³⁴",
       "sandhi": "",
       "pos": "num",
       "variety": "欣山镇",
@@ -913,7 +913,7 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：sə（未标声调，待按现行体例重新转写）",
+      "notes": "2021 年初步记音：sə（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -965,7 +965,7 @@
       "id": "w21-seven",
       "hanzi": "七",
       "roman": "",
-      "ipa": "",
+      "ipa": "tɕʰjɜ⁴¹",
       "sandhi": "",
       "pos": "num",
       "variety": "欣山镇",
@@ -973,13 +973,23 @@
         "七（seven）"
       ],
       "examples": [],
-      "variants": [],
+      "variants": [
+        {
+          "form": "七",
+          "ipa": "tsʰjɜ⁴¹",
+          "variety": "欣山镇",
+          "note": "自由变读",
+          "audio": "",
+          "sandhi": "",
+          "verified": false
+        }
+      ],
       "tags": [
         "数字",
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：t͡ɕʰiə（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "notes": "2021 年初步记音：t͡ɕʰiə（已按现行体例转写）；汉字写法待定",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1361,7 +1371,7 @@
       "id": "w21-yellow",
       "hanzi": "黄",
       "roman": "",
-      "ipa": "",
+      "ipa": "vaŋ³²⁴",
       "sandhi": "",
       "pos": "adj",
       "variety": "欣山镇",
@@ -1375,7 +1385,7 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：vaŋ（未标声调，待按现行体例重新转写）",
+      "notes": "2021 年初步记音：vaŋ（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1471,7 +1481,7 @@
       "id": "w21-mouth",
       "hanzi": "嘴",
       "roman": "",
-      "ipa": "",
+      "ipa": "tsweɪ⁵³",
       "sandhi": "",
       "pos": "n",
       "variety": "欣山镇",
@@ -1485,7 +1495,7 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：zuei（未标声调，待按现行体例重新转写）",
+      "notes": "2021 年初步记音：zuei（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     }

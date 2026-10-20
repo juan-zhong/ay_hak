@@ -20,6 +20,14 @@
   const ipa = (s) => (s ? `<span class="ipa">/${esc(s)}/</span>` : '');
   const playBtn = (src, label = '▶') => (src ? `<button class="play" data-play="${esc(src)}" aria-label="播放录音">${label}</button>` : '');
 
+  // 管理模式（二维码、打印）：网址加 ?admin=1 打开，?admin=0 关闭
+  try {
+    const v = new URL(location.href).searchParams.get('admin');
+    if (v === '1') localStorage.setItem('ayhak.admin', '1');
+    if (v === '0') localStorage.removeItem('ayhak.admin');
+    if (localStorage.getItem('ayhak.admin') === '1') document.documentElement.classList.add('admin');
+  } catch { /* 无法存储时只看网址 */ }
+
   const state = { plants: [], target: 22, cat: 'all', q: '' };
 
   function photos(p) {
