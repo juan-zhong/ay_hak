@@ -4,94 +4,151 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>AYHAK · 安远话记录计划</title>
-  <meta name="description" content="AYHAK 安远话记录计划：记录江西安远客家话的词汇、语音和故事。安远话词典、植物图集、复健会。" />
+  <meta name="description" content="AYHAK 安远话记录计划：由安远人发起的社区语言记录计划。查安远话、参加复健会、一起记录各乡镇的说法和地方知识。" />
+  <meta property="og:title" content="AYHAK · 安远话记录计划" />
+  <meta property="og:description" content="一起讲安远话，一起记录安远。" />
+  <meta property="og:image" content="https://juan-zhong.github.io/ay_hak/images/gallery/%E6%AC%A3%E5%B1%B1%E5%A4%A7%E5%B8%82%E5%9C%BA03.jpg" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
   <link rel="alternate" hreflang="en" href="./index.html" />
-  <link rel="stylesheet" href="./style.css?v=20261019f" />
+  <link rel="stylesheet" href="./style.css?v=20261020b" />
 </head>
 
 <body>
   <a class="skip" href="#main">跳到正文</a>
 
   <nav class="page-nav" aria-label="站点导航">
-    <a href="https://juan-zhong.github.io/me/">← Juan Zhong</a>
     <a href="./index-zh.html" aria-current="page">AYHAK</a>
-    <a href="./dict.html">词典</a>
+    <a href="./dict.html">查安远话</a>
     <a href="./plants.html">植物图集</a>
-    <a href="#join">复健会</a>
-    <a href="#questions">常见问题</a>
-    <a href="#gallery">安远影像</a>
+    <a href="./gallery.html">安远影像</a>
+    <a href="#join">一起参与</a>
+    <a href="#about">关于</a>
     <a href="./index.html" lang="en">English</a>
   </nav>
 
   <header class="hero">
     <p class="kicker">AYHAK</p>
     <h1>安远话记录计划</h1>
-    <p class="subtitle">一起来讲安远话</p>
-    <p class="intro">安远话是江西省安远县人日常说的地方话。现在会说的年轻人越来越少。我们记录安远话的词汇、语音和故事，一起讲安远话，学安远话。</p>
+    <p class="subtitle">一起讲安远话，一起记录安远</p>
+    <p class="intro">安远话是江西省安远县人使用的客家话。不同乡镇、不同村庄有各自的说法，也承载着人们的生活经验与地方知识。</p>
+    <p class="intro">AYHAK 是一个由安远人发起的社区语言记录计划。我们一起记录安远话的词汇、语音、故事和日常知识，也为想学、想继续说安远话的人创造交流的空间。</p>
     <div class="buttons">
-      <a class="btn primary" href="#projects">看看项目</a>
+      <a class="btn primary" href="#lookup">查安远话</a>
       <a class="btn" href="#join">参加复健会</a>
-      <a class="btn" href="mailto:juanzhon@buffalo.edu">联系我们</a>
     </div>
     <p class="status">2021 年至今 · 江西安远</p>
   </header>
 
   <main id="main">
-    <section id="about" class="content-section">
-      <h2>关于</h2>
-      <p>AYHAK 是由安远本地人发起的社区项目。我们遵循几条简单的原则：</p>
-      <ul>
-        <li>说安远话的人是合作伙伴。</li>
-        <li>每个乡镇、每个村的说法都算数，安远话没有唯一的“标准说法”。</li>
-        <li>做出来的东西首先回馈给家乡。</li>
-      </ul>
+    <!-- ========= 查一个词 ========= -->
+    <section id="lookup" class="content-section">
+      <h2>查一个词</h2>
+      <form class="searchbar" action="./dict.html" method="get" role="search">
+        <input name="q" type="search" placeholder="输入汉字、释义或音标，例如：屋下 / 家" autocomplete="off" aria-label="查安远话" />
+        <button class="btn primary" type="submit">查</button>
+      </form>
+      <p class="small try">试试：
+        <a class="chip-link" href="./dict.html?w=vu-xa">屋下</a>
+        <a class="chip-link" href="./dict.html?w=xian-cheng">县城</a>
+        <a class="chip-link" href="./dict.html?w=xinshan-da-shichang">欣山大市场</a>
+      </p>
+      <p>同一个意思，不同乡镇、不同村子可能有不同的说法。词典里每个说法都标明来自哪里，也会列出其他地方的说法。查不到你们那里的说法？<a href="#contribute">告诉我们</a>。</p>
+      <p class="muted">看不懂国际音标（IPA）没关系，词典里可以把音标关掉，只看汉字和释义。</p>
     </section>
 
+    <!-- ========= 项目 ========= -->
     <section id="projects" class="content-section">
       <h2>项目</h2>
+      <p class="legend small"><span class="tag live">已上线</span> 可以直接用　<span class="tag todo">正在整理</span> 可以先看已有的部分　<span class="tag pending">计划中</span> 还没有开放　<span class="tag done">已完成</span></p>
       <div class="projects">
         <a class="proj" href="./dict.html">
           <img src="images/gallery/篓子.jpg" alt="篓子" loading="lazy" />
-          <span class="tag live">上线</span>
+          <span class="tag live">已上线</span>
           <b>安远话词典</b>
-          <span class="desc">汉字、IPA、释义、例句和录音，每个说法都标明乡镇。</span>
+          <span class="desc">汉字、IPA、释义、例句和录音，每个说法都标明乡镇。词条正在陆续补充。</span>
           <span class="more">查词 →</span>
         </a>
         <a class="proj" href="./plants.html">
           <img class="cutout" src="images/plants/shu-tuber.jpg" alt="薯" loading="lazy" />
-          <span class="tag todo">即将推出</span>
+          <span class="tag todo">正在整理</span>
           <b>安远话植物图集</b>
-          <span class="desc">收录本地植物的安远话叫法和录音，计划推出网页版和纸质版。</span>
-          <span class="more">先睹为快 →</span>
+          <span class="desc">22 种本地可食植物的叫法、照片和录音。已经可以先看薯和艾。</span>
+          <span class="more">先看已有的 →</span>
         </a>
         <figure class="proj">
           <img src="images/gallery/母女.jpg" alt="母女" loading="lazy" />
-          <span class="tag todo">进行中</span>
+          <span class="tag todo">正在整理</span>
           <b>安远话语音描写</b>
-          <span class="desc">描写安远话的发音系统，并附上录音。</span>
-        </figure>
-        <figure class="proj">
-          <img src="images/gallery/桌子凳子.jpg" alt="桌子凳子" loading="lazy" />
-          <span class="tag done">2024</span>
-          <b>用安远话学习语言学</b>
-          <span class="desc">用安远话为安远人讲授语言学入门课程。</span>
+          <span class="desc">描写安远话的发音系统，并附上录音。整理好后在这里发布。</span>
         </figure>
         <figure class="proj">
           <img src="images/gallery/门窗.jpg" alt="门窗" loading="lazy" />
-          <span class="tag todo">即将推出</span>
+          <span class="tag pending">计划中</span>
           <b>安远话入门十讲</b>
-          <span class="desc">用普通话讲解安远话的发音，词汇，以及语法，欢迎所有人参加。</span>
+          <span class="desc">用普通话讲解安远话的发音、词汇和语法，欢迎所有人参加。还没有开放报名，开课前会在这里和复健会通知。</span>
+        </figure>
+        <figure class="proj">
+          <img src="images/gallery/桌子凳子.jpg" alt="桌子凳子" loading="lazy" />
+          <span class="tag done">已完成 · 2024</span>
+          <b>用安远话学习语言学</b>
+          <span class="desc">用安远话为安远人讲授语言学入门课程。</span>
         </figure>
       </div>
     </section>
 
-    <section id="join" class="content-section">
-      <h2>安远话复健会</h2>
-      <p>复健会面向所有想继续说安远话的安远人，不管你现在在哪里。我们隔周五晚上（北京时间）在腾讯会议见面，一半时间自由聊天，一半时间聊一个主题。参加时请在昵称后面写上你的乡镇或村名，大家就能听到各地说法的不同。</p>
-      <p>把活动日程加到日历：<a href="webcal://p54-caldav.icloud.com/published/2/MTEzODIwMDE0NDExMzgyMMFgVCDCDaKoMtNCKBn1EhfA-79njfZBbu5WWxrAYHy4s1xKDF6rgkBgKywDp8NgCctA90rvas5HTKUIKwTFqRs">2026</a></p>
-      <p>想参加的话，<a href="mailto:juanzhon@buffalo.edu">发邮件给我们</a>获取会议链接。</p>
+    <!-- ========= 安远影像（精选） ========= -->
+    <section id="life" class="content-section">
+      <h2>安远影像</h2>
+      <p>市场、屋下、田里的东西，安远话怎么叫？我们在安远拍下日常生活，再一起把它们的说法记下来。点照片可以看大图。</p>
+      <div class="gallery-grid teaser">
+        <figure><img src="images/gallery/欣山大市场03.jpg" alt="欣山大市场" loading="lazy" /><figcaption>欣山大市场</figcaption></figure>
+        <figure><img src="images/gallery/干货.jpg" alt="干货" loading="lazy" /><figcaption>干货</figcaption></figure>
+        <figure><img src="images/gallery/捶捶鱼.jpg" alt="捶捶鱼" loading="lazy" /><figcaption>捶捶鱼</figcaption></figure>
+        <figure><img src="images/gallery/柴火.jpg" alt="柴火" loading="lazy" /><figcaption>柴火</figcaption></figure>
+        <figure><img src="images/gallery/篓子.jpg" alt="篓子" loading="lazy" /><figcaption>篓子</figcaption></figure>
+        <figure><img src="images/gallery/猪膏花.jpg" alt="猪膏花" loading="lazy" /><figcaption>猪膏花</figcaption></figure>
+      </div>
+      <p class="more-link"><a href="./gallery.html">看全部影像 →</a></p>
     </section>
 
+    <!-- ========= 一起参与 ========= -->
+    <section id="join" class="content-section">
+      <h2>一起参与</h2>
+
+      <h3 class="sub">安远话复健会</h3>
+      <p>复健会面向所有想继续说安远话的安远人，不管你现在在哪里。</p>
+      <dl class="facts">
+        <dt>时间</dt><dd>隔周五 21:00–22:00（北京时间）<br><span class="small">2026 秋冬季：10 月 23 日至 12 月 18 日，共 5 次</span></dd>
+        <dt>地点</dt><dd>腾讯会议，线上</dd>
+        <dt>形式</dt><dd>一半时间自由聊天，一半时间聊一个主题</dd>
+        <dt>第一次来</dt><dd>会说多少都可以，只听不说也欢迎。进会时在昵称后面写上你的乡镇或村名，大家就能听到各地说法的不同。</dd>
+      </dl>
+      <p class="next-meetup" id="nextMeetup" aria-live="polite"></p>
+      <div class="buttons left">
+        <a class="btn primary" href="mailto:juanzhon@buffalo.edu?subject=%E5%8F%82%E5%8A%A0%E5%AE%89%E8%BF%9C%E8%AF%9D%E5%A4%8D%E5%81%A5%E4%BC%9A">发邮件获取会议链接</a>
+        <a class="btn" href="webcal://p54-caldav.icloud.com/published/2/MTEzODIwMDE0NDExMzgyMMFgVCDCDaKoMtNCKBn1EhfA-79njfZBbu5WWxrAYHy4s1xKDF6rgkBgKywDp8NgCctA90rvas5HTKUIKwTFqRs">加到日历（2026）</a>
+      </div>
+      <p class="small">“加到日历”适用于苹果设备和 Outlook。安卓手机打不开的话，按上面的时间记下就好。</p>
+
+      <h3 class="sub" id="contribute">贡献你知道的</h3>
+      <div class="pillars three">
+        <div class="card"><span class="num">01</span><h3>补充说法</h3><p class="muted">词典里的词，你们村怎么说？有没有别的叫法、别的意思？</p></div>
+        <div class="card"><span class="num">02</span><h3>录一段音</h3><p class="muted">一个词、一句话、一个小故事都可以，用手机录就行。</p></div>
+        <div class="card"><span class="num">03</span><h3>照片和地方知识</h3><p class="muted">家里的老物件、菜园里的植物、过节吃的东西，以及它们的说法和做法。</p></div>
+      </div>
+      <p><a href="mailto:juanzhon@buffalo.edu?subject=AYHAK%20%E8%B4%A1%E7%8C%AE">发邮件给我们</a>，写上你的乡镇或村名就好。</p>
+
+      <div class="note-box">
+        <h3>你的贡献会怎么用</h3>
+        <ul>
+          <li>公开到网站之前，我们会先问清楚：能不能公开、能不能用于研究、希望怎么署名。</li>
+          <li>每条记录都会标明来自哪个乡镇或村子。</li>
+          <li>任何时候都可以要求修改或撤回你的内容。</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========= 常见问题 ========= -->
     <section id="questions" class="content-section">
       <h2>常见问题</h2>
       <dl class="faq">
@@ -101,57 +158,37 @@
         <dd>来参加复健会，分享你家乡的说法和故事，或者帮忙录音都可以。会说多少都欢迎。</dd>
         <dt>我不会说安远话，可以参加吗？</dt>
         <dd>可以。即将推出的安远话入门课将使用普通话讲授，复健会也欢迎旁听。</dd>
+        <dt>安远话怎么写？那些符号是什么？</dt>
+        <dd>词典用汉字和国际音标（IPA）记录。有些词没有公认的写法，我们会注明。看不懂音标没关系，可以只看汉字和释义。</dd>
+        <dt>我的录音会怎么用？</dt>
+        <dd>公开之前会先征得你的同意，并按你希望的方式署名。你可以随时要求修改或撤回。</dd>
       </dl>
     </section>
 
-    <section id="gallery" class="content-section">
-      <h2>安远影像</h2>
+    <!-- ========= 关于 ========= -->
+    <section id="about" class="content-section">
+      <h2>关于</h2>
+      <p>AYHAK 是由安远本地人发起的社区项目。我们遵循几条简单的原则：</p>
+      <ul>
+        <li>说安远话的人是合作伙伴。</li>
+        <li>每个乡镇、每个村的说法都算数，安远话没有唯一的“标准说法”。</li>
+        <li>做出来的东西首先回馈给家乡。</li>
+      </ul>
 
-      <div class="gallery-group">
-        <h3>县城 <span class="ipa">[ɥʊ̃ŋ⁴⁵.t͡sʰɜ̃ŋ³²⁴]</span></h3>
-        <div class="gallery-grid">
-          <figure class="solo"><img src="images/gallery/琴行旧址.jpg" alt="琴行旧址" loading="lazy" /><figcaption>琴行旧址</figcaption></figure>
-        </div>
-      </div>
+      <h3 class="sub">参与者</h3>
+      <p class="muted">参与的发音人和合作者，征得本人同意后列在这里。</p>
 
-      <div class="gallery-group">
-        <h3>欣山大市场 <span class="ipa">[siŋ³⁴.sɑ̃³⁴.tʰɑ⁴⁵.si⁵².tsɑŋ⁴¹]</span></h3>
-        <div class="gallery-grid">
-          <figure><img src="images/gallery/欣山大市场03.jpg" alt="欣山大市场" loading="lazy" /></figure>
-          <figure><img src="images/gallery/欣山大市场01.jpg" alt="欣山大市场" loading="lazy" /></figure>
-          <figure><img src="images/gallery/欣山大市场02.jpg" alt="欣山大市场" loading="lazy" /></figure>
-          <figure><img src="images/gallery/干货.jpg" alt="干货" loading="lazy" /><figcaption>干货</figcaption></figure>
-          <figure><img src="images/gallery/母女.jpg" alt="母女" loading="lazy" /><figcaption>母女</figcaption></figure>
-          <figure><img src="images/gallery/捶捶鱼.jpg" alt="捶捶鱼" loading="lazy" /><figcaption>捶捶鱼</figcaption></figure>
-          <figure><img src="images/gallery/荔枝与.jpg" alt="荔枝" loading="lazy" /><figcaption>荔枝</figcaption></figure>
-          <figure><img src="images/gallery/葱子.jpg" alt="葱子" loading="lazy" /><figcaption>葱子</figcaption></figure>
-        </div>
-      </div>
-
-      <div class="gallery-group">
-        <h3>屋下 <span class="ipa">[vu⁴⁵.xɑ³⁴]</span></h3>
-        <div class="gallery-grid">
-          <figure><img src="images/gallery/柴火.jpg" alt="柴火" loading="lazy" /><figcaption>柴火</figcaption></figure>
-          <figure><img src="images/gallery/篓子.jpg" alt="篓子" loading="lazy" /><figcaption>篓子</figcaption></figure>
-          <figure><img src="images/gallery/桌子凳子.jpg" alt="桌子凳子" loading="lazy" /><figcaption>桌子凳子</figcaption></figure>
-          <figure><img src="images/gallery/门窗.jpg" alt="门窗" loading="lazy" /><figcaption>门窗</figcaption></figure>
-        </div>
-      </div>
-
-      <div class="gallery-group">
-        <h3>瓜果蔬菜</h3>
-        <div class="gallery-grid">
-          <figure><img src="images/gallery/猪膏花.jpg" alt="猪膏花" loading="lazy" /><figcaption>猪膏花</figcaption></figure>
-          <figure><img src="images/gallery/瓜田.jpg" alt="瓜田" loading="lazy" /><figcaption>瓜田</figcaption></figure>
-          <figure><img src="images/gallery/鲜鸡蛋.jpg" alt="鲜鸡蛋" loading="lazy" /><figcaption>鲜鸡蛋</figcaption></figure>
-        </div>
-      </div>
+      <h3 class="sub">联系</h3>
+      <p>juanzhon AT buffalo DOT edu · <a href="https://juan-zhong.github.io/me/">Juan Zhong</a></p>
     </section>
   </main>
 
   <footer>
     <p>AYHAK · 联系方式：juanzhon AT buffalo DOT edu</p>
     <p>© 2026 Juan Zhong</p>
+    <p class="license">代码 CC0 · 文字与照片 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans">CC BY-NC 4.0</a> · 录音按发音人授权使用，未经许可请勿转载 · <a href="https://github.com/juan-zhong/ay_hak/blob/main/CONTENT-LICENSE.md">授权说明</a></p>
   </footer>
+
+  <script src="./home.js?v=20261020b" defer></script>
 </body>
 </html>

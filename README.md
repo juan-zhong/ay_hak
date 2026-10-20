@@ -15,6 +15,9 @@ AYHAK 安远话记录计划的网站：项目主页、**安远话词典**和**�
 ay_hak/
 ├── index.html          项目主页（English）
 ├── index-zh.html       项目主页（中文）
+├── gallery.html        安远影像（全部照片，可点开看大图）
+├── home.js             首页脚本：下一次复健会、看大图
+├── favicon.svg         网站图标
 ├── dict.html           词典页
 ├── app.js              词典逻辑（搜索、筛选、收藏、录音、导入导出）
 ├── plants.html         植物图集页
@@ -23,6 +26,7 @@ ay_hak/
 ├── apps_script.gs      录音上传到 Google Drive 的 Apps Script
 ├── data/
 │   ├── dict.json       词典数据
+│   ├── meetups.json    复健会日期（首页自动显示下一次）
 │   └── plants.json     植物数据
 ├── images/
 │   ├── gallery/        首页“安远影像”的照片
@@ -60,6 +64,11 @@ python3 -m http.server 8000
 
 然后打开 <http://localhost:8000>（英文主页）、<http://localhost:8000/index-zh.html>（中文主页）或 <http://localhost:8000/dict.html>（词典）。
 
+
+## 更新复健会日期
+
+编辑 `data/meetups.json`：`time` 填北京时间的开始时间（如 `"20:00"`），`dates` 填这一季每次活动的日期（如 `["2026-10-23", "2026-11-06"]`）。首页会自动显示最近的一次；如果访客不在中国，还会换算成他们当地的时间。日期为空时，首页提示看日历或发邮件。
+
 ## 更新词典
 
 两种方式：
@@ -73,7 +82,7 @@ python3 -m http.server 8000
 
 | 字段 | 说明 |
 |---|---|
-| `id` | 唯一编号，用在链接里（`dict.html?w=vu-xa`）。建议用拼音或英文，不要改动 |
+| `id` | 唯一编号，用在链接里（`dict.html?w=vu-xa`；搜索链接写成 `dict.html?q=屋下`）。建议用拼音或英文，不要改动 |
 | `hanzi` | 汉字写法 |
 | `roman` | 拼写（可选） |
 | `ipa` | IPA，不带方括号，例如 `vu⁴⁵.xɑ³⁴` |
@@ -85,6 +94,8 @@ python3 -m http.server 8000
 | `audio` | 录音路径，例如 `audio/vu-xa.mp3` |
 | `notes` | 备注 |
 | `speaker` | 发音人署名（按发音人意愿填写） |
+| `variants` | 其他地方的说法：`[{ "form": "", "ipa": "", "variety": "某乡镇", "note": "" }]`。CSV 写成 `说法::IPA::乡镇::备注`，用 `||` 分隔 |
+| `verified` | `true` = 已和发音人核实；不填 = 待核实 |
 
 CSV 列名相同；`senses`、`tags` 用 `||` 分隔，`examples` 写成 `例句::IPA::翻译`，多条用 `||` 分隔。
 
@@ -95,13 +106,13 @@ CSV 列名相同；`senses`、`tags` 用 `||` 分隔，`examples` 写成 `例句
 | 字段 | 说明 |
 |---|---|
 | `id` | 唯一编号，也是二维码指向的锚点（`plants.html#shu`）。**印刷后不要再改** |
-| `name` / `ipa` | 安远话叫法和 IPA。IPA 不带斜杠，网页会显示成 `/sé/` |
+| `name` / `ipa` | 安远话叫法和 IPA。IPA 不带斜杠，网页会显示成 `/se³²⁴/`；声调用五度调值上标数字 |
 | `gloss` | 简短释义 |
 | `mandarin` / `latin` | 普通话名、学名 |
 | `category` | `蔬菜` `野菜` `块根` `水果` `豆类` `花` `香料` `其他` |
 | `photos` | 照片列表，按生长阶段排：`[{ "src": "images/plants/shu-tuber.jpg", "caption": "整个的薯" }]` |
 | `habitat` / `season` / `uses` | 生长环境、季节、吃法 |
-| `derived` | 用它做的食物：`[{ "name": "薯粄", "ipa": "sé.pɑ̃̌", "gloss": "薯做的米粄", "photo": "…", "audio": "audio/shu-ban.mp3" }]` |
+| `derived` | 用它做的食物：`[{ "name": "薯粄", "ipa": "se³²⁴.pɑ̃⁴¹", "gloss": "薯做的米粄", "photo": "…", "audio": "audio/shu-ban.mp3" }]` |
 | `audio` | 叫法的录音，例如 `audio/shu.mp3` |
 | `variety` | 说法来源的乡镇 / 村 |
 | `notes` / `credit` | 备注、署名 |

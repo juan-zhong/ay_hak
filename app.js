@@ -69,6 +69,10 @@
       audio: String(raw.audio || '').trim(),
       notes: String(raw.notes || '').trim(),
       speaker: String(raw.speaker || '').trim(),
+      // 其他地方的说法：[{ form, ipa, variety, note }]；CSV 写成 形式::IPA::乡镇，用 || 分隔
+      variants: [],
+      // 是否已和发音人核实
+      verified: raw.verified === true || String(raw.verified).toLowerCase() === 'true' || raw.verified === '1' || raw.verified === '是',
     };
     if (!POS_LABEL[e.pos]) e.pos = 'other';
     const exs = Array.isArray(raw.examples) ? raw.examples : toList(raw.examples);
@@ -78,6 +82,12 @@
       if (parts.length >= 3) return { text: parts[0], ipa: parts[1], gloss: parts.slice(2).join('::') };
       return { text: parts[0] || '', ipa: '', gloss: parts[1] || '' };
     }).filter((x) => x.text);
+    const vs = Array.isArray(raw.variants) ? raw.variants : toList(raw.variants);
+    e.variants = vs.map((x) => {
+      if (typeof x === 'object' && x) return { form: String(x.form || '').trim(), ipa: String(x.ipa || '').trim(), variety: String(x.variety || '').trim(), note: String(x.note || '').trim() };
+      const [form = '', ipa = '', variety = '', note = ''] = String(x).split('::').map((t) => t.trim());
+      return { form, ipa, variety, note };
+    }).filter((x) => x.form || x.ipa);
     if (!e.id) e.id = slug(e);
     return e;
   }
@@ -95,7 +105,7 @@
       hanzi: norm(e.hanzi), roman: norm(e.roman), ipa: norm(e.ipa),
       senses: norm(e.senses.join(' ')),
       ex: norm(e.examples.map((x) => `${x.text} ${x.ipa} ${x.gloss}`).join(' ')),
-      rest: norm(`${e.tags.join(' ')} ${e.notes} ${e.variety}`),
+      rest: norm(`${e.tags.join(' ')} ${e.notes} ${e.variety} ${e.variants.map((v) => `${v.form} ${v.ipa} ${v.variety}`).join(' ')}`),
     };
     return e;
   }
@@ -194,6 +204,7 @@
       <div class="meta">
         <span class="tag">${esc(POS_LABEL[e.pos] || '其他')}</span>
         ${e.variety ? `<span class="tag">${esc(e.variety)}</span>` : '<span class="tag pending">乡镇待补</span>'}
+        ${e.verified ? '<span class="tag done">已核实</span>' : '<span class="tag pending">待核实</span>'}
         ${e.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}
       </div>
 
@@ -205,6 +216,12 @@
           ${state.showIPA && x.ipa ? `<span class="ipa">[${esc(x.ipa)}]</span>` : ''}
           ${x.gloss ? `<div class="tr">${esc(x.gloss)}</div>` : ''}
         </div>`).join('')}` : ''}
+
+      <h4>其他地方的说法</h4>
+      ${e.variants.length ? `<ul class="variants">${e.variants.map((v) => `
+        <li><b>${esc(v.form || e.hanzi)}</b>${state.showIPA && v.ipa ? ` <span class="ipa">[${esc(v.ipa)}]</span>` : ''}${v.variety ? ` <span class="tag">${esc(v.variety)}</span>` : ''}${v.note ? `<span class="small"> ${esc(v.note)}</span>` : ''}</li>`).join('')}</ul>`
+        : '<p class="small">还没有记录到其他说法。</p>'}
+      <p class="small"><a href="mailto:juanzhon@buffalo.edu?subject=${encodeURIComponent(`AYHAK 词典：${e.hanzi}`)}">你们那里怎么说？告诉我们 →</a></p>
 
       ${e.notes ? `<h4>备注</h4><p class="notes">${esc(e.notes)}</p>` : ''}
 
@@ -421,7 +438,7 @@
   }
 
   /* ---------- CSV ---------- */
-  const CSV_COLS = ['id', 'hanzi', 'roman', 'ipa', 'pos', 'variety', 'senses', 'examples', 'tags', 'audio', 'notes', 'speaker'];
+  const CSV_COLS = ['id', 'hanzi', 'roman', 'ipa', 'pos', 'variety', 'senses', 'examples', 'variants', 'tags', 'audio', 'notes', 'speaker', 'verified'];
   function parseCSV(text) {
     const rows = []; let row = []; let cell = ''; let q = false;
     text = text.replace(/^﻿/, '');
@@ -449,6 +466,8 @@
         let v = e[k];
         if (k === 'senses' || k === 'tags') v = v.join('||');
         if (k === 'examples') v = v.map((x) => [x.text, x.ipa, x.gloss].filter((p, i) => i !== 1 || p).join('::')).join('||');
+        if (k === 'variants') v = v.map((x) => [x.form, x.ipa, x.variety, x.note].join('::').replace(/(::)+$/, '')).join('||');
+        if (k === 'verified') v = v ? 'true' : '';
         return csvCell(String(v ?? ''));
       }).join(','));
     }
@@ -524,7 +543,8 @@
     const sample = [{
       id: 'vu-xa', hanzi: '屋下', roman: 'vu xa', ipa: 'vu⁴⁵.xɑ³⁴', pos: 'n', variety: '欣山镇',
       senses: ['家；家里'], examples: [{ text: '（例句）', ipa: '', gloss: '（普通话翻译）' }],
-      tags: ['居住'], audio: 'audio/vu-xa.mp3', notes: '', speaker: '',
+      variants: [{ form: '（另一种说法）', ipa: '', variety: '（某乡镇）', note: '' }],
+      tags: ['居住'], audio: 'audio/vu-xa.mp3', notes: '', speaker: '', verified: false,
     }];
     $('#jsonExample').textContent = JSON.stringify({ entries: sample }, null, 2);
     $('#csvExample').textContent = toCSV(normalizeAll(sample)).replace(/^﻿/, '');
@@ -576,7 +596,10 @@
       $('#results').innerHTML = `<p class="none">${esc(err.message)}<br>如果是直接双击打开的 HTML 文件，请改用本地服务器（见 README）。</p>`;
     }
 
-    const w = new URL(location.href).searchParams.get('w');
+    const params = new URL(location.href).searchParams;
+    const q0 = params.get('q');
+    if (q0) { $('#q').value = q0; state.q = q0; runSearch(); }
+    const w = params.get('w');
     if (w && state.entries.some((e) => e.id === w)) select(w, false);
     else if (state.shown[0]) select(state.shown[0].id, false);
   }

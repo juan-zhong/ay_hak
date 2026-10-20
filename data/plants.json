@@ -6,7 +6,7 @@
     {
       "id": "shu",
       "name": "薯",
-      "ipa": "sé",
+      "ipa": "se³²⁴",
       "mandarin": "参薯（大薯）的本地品种",
       "latin": "Dioscorea alata",
       "gloss": "本地种的大薯，肉是紫色的",
@@ -31,21 +31,21 @@
       "derived": [
         {
           "name": "薯粄",
-          "ipa": "sé.pɑ̃̌",
+          "ipa": "se³²⁴.pɑ̃⁴¹",
           "gloss": "薯做的米粄",
           "photo": "images/plants/shu-ban.jpg",
           "audio": ""
         },
         {
           "name": "薯包",
-          "ipa": "sé.pō",
+          "ipa": "se³²⁴.po³³",
           "gloss": "",
           "photo": "images/plants/shu-bao.jpg",
           "audio": ""
         },
         {
           "name": "薯酒",
-          "ipa": "sé.tsy̌",
+          "ipa": "se³²⁴.tsy⁴¹",
           "gloss": "薯酿的酒",
           "photo": "images/plants/shu-jiu.jpg",
           "audio": ""
@@ -59,7 +59,7 @@
     {
       "id": "ai",
       "name": "艾",
-      "ipa": "ŋɑ̀",
+      "ipa": "ŋɑ⁵³",
       "mandarin": "艾草",
       "latin": "Artemisia argyi",
       "gloss": "",
@@ -84,14 +84,14 @@
       "derived": [
         {
           "name": "艾粄",
-          "ipa": "ŋɑ̀.pɑ̃̌",
+          "ipa": "ŋɑ⁵³.pɑ̃⁴¹",
           "gloss": "",
           "photo": "images/plants/ai-ban.jpg",
           "audio": ""
         },
         {
           "name": "艾蛋",
-          "ipa": "ŋɑ̀.tʰɑ̃̀",
+          "ipa": "ŋɑ⁵³.tʰɑ̃⁴⁵",
           "gloss": "",
           "photo": "images/plants/ai-dan.jpg",
           "audio": ""
