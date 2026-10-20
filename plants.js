@@ -30,30 +30,33 @@
 
   const state = { plants: [], target: 22, cat: 'all', q: '' };
 
+  const pad = (n) => String(n).padStart(2, '0');
+
   function photos(p) {
     const list = (p.photos || (p.photo ? [{ src: p.photo }] : [])).filter((x) => x && x.src);
-    if (!list.length) return '<div class="photo"><div class="nophoto">照片待补</div></div>';
+    if (!list.length) return '<div class="plate"><div class="nophoto">照片待补</div></div>';
     const [first] = list;
     return `
-      <div class="photo"><img src="${esc(first.src)}" alt="${esc(first.caption || p.name)}" loading="lazy" data-main /></div>
+      <div class="plate"><img src="${esc(first.src)}" alt="${esc(first.caption || p.name)}" loading="lazy" data-main /></div>
+      <p class="plate-cap" data-cap>${esc(first.caption || '')}</p>
       ${list.length > 1 ? `<div class="thumbs">${list.map((x, i) => `
         <button class="thumb${i ? '' : ' is-active'}" data-src="${esc(x.src)}" data-cap="${esc(x.caption || '')}" aria-label="${esc(x.caption || `照片 ${i + 1}`)}">
-          <img src="${esc(x.src)}" alt="" loading="lazy" /></button>`).join('')}</div>` : ''}
-      <p class="photo-cap small" data-cap>${esc(first.caption || '')}</p>`;
+          <img src="${esc(x.src)}" alt="" loading="lazy" /></button>`).join('')}</div>` : ''}`;
   }
 
   function derived(p) {
     const d = (p.derived || []).filter((x) => x && x.name);
     if (!d.length) return '';
     return `<h4>用${esc(p.name || p.mandarin)}做的</h4>
-      <ul class="derived">${d.map((x) => `
+      <ul class="dishes">${d.map((x) => `
         <li>
           ${x.photo ? `<img src="${esc(x.photo)}" alt="${esc(x.name)}" loading="lazy" />` : '<span class="dph"></span>'}
-          <span class="dname"><b>${esc(x.name)}</b> ${ipa(x.ipa)} ${playBtn(x.audio)}${x.gloss ? `<br><span class="small">${esc(x.gloss)}</span>` : ''}</span>
+          <span class="dname"><b>${esc(x.name)}</b> ${playBtn(x.audio)}<br>${ipa(x.ipa)}${x.gloss ? `<br><span class="small">${esc(x.gloss)}</span>` : ''}</span>
         </li>`).join('')}</ul>`;
   }
 
-  function card(p) {
+  // 每种植物是一个跨页：左页照片，右页文字。页码从封面跨页之后算起。
+  function card(p, i) {
     const rows = [
       ['普通话', esc(p.mandarin)],
       ['学名', p.latin ? `<i>${esc(p.latin)}</i>` : ''],
@@ -61,29 +64,60 @@
       ['季节', esc(p.season)],
       ['说法来源', esc(p.variety)],
     ].filter(([, v]) => v);
+    const no = state.plants.indexOf(p) + 1;
+    const left = no * 2 + 1;
+    const missing = [p.name ? '' : '安远话叫法', p.ipa ? '' : 'IPA ', p.audio ? '' : '录音'].filter(Boolean);
     return `
-      <article class="plant" id="${esc(p.id)}">
-        ${photos(p)}
-        <div class="body">
-          <div class="name">${esc(p.name || p.mandarin || '（未命名）')}${ipa(p.ipa)} ${playBtn(p.audio)}</div>
+      <article class="spread plant" id="${esc(p.id)}">
+        <div class="page page-photo">
+          <p class="run">${pad(no)} · ${esc(p.category || '其他')}</p>
+          ${photos(p)}
+          <p class="folio">${left}</p>
+        </div>
+        <div class="page page-text">
+          <p class="run">AYHAK · 安远话植物图集</p>
+          <h3 class="name">${esc(p.name || p.mandarin || '（未命名）')}</h3>
+          <p class="say">${ipa(p.ipa)} ${playBtn(p.audio)}</p>
           ${p.gloss ? `<p class="gloss">${esc(p.gloss)}</p>` : ''}
-          <div class="tags">
-            <span class="tag">${esc(p.category || '其他')}</span>
-            ${p.name ? '' : pending('安远话叫法')}
-            ${p.ipa ? '' : pending('IPA ')}
-            ${p.audio ? '' : pending('录音')}
-          </div>
           ${rows.length ? `<dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>` : ''}
           ${p.uses ? `<p class="desc">${esc(p.uses)}</p>` : ''}
           ${derived(p)}
-          ${p.notes ? `<p class="desc muted" style="font-size:14px;">${esc(p.notes)}</p>` : ''}
+          ${p.notes ? `<p class="desc muted">${esc(p.notes)}</p>` : ''}
+          ${missing.length ? `<div class="tags">${missing.map(pending).join('')}</div>` : ''}
           <div class="foot">
-            <button class="btn sm btn-ghost" data-link="${esc(p.id)}">复制链接</button>
             ${p.credit ? `<span class="small">${esc(p.credit)}</span>` : ''}
+            <button class="btn sm btn-ghost" data-link="${esc(p.id)}">复制链接</button>
           </div>
           <div class="qr"><div class="qrbox" data-qr="${esc(p.id)}"></div><p class="small">扫码听发音<br>${esc(CANONICAL_URL)}#${esc(p.id)}</p></div>
+          <p class="folio">${left + 1}</p>
         </div>
       </article>`;
+  }
+
+  // 封面跨页：左页书名，右页目录
+  function cover(list) {
+    const toc = list.map((p) => {
+      const no = state.plants.indexOf(p) + 1;
+      return `<li><a href="#${esc(p.id)}"><span class="toc-name">${esc(p.name || p.mandarin || '（未命名）')}</span>${p.ipa ? `<span class="ipa">${esc(p.ipa)}</span>` : ''}<span class="dots"></span><span class="toc-page">${no * 2 + 1}</span></a></li>`;
+    }).join('');
+    return `
+      <section class="spread cover" aria-label="封面和目录">
+        <div class="page page-title">
+          <p class="run">AYHAK · ETHNOBOTANY</p>
+          <div class="title-block">
+            <p class="kicker">江西安远 · 客家话</p>
+            <h3>安远话植物图集</h3>
+            <p class="sub">安远本地 ${state.target} 种能吃的植物</p>
+          </div>
+          <p class="folio">1</p>
+        </div>
+        <div class="page page-toc">
+          <p class="run">目录</p>
+          <ol class="toc">${toc}</ol>
+          ${list.length < state.target ? `<p class="small toc-note">其余 ${state.target - list.length} 种陆续补上</p>` : ''}
+          <p class="folio">2</p>
+        </div>
+      </section>`;
   }
 
   function searchText(p) {
@@ -95,7 +129,10 @@
     const nq = norm(state.q);
     const list = state.plants.filter((p) =>
       (state.cat === 'all' || (p.category || '其他') === state.cat) && (!nq || searchText(p).includes(nq)));
-    $('#plantGrid').innerHTML = list.length ? list.map(card).join('') : '<p class="muted">没有找到。</p>';
+    const filtering = state.cat !== 'all' || !!nq;
+    $('#plantGrid').innerHTML = list.length
+      ? (filtering ? '' : cover(list)) + list.map(card).join('')
+      : '<p class="muted">没有找到。</p>';
     if (document.body.classList.contains('show-qr')) drawQR();
   }
 
