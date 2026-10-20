@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>AYHAK · 安远话植物图集</title>
+  <meta name="description" content="安远话植物图集里的一种植物：照片、安远话叫法、录音、学名和用法。" />
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./plants.css?v=20261022b" />
+</head>
+
+<body class="book-plant">
+  <a class="skip" href="#plant">跳到正文</a>
+
+  <header class="topbar">
+    <a class="mark" href="./index-zh.html">AYHAK</a>
+    <nav aria-label="站点导航">
+      <a href="./plants.html">植物图集</a>
+      <a href="./plants.html#plates">目录</a>
+      <a href="./dict.html">查词典</a>
+      <a href="./sentences.html">五百句</a>
+    </nav>
+  </header>
+
+  <div class="tools admin-only">
+    <label><input id="toggleQR" type="checkbox" /> 二维码</label>
+    <button class="btn" id="btnPrint">打印/存PDF</button>
+  </div>
+
+  <main class="book" id="plant">
+    <p class="muted" style="text-align:center;padding:60px 0">载入中…</p>
+  </main>
+
+  <nav class="turn" id="turn" aria-label="翻页"></nav>
+  <p class="endnote">安远话植物图集 · AYHAK · 照片和录音按发音人授权使用 · <a href="https://github.com/juan-zhong/ay_hak/blob/main/CONTENT-LICENSE.md">授权说明</a></p>
+
+  <script src="./vendor/qrcode.js?v=20261022b" defer></script>
+  <script src="./plants.js?v=20261022b" defer></script>
+</body>
+</html>

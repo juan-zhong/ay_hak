@@ -66,14 +66,6 @@
       "category": "野菜",
       "photos": [
         {
-          "src": "images/plants/ai-plant.jpg",
-          "caption": "艾"
-        },
-        {
-          "src": "images/plants/ai-bundle.jpg",
-          "caption": "一把新鲜的艾"
-        },
-        {
           "src": "images/plants/ai-dried.jpg",
           "caption": "晒干的艾"
         }
