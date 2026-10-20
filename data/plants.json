@@ -14,15 +14,18 @@
       "photos": [
         {
           "src": "images/plants/shu-tuber.jpg",
-          "caption": "整个的薯"
+          "caption": "整个的薯",
+          "caption_en": "Whole tuber"
         },
         {
           "src": "images/plants/shu-cut.jpg",
-          "caption": "切开的薯"
+          "caption": "切开的薯",
+          "caption_en": "Cut tuber"
         },
         {
           "src": "images/plants/shu-flesh.jpg",
-          "caption": "薯肉"
+          "caption": "薯肉",
+          "caption_en": "Flesh"
         }
       ],
       "habitat": "",
@@ -34,7 +37,8 @@
           "ipa": "seɪ³²⁴.pɑ̃⁴¹",
           "gloss": "薯做的米粄",
           "photo": "images/plants/shu-ban.jpg",
-          "audio": ""
+          "audio": "",
+          "gloss_en": "ban (rice cake) made with yam"
         },
         {
           "name": "薯包",
@@ -48,13 +52,16 @@
           "ipa": "seɪ³²⁴.tsy⁴¹",
           "gloss": "薯酿的酒",
           "photo": "images/plants/shu-jiu.jpg",
-          "audio": ""
+          "audio": "",
+          "gloss_en": "wine brewed from yam"
         }
       ],
       "audio": "",
       "variety": "",
       "notes": "",
-      "credit": "摄影：Juan Zhong"
+      "credit": "摄影：Juan Zhong",
+      "mandarin_en": "a local variety of greater yam",
+      "gloss_en": "A locally grown greater yam with purple flesh."
     },
     {
       "id": "ai",
@@ -67,7 +74,8 @@
       "photos": [
         {
           "src": "images/plants/ai-dried.jpg",
-          "caption": "晒干的艾"
+          "caption": "晒干的艾",
+          "caption_en": "Dried mugwort"
         }
       ],
       "habitat": "",
@@ -92,7 +100,8 @@
       "audio": "",
       "variety": "",
       "notes": "",
-      "credit": "摄影：Juan Zhong"
+      "credit": "摄影：Juan Zhong",
+      "mandarin_en": "mugwort"
     },
     {
       "id": "zhugaohua",
@@ -128,7 +137,8 @@
       "photos": [
         {
           "src": "images/plants/congzi.jpg",
-          "caption": "欣山大市场的葱子"
+          "caption": "欣山大市场的葱子",
+          "caption_en": "Scallions at the Xinshan market"
         }
       ],
       "habitat": "",
@@ -138,7 +148,9 @@
       "audio": "",
       "variety": "",
       "notes": "",
-      "credit": "摄影：Juan Zhong · 欣山大市场"
+      "credit": "摄影：Juan Zhong · 欣山大市场",
+      "mandarin_en": "scallion (Welsh onion)"
     }
-  ]
+  ],
+  "note_en": "Names and IPA follow speaker checks. Empty fields mean the information has not been recorded yet."
 }

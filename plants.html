@@ -1,27 +1,27 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-lang="zh">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>AYHAK · 安远话植物图集</title>
-  <meta name="description" content="拍植物，记语言：安远话可食植物图集。照片、汉字和 IPA 叫法、录音、学名，以及生长环境和吃法。网页版与附二维码的纸质版。" />
-  <meta property="og:title" content="AYHAK · 安远话植物图集" />
+  <title>AYHAK · 安远话植物图集 · Plants and Plant Knowledge in Anyuan Hakka</title>
+  <meta name="description" content="安远话植物图集：安远当地可食用植物的安远话名称、发音、形态和用途。This atlas documents the names, pronunciation, forms, and uses of edible plants in Anyuan Hakka." />
+  <meta property="og:title" content="安远话植物图集 · Plants and Plant Knowledge in Anyuan Hakka" />
   <meta property="og:image" content="https://juan-zhong.github.io/ay_hak/images/plants/ai-dried.jpg" />
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="./plants.css?v=20261022b" />
+  <link rel="stylesheet" href="./plants.css?v=20261022e" />
+  <script>try{var l=new URL(location.href).searchParams.get('lang')||localStorage.getItem('ayhak.plants.lang');if(l==='en')document.documentElement.setAttribute('data-lang','en');}catch(e){}</script>
 </head>
 
 <body class="book-index">
-  <a class="skip" href="#contents">跳到目录</a>
+  <a class="skip" href="#contents"><span class="zh">跳到目录</span><span class="en" lang="en">Skip to contents</span></a>
 
   <header class="topbar">
     <a class="mark" href="./index-zh.html">AYHAK</a>
     <nav aria-label="站点导航">
-      <a href="./dict.html">查词典</a>
-      <a href="./sentences.html">五百句</a>
-      <a href="./plants.html" aria-current="page">植物图集</a>
-      <a href="./gallery.html">安远影像</a>
-      <a href="./index-zh.html#join">一起参与</a>
+      <a href="./dict.html"><span class="zh">查词典</span><span class="en" lang="en">Dictionary</span></a>
+      <a href="./sentences.html"><span class="zh">五百句</span><span class="en" lang="en">500 sentences</span></a>
+      <a href="./gallery.html"><span class="zh">安远影像</span><span class="en" lang="en">Images</span></a>
+      <span class="langs" role="group" aria-label="语言 Language"><button type="button" data-setlang="zh">中文</button><span aria-hidden="true">|</span><button type="button" data-setlang="en" lang="en">English</button></span>
     </nav>
   </header>
 
@@ -29,63 +29,76 @@
     <!-- ========= 封面 ========= -->
     <section class="spread" id="cover">
       <div class="page dark bottom">
-        <p class="label">AYHAK · 江西安远</p>
+        <p class="label">AYHAK · <span class="zh">江西安远</span><span class="en" lang="en">Anyuan, Jiangxi</span></p>
         <h1 class="title">安远话植物图集</h1>
-        <p class="title-en">Plants of Anyuan</p>
-        <p class="lede">记录安远植物的地方名称、声音与日常用途。</p>
-        <p class="small" id="plantStatus" style="margin-top:28px">22种 · 江西安远</p>
+        <p class="title-en" lang="en">Plants and Plant Knowledge in Anyuan Hakka</p>
+        <p class="small" id="plantStatus" style="margin-top:22px"></p>
       </div>
-      <div class="page bleed"><img src="images/plants/ai-dried.jpg" alt="晒干的艾" /></div>
+      <div class="page bleed"><img src="images/plants/ai-dried.jpg" alt="晒干的艾 Dried mugwort" /></div>
     </section>
 
     <!-- ========= 目录 ========= -->
     <section class="spread" id="contents">
       <div class="page">
-        <div class="runhead"><span>安远话植物图集</span><span>目录</span></div>
+        <div class="runhead"><span>安远话植物图集</span><span><span class="zh">目录</span><span class="en" lang="en">Contents</span></span></div>
         <p class="label">Contents</p>
-        <h2 class="h">目录</h2>
+        <h2 class="h"><span class="zh">目录</span><span class="en" lang="en">Contents</span></h2>
         <ol class="toc">
-          <li><a href="#about"><span class="n">—</span><b>关于</b><span class="dots"></span><span class="pg">4</span></a></li>
-          <li><a href="#plates"><span class="n">—</span><b>图集</b><span class="sub" id="tocCount"></span><span class="dots"></span><span class="pg">6</span></a></li>
+          <li><a href="#intro"><span class="n">—</span><b><span class="zh">关于</span><span class="en" lang="en">Introduction</span></b><span class="dots"></span><span class="pg">4</span></a></li>
+          <li><a href="#plates"><span class="n">—</span><b><span class="zh">图集</span><span class="en" lang="en">Plates</span></b><span class="sub" id="tocCount"></span><span class="dots"></span><span class="pg">6</span></a></li>
         </ol>
         <ol class="toc" id="tocPlants"></ol>
         <ol class="toc">
-          <li><a href="#example"><span class="n">—</span><b>田地和厨房</b><span class="dots"></span><span class="pg">8</span></a></li>
-          <li><a href="#method"><span class="n">—</span><b>拍照也是一种记录</b><span class="dots"></span><span class="pg">10</span></a></li>
-          <li><a href="#join"><span class="n">—</span><b>参与</b><span class="dots"></span><span class="pg">12</span></a></li>
+          <li><a href="#example"><span class="n">—</span><b><span class="zh">田地和厨房</span><span class="en" lang="en">From field to kitchen</span></b><span class="dots"></span><span class="pg">8</span></a></li>
+          <li><a href="#method"><span class="n">—</span><b><span class="zh">拍照也是一种记录</span><span class="en" lang="en">Photography as documentation</span></b><span class="dots"></span><span class="pg">10</span></a></li>
+          <li><a href="#about"><span class="n">—</span><b><span class="zh">关于本图集</span><span class="en" lang="en">About this atlas</span></b><span class="dots"></span><span class="pg">12</span></a></li>
+          <li><a href="#join"><span class="n">—</span><b><span class="zh">参与</span><span class="en" lang="en">Join us</span></b><span class="dots"></span><span class="pg">14</span></a></li>
         </ol>
         <span class="folio">2</span>
       </div>
       <div class="page center">
-        <div class="runhead"><span>&nbsp;</span><span>Plants of Anyuan</span></div>
-        <p>我们为安远本地22种能吃的植物做了一本图集。每种植物都有不同生长阶段的照片，有汉字和IPA写下的安远话叫法、录音和学名，还有它长在哪里、怎么吃或者怎么用的信息。</p>
-        <p class="small">点图集里的照片，翻到这种植物的那一页。</p>
+        <div class="runhead"><span>&nbsp;</span><span lang="en">Plants of Anyuan</span></div>
+        <div class="zh">
+          <p>这本图集记录了安远当地可食用植物的安远话名称、发音、形态和用途。我们通过照片记录植物在不同生长阶段的样子，也收集与采摘、处理和食用有关的地方说法。</p>
+          <p>每种植物都是一个入口，让我们从名称出发，进一步了解语言与日常生活之间的联系。</p>
+        </div>
+        <div class="en keep" lang="en">
+          <p>This atlas documents the names, pronunciation, forms, and uses of edible plants in Anyuan Hakka, a Hakka variety spoken in Anyuan County, Jiangxi, China. Photographs capture plants at different stages of growth, alongside local expressions associated with harvesting, processing, and food preparation.</p>
+          <p>Each plant offers a starting point for exploring the connections between language and everyday life.</p>
+        </div>
+        <p class="small"><span class="zh">点击图集中的照片，可以查看相应植物的记录。</span><span class="en" lang="en">Click a photograph in the plates to open the record for that plant.</span></p>
         <span class="folio">3</span>
       </div>
     </section>
 
     <!-- ========= 关于 ========= -->
-    <section class="spread" id="about">
+    <section class="spread" id="intro">
       <div class="page">
-        <div class="runhead"><span>安远话植物图集</span><span>关于</span></div>
-        <p class="label">About</p>
-        <h2 class="h">关于</h2>
-        <p>安远话是江西安远县中部说的一种客家话。年轻一代上学、工作都用普通话，长辈们关于本地植物的知识越来越难传下去。</p>
-        <p>植物的叫法很难只靠词表记录。一个叫法的意思，离不开这种植物长什么样、长在哪里、什么季节有、怎么做来吃。所以图集里的每一种植物，都把这些放在一起：</p>
+        <div class="runhead"><span>安远话植物图集</span><span><span class="zh">关于</span><span class="en" lang="en">Introduction</span></span></div>
+        <p class="label">Introduction</p>
+        <h2 class="h"><span class="zh">关于</span><span class="en" lang="en">Introduction</span></h2>
+        <div class="zh">
+          <p>本图集记录的是江西省安远县中部的安远话，以及当地居民关于植物的知识。</p>
+          <p>植物名称不只是词汇。它们也和植物的生长环境、采收季节、处理方式及日常饮食有关。记录这些名称时，我们也希望把相关的声音、照片和生活经验一起保存下来。</p>
+        </div>
+        <div class="en" lang="en">
+          <p>This atlas records Anyuan Hakka as spoken in central Anyuan County, Jiangxi Province, together with local residents’ knowledge of plants.</p>
+          <p>Plant names are more than words. They are tied to where a plant grows, when it is harvested, how it is processed, and what people eat. As we record these names, we also hope to keep the sounds, photographs, and lived experience that go with them.</p>
+        </div>
         <ol class="index">
-          <li><span class="n">01</span><span><b>照片</b>不同生长阶段的样子，从地里到做好的菜。</span></li>
-          <li><span class="n">02</span><span><b>叫法</b>汉字和IPA，标明是哪里的说法。</span></li>
-          <li><span class="n">03</span><span><b>录音</b>发音人说的叫法，网页上点一下就能听。</span></li>
-          <li><span class="n">04</span><span><b>学名</b>能确定的，附上植物学名。</span></li>
-          <li><span class="n">05</span><span><b>环境和吃法</b>长在哪里、什么时候采、怎么做。</span></li>
+          <li><span class="n">01</span><span><b><span class="zh">照片</span><span class="en" lang="en">Photographs</span></b><span class="zh">不同生长阶段的样子，从地里到做好的菜。</span><span class="en" lang="en">How the plant looks at different stages, from the field to the finished dish.</span></span></li>
+          <li><span class="n">02</span><span><b><span class="zh">叫法</span><span class="en" lang="en">Names</span></b><span class="zh">汉字和IPA，标明是哪里的说法。</span><span class="en" lang="en">Chinese characters and IPA, with the place each name comes from.</span></span></li>
+          <li><span class="n">03</span><span><b><span class="zh">录音</span><span class="en" lang="en">Recordings</span></b><span class="zh">发音人说的叫法，网页上点一下就能听。</span><span class="en" lang="en">Names as said by speakers; tap to listen on the web.</span></span></li>
+          <li><span class="n">04</span><span><b><span class="zh">学名</span><span class="en" lang="en">Scientific names</span></b><span class="zh">能确定的，附上植物学名。</span><span class="en" lang="en">Botanical names, where they can be confirmed.</span></span></li>
+          <li><span class="n">05</span><span><b><span class="zh">环境和吃法</span><span class="en" lang="en">Habitat and use</span></b><span class="zh">长在哪里、什么时候采、怎么做。</span><span class="en" lang="en">Where it grows, when it is gathered, and how it is prepared.</span></span></li>
         </ol>
         <span class="folio">4</span>
       </div>
       <div class="page">
-        <div class="runhead"><span>&nbsp;</span><span>Plants of Anyuan</span></div>
+        <div class="runhead"><span>&nbsp;</span><span lang="en">Plants of Anyuan</span></div>
         <figure class="plate fill">
           <div class="ph"><img src="images/plants/ai-ban.jpg" alt="艾粄" loading="lazy" /></div>
-          <figcaption><span class="no">图</span>艾粄 <span class="ipa">/ŋa⁵³.pɑ̃⁴¹/</span></figcaption>
+          <figcaption><span class="no"><span class="zh">图</span><span class="en" lang="en">Fig.</span></span>艾粄 <span class="ipa">/ŋa⁵³.pɑ̃⁴¹/</span><span class="en" lang="en"> · ban (rice cake) made with mugwort</span></figcaption>
         </figure>
         <span class="folio">5</span>
       </div>
@@ -94,33 +107,41 @@
     <!-- ========= 图集（图版） ========= -->
     <section class="spread single" id="plates">
       <div class="page">
-        <div class="runhead"><span>安远话植物图集 · 6–7</span><span>图集</span></div>
+        <div class="runhead"><span>安远话植物图集 · 6–7</span><span><span class="zh">图集</span><span class="en" lang="en">Plates</span></span></div>
         <p class="label">Plates</p>
-        <h2 class="h">图集</h2>
-        <div class="plates" id="plantGrid"><p class="muted">载入中…</p></div>
+        <h2 class="h"><span class="zh">图集</span><span class="en" lang="en">Plates</span></h2>
+        <div class="plates" id="plantGrid"><p class="muted"><span class="zh">载入中…</span><span class="en" lang="en">Loading…</span></p></div>
+        <noscript><p class="muted">图集需要浏览器开启 JavaScript 才能显示。The plates need JavaScript. 也可以直接打开 Open directly：<a href="./plant.html?id=shu">薯</a>、<a href="./plant.html?id=ai">艾</a>、<a href="./plant.html?id=zhugaohua">猪膏花</a>、<a href="./plant.html?id=congzi">葱子</a>。</p></noscript>
       </div>
     </section>
 
     <!-- ========= 田地和厨房 ========= -->
     <section class="spread" id="example">
       <div class="page dark">
-        <div class="runhead"><span>安远话植物图集</span><span>例子 · 薯</span></div>
+        <div class="runhead"><span>安远话植物图集</span><span><span class="zh">例子 · 薯</span><span class="en" lang="en">Example · 薯</span></span></div>
         <p class="label">Example</p>
-        <h2 class="h">田地和厨房</h2>
-        <p>以 <b>薯</b> <span class="ipa">/seɪ³²⁴/</span> 为例。薯是本地种的大薯（<i>Dioscorea alata</i>）。给薯拍照的时候，我们自然会问：什么时候挖？怎么处理？接着再拍用薯做的东西，又问出了更多叫法。</p>
-        <p>跟着一种植物从田里走到厨房，我们记下了一串复合词，还有挖、处理、做菜时用的说法。这些是单靠一张词表问不出来的。</p>
+        <h2 class="h"><span class="zh">田地和厨房</span><span class="en" lang="en">From field to kitchen</span></h2>
+        <div class="zh">
+          <p>以 <b>薯</b> <span class="ipa">/seɪ³²⁴/</span> 为例。薯是当地种植的大薯（<i>Dioscorea alata</i>）。从田里的薯到做好的食物，我们记录了薯粄、薯包、薯酒等名称，也收集了采收、处理和制作过程中的说法。</p>
+          <p>这些词和说法，把植物、食物与日常生活联系在一起。</p>
+        </div>
+        <div class="en" lang="en">
+          <p>Take <b>薯</b> <span class="ipa">/seɪ³²⁴/</span>, the greater yam grown locally (<i>Dioscorea alata</i>). Following it from the field to finished food, we recorded names such as 薯粄, 薯包, and 薯酒, as well as expressions used in harvesting, processing, and cooking.</p>
+          <p>These words and expressions connect the plant, its foods, and everyday life.</p>
+        </div>
+        <p class="label" style="margin-top:18px"><span class="zh">植物 → 食物</span><span class="en" lang="en">Plant → food</span></p>
         <div class="foods">
-          <figure><img src="images/plants/shu-ban.jpg" alt="薯粄" loading="lazy" /><figcaption><b>薯粄</b> <span class="ipa">/seɪ³²⁴.pɑ̃⁴¹/</span><br><span class="small">薯做的米粄</span></figcaption></figure>
+          <figure><img src="images/plants/shu-ban.jpg" alt="薯粄" loading="lazy" /><figcaption><b>薯粄</b> <span class="ipa">/seɪ³²⁴.pɑ̃⁴¹/</span><br><span class="small"><span class="zh">薯做的米粄</span><span class="en" lang="en">ban (rice cake) made with yam</span></span></figcaption></figure>
           <figure><img src="images/plants/shu-bao.jpg" alt="薯包" loading="lazy" /><figcaption><b>薯包</b> <span class="ipa">/seɪ³²⁴.poʊ³⁴/</span></figcaption></figure>
-          <figure><img src="images/plants/shu-jiu.jpg" alt="薯酒" loading="lazy" /><figcaption><b>薯酒</b> <span class="ipa">/seɪ³²⁴.tsy⁴¹/</span><br><span class="small">薯酿的酒</span></figcaption></figure>
+          <figure><img src="images/plants/shu-jiu.jpg" alt="薯酒" loading="lazy" /><figcaption><b>薯酒</b> <span class="ipa">/seɪ³²⁴.tsy⁴¹/</span><br><span class="small"><span class="zh">薯酿的酒</span><span class="en" lang="en">wine brewed from yam</span></span></figcaption></figure>
         </div>
         <span class="folio">8</span>
       </div>
       <div class="page">
-        <div class="runhead"><span>&nbsp;</span><span>Plants of Anyuan</span></div>
+        <div class="runhead"><span>&nbsp;</span><span lang="en">Plants of Anyuan</span></div>
         <figure class="plate fill">
           <div class="ph"><img src="images/plants/shu-tuber.jpg" alt="薯" loading="lazy" /></div>
-          <figcaption><span class="no">图</span>薯 <span class="ipa">/seɪ³²⁴/</span> · <a class="ulink" href="./plant.html?id=shu">翻到薯这一页</a></figcaption>
+          <figcaption><span class="no"><span class="zh">图</span><span class="en" lang="en">Fig.</span></span>薯 <span class="ipa">/seɪ³²⁴/</span> · <a class="ulink" href="./plant.html?id=shu"><span class="zh">翻到薯这一页</span><span class="en" lang="en">Open the record for 薯</span></a></figcaption>
         </figure>
         <span class="folio">9</span>
       </div>
@@ -129,49 +150,80 @@
     <!-- ========= 方法 ========= -->
     <section class="spread" id="method">
       <div class="page">
-        <div class="runhead"><span>安远话植物图集</span><span>方法</span></div>
+        <div class="runhead"><span>安远话植物图集</span><span><span class="zh">方法</span><span class="en" lang="en">Method</span></span></div>
         <figure class="plate fill">
           <div class="ph"><img src="images/plants/shu-flesh.jpg" alt="薯肉" loading="lazy" /></div>
-          <figcaption><span class="no">图</span>薯肉</figcaption>
+          <figcaption><span class="no"><span class="zh">图</span><span class="en" lang="en">Fig.</span></span><span class="zh">薯肉</span><span class="en" lang="en">Flesh of 薯</span></figcaption>
         </figure>
         <span class="folio">10</span>
       </div>
       <div class="page taupe">
-        <div class="runhead"><span>&nbsp;</span><span>Plants of Anyuan</span></div>
+        <div class="runhead"><span>&nbsp;</span><span lang="en">Plants of Anyuan</span></div>
         <p class="label">Method</p>
-        <h2 class="h">拍照也是一种记录</h2>
-        <p>在很多田野调查里，图片只是用来引出说法的道具。在这本图集里，照片是在记录的过程中拍的，本身就是记录的一部分：拍什么、拍植物的哪个阶段，决定了接下来会问到什么、录下什么。</p>
+        <h2 class="h"><span class="zh">拍照也是一种记录</span><span class="en" lang="en">Photography as documentation</span></h2>
+        <p class="zh">在这个项目中，照片不只是展示植物的配图，也是记录过程的一部分。拍摄植物的不同生长阶段，以及采收、处理和制作后的样子，会引出不同的问题，也帮助我们记录更多名称和日常说法。</p>
+        <p class="en" lang="en">In this project, photographs are not just illustrations of plants; they are part of the documentation process. Photographing plants at different stages of growth, and after harvesting, processing, and cooking, prompts different questions and helps us record more names and everyday expressions.</p>
         <ol class="index">
-          <li><span class="n">01</span><span><b>引出说法</b>拍植物，引出采收和处理的说法；拍做好的食物，又引出新的复合词。</span></li>
-          <li><span class="n">02</span><span><b>扩展记录</b>每个条目把一个叫法和一张照片、一个地方、一种做法、一段录音连在一起。</span></li>
-          <li><span class="n">03</span><span><b>带回社区</b>网页版把照片和录音连在一起；纸质版用二维码播放同样的录音。孩子、学说安远话的人、不常用手机的长辈，都能用自己习惯的方式看、听。</span></li>
+          <li><span class="n">01</span><span><b><span class="zh">从照片引出说法</span><span class="en" lang="en">From photographs to expressions</span></b><span class="zh">拍摄植物及其加工后的样子，记录相关的名称和表达。</span><span class="en" lang="en">Photograph plants and what they become, and record the related names and expressions.</span></span></li>
+          <li><span class="n">02</span><span><b><span class="zh">把材料联系起来</span><span class="en" lang="en">Connecting the materials</span></b><span class="zh">将名称、照片、地点、录音和用途放在同一条记录中。</span><span class="en" lang="en">Keep names, photographs, places, recordings, and uses together in one record.</span></span></li>
+          <li><span class="n">03</span><span><b><span class="zh">让材料回到社区</span><span class="en" lang="en">Bringing materials back to the community</span></b><span class="zh">网页将照片与录音联系起来；纸质版计划通过二维码播放录音，让不同年龄、不同使用习惯的人都能查阅。</span><span class="en" lang="en">The website links photographs with recordings; a printed edition is planned, with QR codes that play the same recordings, so that people of different ages and habits can use it.</span></span></li>
         </ol>
-        <p class="small" style="margin-top:18px">录音和照片都会先征得发音人同意，署名方式由发音人决定。</p>
+        <p class="small" style="margin-top:18px"><span class="zh">录音和照片都会先征得发音人同意，署名方式由发音人决定。</span><span class="en" lang="en">Recordings and photographs are published only with speakers’ consent, credited as they choose.</span></p>
         <span class="folio">11</span>
+      </div>
+    </section>
+
+    <!-- ========= 关于本图集 ========= -->
+    <section class="spread" id="about">
+      <div class="page">
+        <div class="runhead"><span>安远话植物图集</span><span><span class="zh">关于本图集</span><span class="en" lang="en">About this atlas</span></span></div>
+        <p class="label">About this atlas</p>
+        <h2 class="h"><span class="zh">关于本图集</span><span class="en" lang="en">About this atlas</span></h2>
+        <dl class="about">
+          <dt><span lang="en">Project scope</span> · 项目范围</dt>
+          <dd><span class="zh">计划记录安远当地22种可食用植物，现已上线的条目见目录。每条记录标明说法来自哪个乡镇，尚未标明的写“待补”。</span><span class="en" lang="en">We plan to record 22 edible plants from Anyuan; entries now online are listed in the contents. Each record notes the township a name comes from; where this is not yet recorded, it is marked as pending.</span></dd>
+          <dt><span lang="en">Language documentation</span> · 语言记录</dt>
+          <dd><span class="zh">安远话名称用汉字和国际音标（IPA）记录，声调用五度调值数字标本调。有录音的条目可以直接播放。不同乡镇的不同叫法分别记录，不合并成一个“标准”名称。</span><span class="en" lang="en">Anyuan Hakka names are written in Chinese characters and the International Phonetic Alphabet (IPA); tones are given as Chao tone numbers for citation tones. Entries with recordings can be played directly. Different names from different townships are recorded separately rather than merged into one “standard” name.</span></dd>
+          <dt><span lang="en">Plant identification</span> · 植物鉴定</dt>
+          <dd><span class="zh">学名只在能确定时列出；尚未确认的条目标注“待鉴定”。安远话的植物名称和普通话名称、学名不一定一一对应。</span><span class="en" lang="en">Scientific names are given only where they can be confirmed; others are marked “identification pending”. Anyuan Hakka plant names do not necessarily map one-to-one onto Mandarin names or scientific taxa.</span></dd>
+        </dl>
+        <span class="folio">12</span>
+      </div>
+      <div class="page">
+        <div class="runhead"><span>&nbsp;</span><span lang="en">Plants of Anyuan</span></div>
+        <dl class="about" style="margin-top:62px">
+          <dt><span lang="en">Fieldwork and photography</span> · 田野调查与摄影</dt>
+          <dd><span class="zh">照片由 Juan Zhong 拍摄。拍摄植物的不同阶段和用它做的食物，会引出更多名称和说法。</span><span class="en" lang="en">Photographs by Juan Zhong. Photographing plants at different stages, and the foods made from them, brings out further names and expressions.</span></dd>
+          <dt><span lang="en">Contributors</span> · 参与者</dt>
+          <dd><span class="zh">参与者提供的叫法、照片和录音，按本人同意的方式署名或匿名。</span><span class="en" lang="en">Names, photographs, and recordings from contributors are credited or kept anonymous as each person chooses.</span></dd>
+          <dt><span lang="en">Use and permissions</span> · 使用与授权</dt>
+          <dd><span class="zh">文字与照片采用 CC BY-NC 4.0；录音只在本网站播放，使用范围以发音人同意的为准，转载或用于研究请先联系我们；网站代码 CC0。</span><span class="en" lang="en">Texts and photographs: CC BY-NC 4.0. Recordings are played on this site only, within the scope each speaker agreed to; please contact us before republishing them or using them in research. Website code: CC0.</span> <a href="https://github.com/juan-zhong/ay_hak/blob/main/CONTENT-LICENSE.md"><span class="zh">授权说明</span><span class="en" lang="en">License details</span></a></dd>
+        </dl>
+        <span class="folio">13</span>
       </div>
     </section>
 
     <!-- ========= 参与 / 版权页 ========= -->
     <section class="spread" id="join">
       <div class="page">
-        <div class="runhead"><span>安远话植物图集</span><span>参与</span></div>
+        <div class="runhead"><span>安远话植物图集</span><span><span class="zh">参与</span><span class="en" lang="en">Join us</span></span></div>
         <p class="label">Join us</p>
-        <h2 class="h">参与</h2>
-        <p>你家里人怎么叫这些植物？你们村有没有别的叫法？用它们做过什么吃的？欢迎发来照片、叫法或者一段录音，会说多少都可以。</p>
+        <h2 class="h"><span class="zh">参与</span><span class="en" lang="en">Join us</span></h2>
+        <p class="zh">你家里人怎么叫这些植物？你们村有没有别的叫法？用它们做过什么吃的？欢迎发来照片、叫法或者一段录音，会说多少都可以。</p>
+        <p class="en" lang="en">What does your family call these plants? Is there another name in your village? What have you made with them? Photographs, names, or a short recording are all welcome, however much Anyuan Hakka you speak.</p>
         <p style="display:flex;gap:22px;flex-wrap:wrap;margin-top:12px">
-          <a class="ulink" href="mailto:juanzhon@buffalo.edu?subject=AYHAK%20植物图集">发邮件给我们</a>
-          <a class="ulink" href="./index-zh.html#join">参加安远话复健会</a>
+          <a class="ulink" href="mailto:juanzhon@buffalo.edu?subject=AYHAK%20植物图集"><span class="zh">发邮件给我们</span><span class="en" lang="en">Email us</span></a>
+          <a class="ulink" href="./index-zh.html#join"><span class="zh">参加安远话复健会</span><span class="en" lang="en">Join the Anyuan Hakka meetups</span></a>
         </p>
-        <span class="folio">12</span>
+        <span class="folio">14</span>
       </div>
       <div class="page bottom colophon">
-        <div class="runhead"><span>&nbsp;</span><span>Plants of Anyuan</span></div>
+        <div class="runhead"><span>&nbsp;</span><span lang="en">Plants of Anyuan</span></div>
         <p class="label">Colophon</p>
-        <p><b>安远话植物图集</b> <span class="en">Plants of Anyuan</span><br>AYHAK · 江西安远</p>
-        <p>摄影：Juan Zhong<br>联系方式：juanzhon AT buffalo DOT edu</p>
-        <p class="small">代码 CC0 · 文字与照片 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans">CC BY-NC 4.0</a> · 录音按发音人授权使用，未经许可请勿转载 · <a href="https://github.com/juan-zhong/ay_hak/blob/main/CONTENT-LICENSE.md">授权说明</a></p>
+        <p><b>安远话植物图集</b><br><span class="en keep" lang="en">Plants and Plant Knowledge in Anyuan Hakka</span><br>AYHAK · <span class="zh">江西安远</span><span class="en" lang="en">Anyuan, Jiangxi</span></p>
+        <p><span class="zh">摄影</span><span class="en" lang="en">Photographs</span>：Juan Zhong<br><span class="zh">联系方式</span><span class="en" lang="en">Contact</span>：juanzhon AT buffalo DOT edu</p>
         <p class="small">© <span id="year">2026</span> Juan Zhong</p>
-        <span class="folio">13</span>
+        <span class="folio">15</span>
       </div>
     </section>
 
@@ -185,8 +237,8 @@
     HIDDEN-END -->
   </main>
 
-  <p class="endnote"><a href="./index-zh.html">← 回到 AYHAK 首页</a></p>
+  <p class="endnote"><a href="./index-zh.html"><span class="zh">← 回到 AYHAK 首页</span><span class="en" lang="en">← Back to AYHAK</span></a></p>
 
-  <script src="./plants.js?v=20261022b" defer></script>
+  <script src="./plants.js?v=20261022e" defer></script>
 </body>
 </html>

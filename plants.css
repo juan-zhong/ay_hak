@@ -18,11 +18,15 @@
   --plum: #7b4f80;
   --taupe: #ab9784;
   --sans: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', Arial, sans-serif;
-  --serif: Georgia, 'Times New Roman', Times, serif;
+  --serif: 'EB Garamond', Georgia, 'Times New Roman', Times, serif;
   --mono: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
   --ipa-font: 'Lucida Grande', 'Segoe UI', 'Noto Sans', 'DejaVu Sans', 'Arial Unicode MS', sans-serif;
   --page-pad: clamp(22px, 4.2vw, 60px);
 }
+/* EB Garamond：放在仓库里（vendor/fonts），国内也能加载；SIL OFL 授权 */
+@font-face { font-family: 'EB Garamond'; font-style: normal; font-weight: 400; font-display: swap; src: url('./vendor/fonts/eb-garamond-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'EB Garamond'; font-style: italic; font-weight: 400; font-display: swap; src: url('./vendor/fonts/eb-garamond-latin-400-italic.woff2') format('woff2'); }
+@font-face { font-family: 'EB Garamond'; font-style: normal; font-weight: 500; font-display: swap; src: url('./vendor/fonts/eb-garamond-latin-500-normal.woff2') format('woff2'); }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--table); color: var(--text); font-family: var(--sans); font-size: 15px; line-height: 1.85; -webkit-font-smoothing: antialiased; }
@@ -34,7 +38,7 @@ p { margin: 0 0 14px; }
 .ipa { font-family: var(--ipa-font); color: var(--plum); letter-spacing: 0; }
 .small { font-size: 13px; color: var(--muted); }
 .muted { color: var(--muted); }
-.en { font-family: var(--serif); font-style: italic; letter-spacing: 0.01em; }
+.en { letter-spacing: 0.01em; }
 .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
 .ulink { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 2px; }
 .ulink:hover { opacity: 0.65; }
@@ -193,3 +197,25 @@ html.admin .admin-only { display: revert !important; }
 .page.blank { align-items: center; justify-content: center; }
 .page.blank .endmark { font-family: var(--mono); font-size: 11px; letter-spacing: 0.2em; color: rgba(22,22,19,.35); }
 .spread.last .page { min-height: min(62vh, 620px); }
+
+/* ---------- 中文 | English：中文为主，英文完整可读 ---------- */
+html[data-lang="zh"] .en:not(.keep) { display: none !important; }
+html[data-lang="en"] .zh { display: none !important; }
+/* 中文页面里始终显示的英文段落：稍作区分，但不缩小 */
+html[data-lang="zh"] div.en.keep { border-top: 1px solid var(--line); padding-top: 14px; margin-top: 4px; color: var(--muted); }
+[lang="en"] { font-family: 'EB Garamond', var(--sans); }
+p[lang="en"], div[lang="en"] p, dd [lang="en"], .en[lang="en"] { font-size: 1.06em; line-height: 1.7; }
+.label [lang="en"], .label, .runhead [lang="en"], .langs [lang="en"], .ulink [lang="en"], .toc [lang="en"], .small [lang="en"] { font-size: inherit; }
+.runhead [lang="en"], .label [lang="en"], .ulink [lang="en"] { font-family: inherit; }
+html[data-lang="en"] .h, html[data-lang="en"] .p-name-en { font-family: 'EB Garamond', var(--serif); letter-spacing: 0.02em; font-size: clamp(26px, 3vw, 36px); }
+.langs { display: inline-flex; gap: 6px; align-items: center; margin-left: 8px; color: var(--muted); }
+.langs button { background: none; border: 0; padding: 0 2px; cursor: pointer; font: inherit; color: var(--muted); letter-spacing: 0.06em; }
+html[data-lang="zh"] .langs [data-setlang="zh"], html[data-lang="en"] .langs [data-setlang="en"] { color: var(--ink); border-bottom: 1px solid currentColor; }
+dl.about { margin: 8px 0 0; }
+dl.about dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink); border-top: 1px solid var(--line); padding-top: 14px; margin-top: 16px; }
+dl.about dt [lang="en"] { font-family: inherit; }
+dl.about dd { margin: 6px 0 0; font-size: 14px; }
+.p-sub { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: -4px 0 18px; }
+.lat { font-family: var(--serif); font-style: italic; }
+.plates .nm2 { font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
+.plates .nm .ipa { font-size: 13px; }
