@@ -32,11 +32,13 @@ ay_hak/
 │   ├── meetups.json    复健会日期（首页自动显示下一次）
 │   ├── sentences.json  五百句（普通话提示句，可补安远话写法和 IPA）
 │   ├── wanted.json     征集词表（词典页“征集”一节）
+│   ├── recordings.json 已发布到网站的五百句录音
 │   └── plants.json     植物数据
 ├── images/
 │   ├── gallery/        首页“安远影像”的照片
 │   └── plants/         植物图集照片
 ├── audio/              录音文件（mp3 / m4a / wav）
+├── tools/publish_recordings.py  把审核通过的五百句录音发布到网站（国内可播）
 ├── vendor/qrcode.js    二维码库（qrcode-generator，MIT），本地存放，不依赖 CDN
 ├── LICENSE
 └── .nojekyll           让 GitHub Pages 按原样发布
@@ -146,7 +148,13 @@ sips -s format jpeg -Z 1600 照片.HEIC --out images/plants/xxx.jpg
 - 大家在网页上录音（或上传手机里的录音），必须勾选“同意公开”才能提交；“同意用于研究”另外勾。
 - 录音存到你的 Google Drive：`AYHAK-Sentences/` 文件夹，每条记在表格“AYHAK-五百句录音”里，状态默认“待审核”。
 - **审核**：在表格里把“状态”改成“公开”，几分钟内就会出现在网站上（想马上出现，在 Apps Script 里手动运行一次 `clearCache`）。改成“不公开”就会撤下。
-- **注意**：Google 的服务在中国大陆打不开，国内的访客可以看句子，但不能上传和收听，页面上会提示。
+- **国内点播**：审核通过的录音要“发布到网站”，放进仓库的 `audio/sentences/`，网页直接从网站播放，**不经过 Google，国内也能听**。步骤：
+  1. 在 Google 表格“AYHAK-五百句录音”里把要公开的行改成“公开”；
+  2. 下载这张表（文件 → 下载 → CSV），再把 Drive 里的 `AYHAK-Sentences` 文件夹下载下来解压；
+  3. 在仓库根目录运行：`python3 tools/publish_recordings.py --sheet 表格.csv --audio-dir AYHAK-Sentences`（需要 ffmpeg：`brew install ffmpeg`）；
+  4. 把 `audio/sentences/` 和 `data/recordings.json` 上传到 GitHub。
+  邮件、石墨表单等其他渠道收到的录音，也可以整理成同样列名的表格（加一列“文件名”），用同一个命令发布。
+- **上传**仍然走 Google，在国内需要能打开 Google 的网络；页面上会提示国内用户改用邮件寄录音。
 
 ## 录音上传到 Google Drive
 

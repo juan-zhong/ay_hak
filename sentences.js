@@ -32,7 +32,22 @@
     state.cats = j.categories || [];
     state.sentences = j.sentences || [];
   }
+  // 已发布到网站的录音（放在仓库 audio/sentences/，国内也能播）
+  async function loadStatic() {
+    try {
+      const j = await (await fetch('./data/recordings.json', { cache: 'no-cache' })).json();
+      return (j.recordings || []).filter((r) => r && r.sid && r.file);
+    } catch { return []; }
+  }
+  function addRecs(list) {
+    list.forEach((r) => {
+      const arr = (state.recs[r.sid] ||= []);
+      if (!arr.some((x) => x.rid && x.rid === r.rid)) arr.push(r);
+    });
+  }
   async function loadRecordings() {
+    state.recs = {};
+    addRecs(await loadStatic());             // 先放网站上的，保证国内能听
     if (!ENDPOINT) { state.svc = 'off'; return; }
     try {
       const ctrl = new AbortController();
@@ -41,8 +56,7 @@
       clearTimeout(t);
       const j = await res.json();
       if (!j.ok || !Array.isArray(j.recordings)) throw new Error(j.error || 'list');
-      state.recs = {};
-      j.recordings.forEach((r) => { (state.recs[r.sid] ||= []).push(r); });
+      addRecs(j.recordings);                 // 再补上 Google 里已公开、还没发布到网站的
       state.svc = 'on';
     } catch {
       state.svc = 'down';
@@ -53,13 +67,11 @@
   function renderStatus() {
     const has = state.sentences.filter((s) => (state.recs[s.id] || []).length).length;
     const total = Object.values(state.recs).reduce((n, a) => n + a.length, 0);
-    $('#sStatus').textContent = state.svc === 'on'
-      ? `500 句 · 已有 ${has} 句有录音 · 共 ${total} 条录音`
-      : '500 句';
+    $('#sStatus').textContent = total ? `500 句 · 已有 ${has} 句有录音 · 共 ${total} 条录音` : '500 句';
     const note = {
       on: '',
       off: '录音功能还没有开通，现在可以先看句子。',
-      down: '暂时连不上录音服务，可以先看句子。在中国大陆可能需要特殊网络才能上传和收听，我们正在准备国内也能用的办法。',
+      down: '网站上的录音可以直接听。上传录音需要能打开 Google 的网络；在国内不方便上传的话，也可以把录音发邮件给我们。',
       loading: '',
     }[state.svc];
     $('#svcNote').textContent = note;
@@ -126,7 +138,8 @@
     $$('.rec-chip.playing').forEach((b) => b.classList.remove('playing'));
     btn.classList.add('loading');
     try {
-      let url = audioCache.get(rid);
+      const r = Object.values(state.recs).flat().find((x) => x.rid === rid);
+      let url = r && r.file ? r.file : audioCache.get(rid);
       if (!url) {
         const j = await (await fetch(`${ENDPOINT}?action=audio&rid=${encodeURIComponent(rid)}`)).json();
         if (!j.ok) throw new Error(j.error || '读取失败');
@@ -139,7 +152,7 @@
       player.onended = () => btn.classList.remove('playing');
       await player.play();
     } catch (err) {
-      alert(`播放失败：${err.message || err}。如果是苹果手机，部分 webm 录音可能放不了。`);
+      alert(`播放失败：${err.message || err}`);
     } finally {
       btn.classList.remove('loading');
     }
@@ -156,7 +169,12 @@
   function openSheet(sid) {
     cur = state.sentences.find((s) => s.id === sid);
     if (!cur) return;
-    if (state.svc !== 'on') { alert($('#svcNote').textContent || '录音服务暂时不可用'); return; }
+    if (state.svc !== 'on') {
+      if (confirm('现在连不上上传服务（在国内需要能打开 Google 的网络）。\n要改成发邮件寄录音吗？')) {
+        location.href = `mailto:juanzhon@buffalo.edu?subject=${encodeURIComponent(`AYHAK 五百句 ${cur.n}：${cur.zh}`)}&body=${encodeURIComponent(`句子 ${cur.n}：${cur.zh}\n\n我的乡镇或村：\n昵称（可不填）：\n同意在网站上公开：是 / 否\n同意用于研究：是 / 否\n\n（请把录音作为附件）`)}`;
+      }
+      return;
+    }
     blob = null;
     $('#sheetNo').textContent = `第 ${cur.n} 句`;
     $('#sheetTitle').textContent = cur.zh;
