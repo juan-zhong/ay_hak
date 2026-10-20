@@ -77,8 +77,8 @@
       const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
       const zh = lang === 'zh';
       box.innerHTML = `<button class="play" type="button" aria-label="${zh ? '播放' : 'Play'}">▶</button>
-        <span>${zh ? '先听一句：' : 'Listen first: '}<b>${esc(rec.hanzi || s.zh)}</b> <span class="small">${esc(rec.place)}</span></span>
-        <a href="./sentences.html">${zh ? '你们那里怎么说？去录一句 →' : 'How do you say it? Record one →'}</a>`;
+        <span>${zh ? '听一句，跟着说：' : 'Listen and repeat: '}<b>${esc(rec.hanzi || s.zh)}</b> <span class="small">${esc(rec.place)}</span></span>
+        <a href="./sentences.html">${zh ? '去五百句听更多 →' : 'More in the 500 sentences →'}</a>`;
       const audio = new Audio(); audio.preload = 'none';
       const btn = $('.play', box);
       btn.addEventListener('click', () => {

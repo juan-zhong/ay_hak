@@ -470,7 +470,7 @@ footer p {
 .gallery-grid .solo { text-align: center; }
 
 /* 项目：照片为主的卡片，和植物页“从田里到厨房”同一种排法 */
-.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 26px 20px; margin-top: 10px; }
+.projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 26px 20px; margin-top: 10px; }
 .proj { margin: 0; display: flex; flex-direction: column; color: inherit; text-decoration: none; }
 .proj img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: var(--tint); border-radius: var(--r-lg); border: 1px solid var(--line); transition: opacity .15s; }
 a.proj:hover img { opacity: 0.85; }
@@ -638,3 +638,13 @@ h2 { margin-bottom: 30px; }
 .also b { color: var(--ink); font-weight: 500; }
 a.to-dict { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
 a.to-dict:hover { color: var(--accent); text-decoration-color: var(--accent); }
+
+/* 首页项目：分组小标题、不用卡片的条目、复健会引言 */
+#projects h3.sub { margin-top: 36px; }
+#projects h3.sub:first-of-type { margin-top: 0; }
+dl.plain { margin: 0; }
+dl.plain dt { font-weight: 500; color: var(--ink); font-size: 17px; margin-top: 14px; }
+dl.plain dt a { color: var(--accent); }
+dl.plain dd { margin: 4px 0 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+.projects + dl.plain { margin-top: 10px; }
+p.lead { font-size: 18px; color: var(--ink); margin-bottom: 10px; }

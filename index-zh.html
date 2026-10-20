@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>AYHAK · 安远话记录计划</title>
-  <meta name="description" content="AYHAK 安远话记录计划：安远人发起的安远话记录项目。查安远话、听各地说法、参加复健会、录一句你们那里怎么说。" />
-  <meta property="og:title" content="AYHAK · 安远话记录计划" />
+  <title>AYHAK · 一起来讲安远话</title>
+  <meta name="description" content="AYHAK 一起来讲安远话：由安远人发起的社区语言记录项目。学安远话、讲安远话、一起记录各乡镇的说法和地方知识。" />
+  <meta property="og:title" content="AYHAK · 一起来讲安远话" />
   <meta property="og:description" content="一起来讲安远话。" />
   <meta property="og:image" content="https://juan-zhong.github.io/ay_hak/images/gallery/%E6%AC%A3%E5%B1%B1%E5%A4%A7%E5%B8%82%E5%9C%BA03.jpg" />
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
   <link rel="alternate" hreflang="en" href="./index.html" />
-  <link rel="stylesheet" href="./style.css?v=20261021a" />
+  <link rel="stylesheet" href="./style.css?v=20261021b" />
 </head>
 
 <body>
@@ -18,7 +18,7 @@
 
   <nav class="page-nav" aria-label="站点导航">
     <a href="./index-zh.html" aria-current="page">AYHAK</a>
-    <a href="./dict.html">查安远话</a>
+    <a href="./dict.html">查词典</a>
     <a href="./sentences.html">五百句</a>
     <a href="./plants.html">植物图集</a>
     <a href="./gallery.html">安远影像</a>
@@ -29,21 +29,19 @@
 
   <header class="hero">
     <p class="kicker">AYHAK</p>
-    <h1>安远话记录计划</h1>
-    <p class="subtitle">一起来讲安远话</p>
-    <p class="intro">安远话是江西省安远县人讲的客家话。同一样东西，不同乡镇、不同村可能叫法不一样。</p>
-    <p class="intro">AYHAK 是安远人发起的安远话记录项目。我们收集各地的说法、录音和故事，也欢迎想学安远话、想找人讲安远话的人一起来。</p>
+    <h1>一起来讲安远话</h1>
+    <p class="intro">你家怎么叫这个东西？你们那里又是怎么说的？我们想把安远各地的说法都记下来，也让更多人有机会听到、学会、继续讲安远话。</p>
     <div class="buttons">
-      <a class="btn primary" href="#lookup">查安远话</a>
+      <a class="btn primary" href="#lookup">查词典</a>
       <a class="btn" href="#join">参加复健会</a>
     </div>
-    <p class="status">2021 年开始记录 · 江西安远</p>
+    <p class="status">2021 年至今 · 江西安远</p>
   </header>
 
   <main id="main">
     <!-- ========= 查一个词 ========= -->
     <section id="lookup" class="content-section">
-      <h2>查一个词</h2>
+      <h2>查词</h2>
       <form class="searchbar" action="./dict.html" method="get" role="search">
         <input name="q" type="search" placeholder="输入汉字、释义或音标，例如：屋下 / 家" autocomplete="off" aria-label="查安远话" />
         <button class="btn primary" type="submit">查</button>
@@ -54,37 +52,57 @@
         <a class="chip-link" href="./dict.html?w=xinshan-da-shichang">欣山大市场</a>
       </p>
       <a class="wotd" id="wotd" href="./dict.html"></a>
-      <p class="muted">每个说法都标明来自哪个乡镇或村子。查不到你们那里的说法？<a href="#contribute">告诉我们</a>。</p>
+      <p class="muted">每个说法都标明来自哪个乡镇。查不到你们那里的说法？<a href="#contribute">告诉我们</a>。</p>
     </section>
 
     <!-- ========= 项目 ========= -->
     <section id="projects" class="content-section">
       <h2>项目</h2>
+
+      <h3 class="sub">已经可以使用</h3>
       <div class="projects">
         <a class="proj" href="./dict.html">
           <img src="images/gallery/篓子.jpg" alt="篓子" loading="lazy" />
-          <span class="tag live">已上线</span>
           <b>安远话词典</b>
-          <span class="desc">查一个词，看汉字、音标和释义，有的能听录音。每个说法都写了是哪个乡镇的。词条还在陆续加。</span>
-          <span class="more">查词 →</span>
+          <span class="desc">查一个词，听听别人怎么说。可以看汉字、音标和释义，也可以听录音。不同乡镇的说法会分别记录。</span>
+          <span class="more">查词典 →</span>
         </a>
         <a class="proj" href="./sentences.html">
           <img src="images/gallery/欣山大市场01.jpg" alt="欣山大市场" loading="lazy" />
-          <span class="tag todo">征集录音</span>
           <b>实用安远话五百句</b>
-          <span class="desc">五百句天天用得上的话。平时怎么跟家里人打招呼、吃饭时说什么？挑一句你会说的，用手机录下来，审核后大家都能点开听。</span>
-          <span class="more">去录一句 →</span>
-        </a>
-        <a class="proj" href="./plants.html">
-          <img class="cutout" src="images/plants/shu-tuber.jpg" alt="薯" loading="lazy" />
-          <span class="tag todo">正在整理</span>
-          <b>安远话植物图集</b>
-          <span class="desc">薯、艾这些从小就认识的植物，安远话怎么叫，做成什么吃。计划收 22 种，已经可以先看薯和艾。</span>
-          <span class="more">先看已有的 →</span>
+          <span class="desc">五百句日常能用的话，配上安远话录音。点开听一听，再跟着说一遍，在国内和国外都能直接听。录音还在陆续补充。</span>
+          <span class="more">去听一听 →</span>
         </a>
       </div>
       <p class="sample" id="sample" hidden></p>
-      <p class="also"><b>还在弄的：</b>安远话发音说明（附录音）、用普通话讲的安远话入门十讲，弄好了会在这里和复健会上说。2024 年我们还用安远话给安远人讲过一次语言学入门。</p>
+
+      <h3 class="sub">正在整理</h3>
+      <div class="projects">
+        <a class="proj" href="./plants.html">
+          <img class="cutout" src="images/plants/shu-tuber.jpg" alt="薯" loading="lazy" />
+          <b>安远话植物图集</b>
+          <span class="desc">安远有些植物，大家从小就认识，但不一定知道普通话叫什么，更不一定知道别的村怎么叫。我们正在整理这些植物的照片、名字和录音。</span>
+          <span class="more">先看薯和艾 →</span>
+        </a>
+      </div>
+      <dl class="plain">
+        <dt>安远话语音记录</dt>
+        <dd>把安远话的发音和例子整理下来，配上实际录音，方便以后查阅和学习。</dd>
+        <dt>安远话入门课程</dt>
+        <dd>用普通话讲解安远话的发音、词汇和语法。课程准备中，准备好后会在这里公布。</dd>
+      </dl>
+
+      <h3 class="sub">一起参与</h3>
+      <dl class="plain">
+        <dt><a href="#join">安远话复健会</a></dt>
+        <dd>找个时间，用安远话聊聊天。也可以分享家乡的说法，或者听听其他地方的人怎么讲。</dd>
+      </dl>
+
+      <h3 class="sub">已经完成</h3>
+      <dl class="plain">
+        <dt>用安远话学习语言学（2024）</dt>
+        <dd>用安远话为安远人讲授语言学入门课程。</dd>
+      </dl>
     </section>
 
     <!-- ========= 安远影像（精选） ========= -->
@@ -107,34 +125,35 @@
       <h2>一起参与</h2>
 
       <h3 class="sub">安远话复健会</h3>
-      <p>复健会面向所有想继续说安远话的安远人，不管你现在在哪里。</p>
+      <p class="lead">想找人讲安远话？欢迎来坐坐。</p>
+      <p>复健会就是大家一起用安远话聊天。有时候随便聊聊最近的生活，有时候聊一个话题，也会听听不同乡镇的说法。</p>
+      <p>会说多少都没关系。想多讲几句的，可以来一起聊；有些话忘了怎么说的，也可以来听听别人怎么讲。</p>
+      <p>我们隔周五晚上在线上见面，使用北京时间。</p>
       <dl class="facts">
         <dt>时间</dt><dd>隔周五 21:00–22:00（北京时间）<br><span class="small">2026 秋冬季：10 月 23 日至 12 月 18 日，共 5 次</span></dd>
         <dt>地点</dt><dd>腾讯会议，线上</dd>
-        <dt>形式</dt><dd>一半时间自由聊天，一半时间聊一个主题</dd>
-        <dt>第一次来</dt><dd>会说多少都可以，只听不说也欢迎。进会时在昵称后面写上你的乡镇或村名，大家就能听到各地说法的不同。</dd>
       </dl>
       <p class="next-meetup" id="nextMeetup" aria-live="polite"></p>
+      <p><b>想参加？</b>给我们发邮件，告诉我们你来自哪里、想不想一起聊天，我们会把会议链接发给你。</p>
       <div class="buttons left">
         <a class="btn primary" href="mailto:juanzhon@buffalo.edu?subject=%E5%8F%82%E5%8A%A0%E5%AE%89%E8%BF%9C%E8%AF%9D%E5%A4%8D%E5%81%A5%E4%BC%9A">发邮件获取会议链接</a>
         <a class="btn" href="webcal://p54-caldav.icloud.com/published/2/MTEzODIwMDE0NDExMzgyMMFgVCDCDaKoMtNCKBn1EhfA-79njfZBbu5WWxrAYHy4s1xKDF6rgkBgKywDp8NgCctA90rvas5HTKUIKwTFqRs">加到日历（2026）</a>
       </div>
-      <p class="small">“加到日历”适用于苹果设备和 Outlook。安卓手机打不开的话，按上面的时间记下就好。</p>
+      <p class="small">“加到日历”适用于苹果设备和Outlook。安卓手机打不开的话，按上面的时间记下就好。</p>
 
-      <h3 class="sub" id="contribute">贡献你知道的</h3>
+      <h3 class="sub" id="contribute">你知道哪些说法</h3>
       <div class="pillars three">
-        <div class="card"><span class="num">01</span><h3>补充说法</h3><p class="muted">词典里的词，你们那里怎么说？有别的叫法、别的意思，也告诉我们。</p></div>
-        <div class="card"><span class="num">02</span><h3>录一段音</h3><p class="muted">一个词、一句话、一小段故事都行。用手机录，说一下你是哪个乡镇的。</p></div>
-        <div class="card"><span class="num">03</span><h3>照片和地方知识</h3><p class="muted">家里的老物件、菜园里的植物、过节吃的东西，拍下来。知道叫什么、怎么用，也一起说说。</p></div>
+        <div class="card"><span class="num">01</span><h3>补充说法</h3><p class="muted">词典里的词，你怎么说？有没有别的叫法、别的意思？</p></div>
+        <div class="card"><span class="num">02</span><h3>整理和校对</h3><p class="muted">如果愿意，也可以参与整理和校对。</p></div>
+        <div class="card"><span class="num">03</span><h3>照片和地方知识</h3><p class="muted">家里的老物件、菜园里的植物、过节吃的东西，以及它们的说法和做法。</p></div>
       </div>
-      <p><a href="mailto:juanzhon@buffalo.edu?subject=AYHAK%20%E8%B4%A1%E7%8C%AE">发邮件给我们</a>，写上你的乡镇或村名就好。</p>
+      <p><a href="mailto:juanzhon@buffalo.edu?subject=AYHAK%20%E8%B4%A1%E7%8C%AE">发邮件给我们</a>，写上你的乡镇名就好。</p>
 
       <div class="note-box">
-        <h3>你的贡献会怎么用</h3>
+        <h3>我们会怎么用你分享的信息</h3>
         <ul>
           <li>公开到网站之前，我们会先问清楚：能不能公开、能不能用于研究、希望怎么署名。</li>
-          <li>每条记录都会标明来自哪个乡镇或村子。</li>
-          <li>录音只在网站上播放，不提供下载，其他人不能拿去转载或另作他用。</li>
+          <li>每条记录都会标明来自哪个乡镇。</li>
           <li>任何时候都可以要求修改或撤回你的内容。</li>
         </ul>
       </div>
@@ -144,30 +163,29 @@
     <section id="questions" class="content-section">
       <h2>常见问题</h2>
       <dl class="faq">
-        <dt>我不会说安远话，可以参加吗？</dt>
-        <dd>可以。复健会欢迎来听，入门课准备好了也会在这里说。</dd>
-        <dt>我是安远人，怎么参与？</dt>
-        <dd>来复健会聊天，分享你们那里的说法和故事，或者录几句音都可以。会说多少都欢迎，不在安远住也没关系，复健会在线上。</dd>
-        <dt>各地说法不一样，哪个才对？</dt>
-        <dd>都对。我们每种说法都记，写清楚是哪个乡镇、哪个村的。</dd>
+        <dt>我不会说安远话，还能参加吗？</dt>
+        <dd>可以。复健会也欢迎想听听安远话、重新熟悉家乡话的人。也可以先在<a href="./sentences.html">五百句</a>里点开录音，跟着说。入门课程准备好后，也会在这里公布。</dd>
+        <dt>我只会说一点，还能参加吗？</dt>
+        <dd>当然可以。你会说的词、记得的表达，或者家里长辈常说的话，都可以成为记录的一部分。</dd>
+        <dt>我来自安远，但不住在安远，可以参加吗？</dt>
+        <dd>可以。复健会在线上举行，欢迎身在各地的安远人参加。</dd>
+        <dt>我能帮忙做什么？</dt>
+        <dd>可以分享一个词、一张照片，或者讲讲某个东西在家乡怎么叫。如果愿意，也可以参与整理和校对。</dd>
+        <dt>安远各地的说法不一样，哪个才是正确的？</dt>
+        <dd>不同地方可能有不同的说法。我们会尽量记录这些差异，并标明资料来自哪里，而不是把所有说法都改成同一个版本。</dd>
         <dt>安远话怎么写？那些符号是什么？</dt>
-        <dd>词典用汉字和国际音标（IPA）记录，数字表示声调。有些词没有公认的写法，我们会注明。看不懂音标没关系，可以只看汉字和释义。</dd>
-        <dt>我的录音会怎么用？</dt>
-        <dd>公开之前会先征得你的同意，并按你希望的方式署名。你可以随时要求修改或撤回。</dd>
+        <dd>词典用汉字和国际音标（IPA）记录。有些词没有公认的写法，我们会注明。看不懂音标没关系，可以只看汉字和释义。</dd>
         <dt>安远话是语言还是方言？</dt>
-        <dd>在中国一般叫方言。它是客家话的一种，有自己的特点。</dd>
+        <dd>在日常交流中，我们通常称它为安远话。它属于客家话的一种，有自己的地方特点。至于语言和方言之间如何划分，还涉及语言学分类和社会历史背景。</dd>
       </dl>
     </section>
 
     <!-- ========= 关于 ========= -->
     <section id="about" class="content-section">
-      <h2>关于</h2>
-      <p>AYHAK 是安远人发起的项目。我们做事有几条原则：</p>
-      <ul>
-        <li>这里记的安远话，来自讲安远话的人。</li>
-        <li>每个乡镇、每个村的说法都算数，安远话没有唯一的“标准说法”。</li>
-        <li>做出来的东西首先回馈给家乡。</li>
-      </ul>
+      <h2>关于这个项目</h2>
+      <p>这个项目从安远话开始，想做的事情很简单：把大家平时说的话记下来，也让更多人有机会听到、学会安远话。</p>
+      <p>安远各地的说法可能不一样。同一个东西，在不同乡镇、不同村，甚至不同家庭里，都可能有不同的叫法。我们希望把这些差别也记下来，而不是只留下一个所谓的标准答案。</p>
+      <p>这里记录的内容来自说安远话的人。大家提供的说法、录音和故事，都会成为这个项目的一部分。</p>
     </section>
   </main>
 
@@ -177,6 +195,6 @@
     <p class="license">代码 CC0 · 文字与照片 <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans">CC BY-NC 4.0</a> · 录音按发音人授权使用，未经许可请勿转载 · <a href="https://github.com/juan-zhong/ay_hak/blob/main/CONTENT-LICENSE.md">授权说明</a></p>
   </footer>
 
-  <script src="./home.js?v=20261021a" defer></script>
+  <script src="./home.js?v=20261021b" defer></script>
 </body>
 </html>

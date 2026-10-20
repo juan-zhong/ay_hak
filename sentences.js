@@ -24,7 +24,13 @@
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { /* ignore */ } },
   };
 
-  const state = { cats: [], sentences: [], recs: {}, cat: 0, q: '', onlyEmpty: false, onlyHas: false, svc: 'loading' };
+  // 录音目前只由项目组录制：访客页面只有点播跟读；网址加 ?admin=1 才出现录音和上传
+  const ADMIN = (() => { const v = new URL(location.href).searchParams.get('admin');
+    try { if (v === '1') localStorage.setItem('ayhak.admin', '1'); if (v === '0') localStorage.removeItem('ayhak.admin');
+      return localStorage.getItem('ayhak.admin') === '1'; } catch { return v === '1'; } })();
+  if (ADMIN) document.documentElement.classList.add('admin');
+
+  const state = { cats: [], sentences: [], recs: {}, cat: 0, q: '', onlyEmpty: false, onlyHas: false, svc: 'loading', slow: false };
 
   /* ---------- 读数据 ---------- */
   async function loadSentences() {
@@ -48,8 +54,8 @@
   }
   async function loadRecordings() {
     state.recs = {};
-    addRecs(await loadStatic());             // 先放网站上的，保证国内能听
-    if (!ENDPOINT) { state.svc = 'off'; return; }
+    addRecs(await loadStatic());             // 网站上的录音，国内外都能直接听
+    if (!ADMIN || !ENDPOINT) { state.svc = 'off'; return; }   // 访客不连 Google
     try {
       const ctrl = new AbortController();
       const t = setTimeout(() => ctrl.abort(), 12000);
@@ -71,7 +77,7 @@
     $('#sStatus').textContent = total ? `500 句 · 已有 ${has} 句有录音 · 共 ${total} 条录音` : '500 句';
     const note = {
       on: '',
-      off: '录音功能还没有开通，现在可以先看句子。',
+      off: '',
       down: '网站上的录音可以直接听。上传录音需要能打开 Google 的网络；在国内不方便上传的话，也可以把录音发邮件给我们。',
       loading: '',
     }[state.svc];
@@ -106,7 +112,7 @@
           <div class="s-zh">${esc(s.zh)}</div>
           ${s.hanzi || s.ipa ? `<div class="s-ay">${esc(s.hanzi)}${s.ipa ? ` <span class="ipa">[${esc(s.ipa)}]</span>` : ''}</div>` : ''}
         </div>
-        <button class="btn sm${recs.length ? ' btn-ghost' : ' primary'}" data-rec="${s.id}">● 我来录</button>
+        ${ADMIN ? `<button class="btn sm${recs.length ? ' btn-ghost' : ' primary'}" data-rec="${s.id}">● 我来录</button>` : (recs.length ? '' : '<span class="small s-wait">录音整理中</span>')}
       </div>
       ${recs.length ? `<div class="s-recs">${recs.map((r) => `
         <button class="rec-chip" data-rid="${esc(r.rid)}" aria-label="播放 ${esc(r.place)} 的录音">
@@ -149,6 +155,7 @@
         audioCache.set(rid, url);
       }
       player = new Audio(url);
+      player.playbackRate = state.slow ? 0.75 : 1;
       btn.classList.add('playing');
       player.onended = () => btn.classList.remove('playing');
       await player.play();
@@ -288,6 +295,7 @@
     });
     let t = null;
     $('#sq').addEventListener('input', (e) => { clearTimeout(t); t = setTimeout(() => { state.q = e.target.value; renderList(); }, 150); });
+    $('#slow')?.addEventListener('change', (e) => { state.slow = e.target.checked; if (player) player.playbackRate = state.slow ? 0.75 : 1; });
     $('#onlyEmpty').addEventListener('change', (e) => { state.onlyEmpty = e.target.checked; if (e.target.checked) { $('#onlyHas').checked = false; state.onlyHas = false; } renderList(); });
     $('#onlyHas').addEventListener('change', (e) => { state.onlyHas = e.target.checked; if (e.target.checked) { $('#onlyEmpty').checked = false; state.onlyEmpty = false; } renderList(); });
     $('#sentenceList').addEventListener('click', (e) => {
