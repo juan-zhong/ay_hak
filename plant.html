@@ -6,7 +6,7 @@
   <title>AYHAK · 安远话植物图集</title>
   <meta name="description" content="安远话植物图集里的一种植物：照片、安远话叫法、录音、学名和用法。One plant from Plants and Plant Knowledge in Anyuan Hakka." />
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="./plants.css?v=20261023a" />
+  <link rel="stylesheet" href="./plants.css?v=20261024b" />
   <script>try{var l=new URL(location.href).searchParams.get('lang')||localStorage.getItem('ayhak.plants.lang');if(l==='en')document.documentElement.setAttribute('data-lang','en');}catch(e){}</script>
 </head>
 
@@ -17,26 +17,26 @@
     <a class="mark" href="./index-zh.html">AYHAK</a>
     <nav aria-label="站点导航">
       <a href="./plants.html"><span class="zh">植物图集</span><span class="en" lang="en">Plant atlas</span></a>
-      <a href="./plants.html#plates"><span class="zh">目录</span><span class="en" lang="en">Contents</span></a>
+      <a href="./plants.html#plates"><span class="zh">图集</span><span class="en" lang="en">Plates</span></a>
       <a href="./dict.html"><span class="zh">查词典</span><span class="en" lang="en">Dictionary</span></a>
-      <span class="langs" role="group" aria-label="语言 Language"><button type="button" data-setlang="zh">中文</button><span aria-hidden="true">|</span><button type="button" data-setlang="en" lang="en">English</button></span>
+      <span class="langs" role="group" aria-label="语言 Language"><button type="button" data-setlang="zh">中文</button><span aria-hidden="true">/</span><button type="button" data-setlang="en" lang="en">English</button></span>
     </nav>
   </header>
 
-  <div class="tools admin-only">
+  <div class="tools wrap admin-only">
     <label><input id="toggleQR" type="checkbox" /> 二维码</label>
     <button class="btn" id="btnPrint">打印/存PDF</button>
   </div>
 
-  <main class="book" id="plant">
-    <p class="muted" style="text-align:center;padding:60px 0">载入中… Loading…</p>
-    <noscript><p class="muted" style="text-align:center">这一页需要浏览器开启 JavaScript 才能显示。This page needs JavaScript. <a href="./plants.html">回到植物图集 Back to the atlas</a></p></noscript>
+  <main id="plant">
+    <p class="muted wrap" style="padding:60px 0">载入中… Loading…</p>
+    <noscript><p class="muted wrap">这一页需要浏览器开启 JavaScript 才能显示。This page needs JavaScript. <a href="./plants.html">回到植物图集 Back to the atlas</a></p></noscript>
   </main>
 
-  <nav class="turn" id="turn" aria-label="翻页"></nav>
-  <p class="endnote"><span class="zh">安远话植物图集 · AYHAK · 照片和录音按发音人授权使用</span><span class="en" lang="en">Plants and Plant Knowledge in Anyuan Hakka · AYHAK · photographs and recordings used with speakers’ consent</span> · <a href="https://github.com/juan-zhong/ay_hak/blob/main/CONTENT-LICENSE.md"><span class="zh">授权说明</span><span class="en" lang="en">License</span></a></p>
+  <nav class="turn wrap" id="turn" aria-label="翻页"></nav>
+  <footer class="colophon wrap"><p><span class="zh">安远话植物图集 · AYHAK · 照片和录音按发音人授权使用</span><span class="en" lang="en">Plants and Plant Knowledge in Anyuan Hakka · AYHAK · photographs and recordings used with speakers’ consent</span> · <a href="https://github.com/juan-zhong/ay_hak/blob/main/CONTENT-LICENSE.md"><span class="zh">授权说明</span><span class="en" lang="en">License</span></a></p></footer>
 
-  <script src="./vendor/qrcode.js?v=20261023a" defer></script>
-  <script src="./plants.js?v=20261023a" defer></script>
+  <script src="./vendor/qrcode.js?v=20261024b" defer></script>
+  <script src="./plants.js?v=20261024b" defer></script>
 </body>
 </html>

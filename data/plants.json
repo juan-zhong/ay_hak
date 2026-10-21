@@ -73,7 +73,8 @@
       "dict": "pl-shu",
       "aliases": [],
       "collected": {},
-      "refs": []
+      "refs": [],
+      "latin_status": "to verify"
     },
     {
       "id": "ai",
@@ -121,7 +122,8 @@
       "dict": "pl-ai",
       "aliases": [],
       "collected": {},
-      "refs": []
+      "refs": [],
+      "latin_status": "to verify"
     },
     {
       "id": "zhugaohua",
@@ -134,7 +136,8 @@
       "photos": [
         {
           "src": "images/plants/zhugaohua.jpg",
-          "caption": "猪膏花"
+          "caption": "猪膏花",
+          "wide": true
         }
       ],
       "habitat": "",
@@ -162,7 +165,8 @@
         {
           "src": "images/plants/congzi.jpg",
           "caption": "欣山大市场的葱子",
-          "caption_en": "Scallions at the Xinshan market"
+          "caption_en": "Scallions at the Xinshan market",
+          "wide": true
         }
       ],
       "habitat": "",
@@ -177,15 +181,17 @@
       "dict": "pl-congzi",
       "aliases": [],
       "collected": {},
-      "refs": []
+      "refs": [],
+      "latin_status": "to verify"
     }
   ],
   "note_en": "Names and IPA follow speaker checks. Empty fields mean the information has not been recorded yet.",
   "schema": {
-    "photos": "[{src, caption, caption_en, cutout}] 第一张是标本页的大图；cutout=true 表示白底照片，放在色块上会融进底色",
+    "photos": "[{src, caption, caption_en, cutout, wide, stage, date, place, by, license}] 第一张是标本页的大图；cutout=true 白底照片；wide=true 横图（图集里占宽格）；stage/date/place 会显示在图注里",
+    "latin_status": "verified = 已对照标本和可靠植物志核实；其他值显示“待核实”",
     "aliases": "[{name, ipa, place}] 其他乡镇、村的叫法",
-    "collected": "{place, date, by} 采集/拍摄地点、日期、记录者",
-    "refs": "[{text, text_en, work, edition, page, url}] 文献：text 写自己概括的要点（不要整段抄原文），work 写书名",
-    "color": "可选：ochre / mauve / sage / slate / lilac / bone，不填就按顺序轮换"
+    "collected": "{place, date, by} 记录地点、时间、记录者",
+    "uses / habitat / season": "地方知识（当地人实际分享的）",
+    "refs": "[{layer, text, text_en, work, edition, page, area, url}] layer: local（地方记录）/ botany（植物学资料）/ literature（文献记录）；text 写自己概括的要点；area 写研究地点"
   }
 }
