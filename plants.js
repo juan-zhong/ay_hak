@@ -137,7 +137,7 @@
     const f = ph[0];
     // 1 左：标本页
     const pg1 = `<div class="page sheet specimen">${head}
-      <div class="ph">${f ? img(f, field(f, 'caption') || p.name, true) : pending('照片待补', 'photo pending')}</div>
+      <div class="ph">${f ? img(f, field(f, 'caption') || p.name, true) : pending('照片待补', 'photo pending')}<span class="ph-say">${sayBtn(p.dict, p.audio)}</span></div>
       <div class="labelblock">
         <div class="first"><span class="k">${t('当地名称', 'Local name')}:</span><span class="v">${word(p.name || p.mandarin, p.dict)} ${ipa(p.ipa)} ${sayBtn(p.dict, p.audio, 'sm')}</span></div>
         ${kv(t('地点', 'Place') + ':', esc(p.variety || col.place || ''))}

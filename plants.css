@@ -341,3 +341,29 @@ html[data-lang="zh"] .h { font-weight: 400; letter-spacing: 0.08em; }
 .p-name { font-weight: 400; letter-spacing: 0.12em; }
 .spec .tag .nm b, .made b, .toc b, .labelblock .first .v, .index b { font-weight: 400; }
 b, strong, summary, dl.layers dt, .page h3 { font-weight: 500; }
+
+/* ---------- 英文也轻一点；编号 No. 01 不抢眼 ---------- */
+@font-face { font-family: 'Oswald'; font-style: normal; font-weight: 300; font-display: swap; src: url('./vendor/fonts/oswald-latin-300-normal.woff2') format('woff2'); }
+.display, p.display[lang="en"] { font-weight: 300; letter-spacing: 0.01em; }
+html[data-lang="en"] .h { font-weight: 300; }
+.mark { font-weight: 300; }
+.p-no { font-family: var(--cond); font-weight: 300; font-size: 18px; line-height: 1.2; letter-spacing: 0.12em; color: rgba(20,20,18,.6); margin: 0 0 14px; }
+.spec .no { font-size: 9.5px; color: rgba(20,20,18,.45); }
+.title-en { font-weight: 400; }
+
+/* ---------- 发音按钮：方角 ---------- */
+.say, .say.sm, .say.xl, .norec { border-radius: 0; }
+
+/* ---------- “听发音”不要浅色底框：只留图标和文字 ---------- */
+.say.xl { background: transparent; border: 0; padding: 0 4px; height: 44px; }
+.say.xl:hover, .say.xl.playing { background: transparent; color: var(--plum); }
+.say.xl span:first-of-type { border-bottom: 1px solid currentColor; padding-bottom: 1px; }
+.norec { border: 0; padding: 0; }
+
+/* ---------- 发音按钮不要浅色底；标本照片角上也放一个 ---------- */
+.say.xl { background: transparent; }
+.say.xl:hover:not(:disabled), .say.xl.playing { background: var(--ink); color: var(--paper); }
+.specimen .ph { position: relative; }
+.ph-say { position: absolute; right: 0; bottom: 0; z-index: 2; }
+.ph-say .say { background: var(--paper); }
+.ph-say .say:hover:not(:disabled), .ph-say .say.playing { background: var(--ink); color: var(--paper); }
