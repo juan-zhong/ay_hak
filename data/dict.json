@@ -1498,6 +1498,213 @@
       "notes": "2021 年初步记音：zuei（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
+    },
+    {
+      "id": "pl-shu",
+      "hanzi": "薯",
+      "roman": "",
+      "ipa": "seɪ³²⁴",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "",
+      "senses": [
+        "参薯（大薯）的本地品种，肉是紫色的（greater yam）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "植物",
+        "植物图集"
+      ],
+      "audio": "",
+      "notes": "",
+      "speaker": "",
+      "verified": false,
+      "plant": "shu"
+    },
+    {
+      "id": "pl-shu-ban",
+      "hanzi": "薯粄",
+      "roman": "",
+      "ipa": "seɪ³²⁴.pɑ̃⁴¹",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "",
+      "senses": [
+        "薯做的米粄（ban made with yam）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "植物",
+        "植物图集"
+      ],
+      "audio": "",
+      "notes": "",
+      "speaker": "",
+      "verified": false,
+      "plant": "shu"
+    },
+    {
+      "id": "pl-shu-bao",
+      "hanzi": "薯包",
+      "roman": "",
+      "ipa": "seɪ³²⁴.poʊ³⁴",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "",
+      "senses": [
+        "用薯做的食物"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "植物",
+        "植物图集"
+      ],
+      "audio": "",
+      "notes": "",
+      "speaker": "",
+      "verified": false,
+      "plant": "shu"
+    },
+    {
+      "id": "pl-shu-jiu",
+      "hanzi": "薯酒",
+      "roman": "",
+      "ipa": "seɪ³²⁴.tsy⁴¹",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "",
+      "senses": [
+        "薯酿的酒（wine brewed from yam）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "植物",
+        "植物图集"
+      ],
+      "audio": "",
+      "notes": "",
+      "speaker": "",
+      "verified": false,
+      "plant": "shu"
+    },
+    {
+      "id": "pl-ai",
+      "hanzi": "艾",
+      "roman": "",
+      "ipa": "ŋa⁵³",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "",
+      "senses": [
+        "艾草（mugwort）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "植物",
+        "植物图集"
+      ],
+      "audio": "",
+      "notes": "",
+      "speaker": "",
+      "verified": false,
+      "plant": "ai"
+    },
+    {
+      "id": "pl-ai-ban",
+      "hanzi": "艾粄",
+      "roman": "",
+      "ipa": "ŋa⁵³.pɑ̃⁴¹",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "",
+      "senses": [
+        "用艾做的粄"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "植物",
+        "植物图集"
+      ],
+      "audio": "",
+      "notes": "",
+      "speaker": "",
+      "verified": false,
+      "plant": "ai"
+    },
+    {
+      "id": "pl-ai-dan",
+      "hanzi": "艾蛋",
+      "roman": "",
+      "ipa": "ŋa⁵³.tʰɑ̃⁴⁵",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "",
+      "senses": [
+        "用艾做的食物"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "植物",
+        "植物图集"
+      ],
+      "audio": "",
+      "notes": "",
+      "speaker": "",
+      "verified": false,
+      "plant": "ai"
+    },
+    {
+      "id": "pl-zhugaohua",
+      "hanzi": "猪膏花",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "",
+      "senses": [
+        "一种花（植物图集里的“猪膏花”，学名待鉴定）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "植物",
+        "植物图集"
+      ],
+      "audio": "",
+      "notes": "",
+      "speaker": "",
+      "verified": false,
+      "plant": "zhugaohua"
+    },
+    {
+      "id": "pl-congzi",
+      "hanzi": "葱子",
+      "roman": "",
+      "ipa": "",
+      "sandhi": "",
+      "pos": "n",
+      "variety": "",
+      "senses": [
+        "葱（scallion）"
+      ],
+      "examples": [],
+      "variants": [],
+      "tags": [
+        "植物",
+        "植物图集"
+      ],
+      "audio": "",
+      "notes": "",
+      "speaker": "",
+      "verified": false,
+      "plant": "congzi"
     }
   ]
 }

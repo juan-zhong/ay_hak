@@ -38,14 +38,16 @@
           "gloss": "薯做的米粄",
           "photo": "images/plants/shu-ban.jpg",
           "audio": "",
-          "gloss_en": "ban (rice cake) made with yam"
+          "gloss_en": "ban (rice cake) made with yam",
+          "dict": "pl-shu-ban"
         },
         {
           "name": "薯包",
           "ipa": "seɪ³²⁴.poʊ³⁴",
           "gloss": "",
           "photo": "images/plants/shu-bao.jpg",
-          "audio": ""
+          "audio": "",
+          "dict": "pl-shu-bao"
         },
         {
           "name": "薯酒",
@@ -53,7 +55,8 @@
           "gloss": "薯酿的酒",
           "photo": "images/plants/shu-jiu.jpg",
           "audio": "",
-          "gloss_en": "wine brewed from yam"
+          "gloss_en": "wine brewed from yam",
+          "dict": "pl-shu-jiu"
         }
       ],
       "audio": "",
@@ -61,7 +64,8 @@
       "notes": "",
       "credit": "摄影：Juan Zhong",
       "mandarin_en": "a local variety of greater yam",
-      "gloss_en": "A locally grown greater yam with purple flesh."
+      "gloss_en": "A locally grown greater yam with purple flesh.",
+      "dict": "pl-shu"
     },
     {
       "id": "ai",
@@ -87,21 +91,24 @@
           "ipa": "ŋa⁵³.pɑ̃⁴¹",
           "gloss": "",
           "photo": "images/plants/ai-ban.jpg",
-          "audio": ""
+          "audio": "",
+          "dict": "pl-ai-ban"
         },
         {
           "name": "艾蛋",
           "ipa": "ŋa⁵³.tʰɑ̃⁴⁵",
           "gloss": "",
           "photo": "images/plants/ai-dan.jpg",
-          "audio": ""
+          "audio": "",
+          "dict": "pl-ai-dan"
         }
       ],
       "audio": "",
       "variety": "",
       "notes": "",
       "credit": "摄影：Juan Zhong",
-      "mandarin_en": "mugwort"
+      "mandarin_en": "mugwort",
+      "dict": "pl-ai"
     },
     {
       "id": "zhugaohua",
@@ -124,7 +131,8 @@
       "audio": "",
       "variety": "",
       "notes": "",
-      "credit": "摄影：Juan Zhong"
+      "credit": "摄影：Juan Zhong",
+      "dict": "pl-zhugaohua"
     },
     {
       "id": "congzi",
@@ -149,7 +157,8 @@
       "variety": "",
       "notes": "",
       "credit": "摄影：Juan Zhong · 欣山大市场",
-      "mandarin_en": "scallion (Welsh onion)"
+      "mandarin_en": "scallion (Welsh onion)",
+      "dict": "pl-congzi"
     }
   ],
   "note_en": "Names and IPA follow speaker checks. Empty fields mean the information has not been recorded yet."

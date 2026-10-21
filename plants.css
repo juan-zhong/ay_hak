@@ -102,10 +102,10 @@ p { margin: 0 0 14px; }
 
 /* ---------- 图版页：照片保留原来的横竖比例，像照片书一样错落排列 ---------- */
 .plates { columns: 3 260px; column-gap: 26px; margin-top: 8px; }
-.plates a { display: block; break-inside: avoid; margin: 0 0 30px; text-decoration: none; }
+.plates > a { display: block; break-inside: avoid; margin: 0 0 30px; text-decoration: none; }
 .plates .ph { background: #f2eee4; overflow: hidden; }
 .plates .ph img { width: 100%; height: auto; transition: transform .4s; }
-.plates a:hover .ph img { transform: scale(1.02); }
+.plates .ph:hover img { transform: scale(1.02); }
 .plates .nm { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 2px 10px; align-items: baseline; line-height: 1.4; }
 .plates .nm b { font-weight: 400; font-size: 17px; letter-spacing: 0.1em; color: var(--ink); }
 .plates .nm .zh, .plates .nm .lat { font-size: 12.5px; color: var(--muted); }
@@ -219,3 +219,22 @@ dl.about dd { margin: 6px 0 0; font-size: 14px; }
 .lat { font-family: var(--serif); font-style: italic; }
 .plates .nm2 { font-size: 12.5px; color: var(--muted); margin-top: 2px; line-height: 1.5; }
 .plates .nm .ipa { font-size: 13px; }
+
+/* ---------- 词典链接、发音按钮 ---------- */
+a.dict-link { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(123,79,128,.45); }
+a.dict-link:hover { color: var(--plum); border-bottom-color: var(--plum); }
+.page.dark a.dict-link { border-bottom-color: rgba(251,248,241,.5); }
+.p-name a.dict-link { border-bottom-width: 2px; }
+.say { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--plum); background: transparent; color: var(--plum); cursor: pointer; padding: 0; vertical-align: middle; flex: none; margin-left: 6px; }
+.say:hover:not(:disabled) { background: var(--plum); color: var(--paper); }
+.say.sm { width: 26px; height: 26px; }
+.say.sm svg { width: 14px; height: 14px; }
+.say:disabled { border-color: var(--line); color: rgba(22,22,19,.3); cursor: not-allowed; }
+.page.dark .say { border-color: rgba(251,248,241,.6); color: var(--paper); }
+.page.dark .say:disabled { border-color: rgba(251,248,241,.25); color: rgba(251,248,241,.35); }
+.say.playing { background: var(--plum); color: var(--paper); }
+.say-slot { display: inline; }
+/* 图集里的条目：照片链接到植物页，名字链接到词典 */
+.plates .item { display: block; break-inside: avoid; margin: 0 0 30px; }
+.plates .item .ph { display: block; }
+.plates .item .nm { align-items: center; }

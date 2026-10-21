@@ -21,7 +21,7 @@
 
   const POS_LABEL = { n: '名词', v: '动词', adj: '形容词', pron: '代词', num: '数词', part: '语气词', other: '其他' };
   // 这些标签不当作“主题”
-  const NON_THEME = new Set(['2021 词表', '示例']);
+  const NON_THEME = new Set(['2021 词表', '示例', '植物图集']);
 
   /* ---------- 小工具 ---------- */
   const $ = (s, r = document) => r.querySelector(s);
@@ -70,6 +70,8 @@
       tags: toList(raw.tags),
       audio: String(raw.audio || '').trim(),
       notes: String(raw.notes || '').trim(),
+      // 植物图集里的条目：plant.html?id=…
+      plant: String(raw.plant || '').trim(),
       speaker: String(raw.speaker || '').trim(),
       // 连读时的读音（变调后），可空
       sandhi: String(raw.sandhi || '').trim(),
@@ -242,6 +244,7 @@
       <p class="small"><a href="mailto:juanzhon@buffalo.edu?subject=${encodeURIComponent(`AYHAK 词典：${e.hanzi}`)}">你们那里怎么说？告诉我们 →</a></p>
 
       ${e.notes ? `<h4>备注</h4><p class="notes">${esc(e.notes)}</p>` : ''}
+      ${e.plant ? `<p class="notes"><a href="./plant.html?id=${encodeURIComponent(e.plant)}">在植物图集里看照片 →</a></p>` : ''}
 
       ${state.showAudio ? `<h4>发音</h4><div class="audio-box" id="audioBox"><p class="small">载入中…</p></div>` : ''}
 
@@ -515,7 +518,7 @@
   }
 
   /* ---------- CSV ---------- */
-  const CSV_COLS = ['id', 'hanzi', 'roman', 'ipa', 'sandhi', 'pos', 'variety', 'senses', 'examples', 'variants', 'tags', 'audio', 'notes', 'speaker', 'verified'];
+  const CSV_COLS = ['id', 'hanzi', 'roman', 'ipa', 'sandhi', 'pos', 'variety', 'senses', 'examples', 'variants', 'tags', 'audio', 'notes', 'speaker', 'verified', 'plant'];
   function parseCSV(text) {
     const rows = []; let row = []; let cell = ''; let q = false;
     text = text.replace(/^﻿/, '');

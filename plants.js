@@ -22,7 +22,17 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const ipa = (s) => (s ? `<span class="ipa">/${esc(s)}/</span>` : '');
   const no = (i) => String(i + 1).padStart(2, '0');
-  const playBtn = (src, cls = '') => (src ? `<button class="play ${cls}" data-play="${esc(src)}" aria-label="播放录音 Play">▶</button>` : '');
+  // 发音按钮：喇叭图标。有录音就能点，没有录音时灰掉并提示“录音待补”
+  const SPEAKER = '<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><path d="M4 9.2v5.6h3.6L12.5 19V5L7.6 9.2H4z" fill="currentColor"/><path d="M15.6 8.6a4.6 4.6 0 0 1 0 6.8M18.2 6a8.3 8.3 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
+  const AUDIO = new Map();          // 词典编号 → 录音
+  const sayBtn = (dictId, src, cls = '') => {
+    const a = src || AUDIO.get(dictId) || '';
+    return a
+      ? `<button type="button" class="say ${cls}" data-play="${esc(a)}" aria-label="${t('听发音', 'Listen')}" title="${t('听发音', 'Listen')}">${SPEAKER}</button>`
+      : `<button type="button" class="say ${cls}" disabled aria-label="${t('录音待补', 'Recording pending')}" title="${t('录音待补', 'Recording pending')}">${SPEAKER}</button>`;
+  };
+  // 叫法链接到词典里的词
+  const word = (name, dictId) => (dictId ? `<a class="dict-link" href="./dict.html?w=${encodeURIComponent(dictId)}" title="${t('在词典里查', 'Look up in the dictionary')}">${esc(name)}</a>` : esc(name));
 
   /* ---------- 语言 ---------- */
   const lang = () => (document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'zh');
@@ -87,11 +97,11 @@
     // 当地名称、照片、发音为主；学名辅助，没有就写“待鉴定”
     grid.innerHTML = plants.map((p, i) => {
       const ph = photosOf(p)[0];
-      return `<a href="./plant.html?id=${encodeURIComponent(p.id)}">
-        <div class="ph">${ph ? `<img src="${esc(ph.src)}" alt="${esc(p.name)}" loading="lazy" />` : ''}</div>
-        <div class="nm"><span class="no">${no(i)}</span><b>${esc(p.name || '')}</b>${ipa(p.ipa)}${p.audio ? ' <span class="small">▶</span>' : ''}</div>
+      return `<div class="item">
+        <a class="ph" href="./plant.html?id=${encodeURIComponent(p.id)}" aria-label="${esc(p.name)}">${ph ? `<img src="${esc(ph.src)}" alt="${esc(p.name)}" loading="lazy" />` : ''}</a>
+        <div class="nm"><span class="no">${no(i)}</span><b>${word(p.name || '', p.dict)}</b>${ipa(p.ipa)}${sayBtn(p.dict, p.audio, 'sm')}</div>
         <div class="nm2">${latin(p)}${field(p, 'mandarin') ? ` · <span>${esc(field(p, 'mandarin'))}</span>` : ''}</div>
-      </a>`;
+      </div>`;
     }).join('');
   }
 
@@ -118,9 +128,10 @@
       ].filter(([, v]) => v);
       return `<div class="page center">${head}
         <p class="label">Plate ${no(i)}</p>
-        <h1 class="p-name">${esc(p.name || p.mandarin)}</h1>
+        <h1 class="p-name">${word(p.name || p.mandarin, p.dict)}</h1>
         <p class="p-sub">Local name · Pronunciation · Botanical identification</p>
-        <div class="p-ipa">${ipa(p.ipa) || pending('IPA 待补', 'IPA pending')} ${p.audio ? playBtn(p.audio) : pending('录音待补', 'recording pending')}</div>
+        <div class="p-ipa">${ipa(p.ipa) || pending('IPA 待补', 'IPA pending')} ${sayBtn(p.dict, p.audio)}${(p.audio || AUDIO.get(p.dict)) ? '' : pending('录音待补', 'recording pending')}</div>
+        ${p.dict ? `<p class="small"><a class="ulink" href="./dict.html?w=${encodeURIComponent(p.dict)}">${t('在词典里查这个词 →', 'See this word in the dictionary →')}</a></p>` : ''}
         ${field(p, 'gloss') ? `<p>${esc(field(p, 'gloss'))}</p>` : ''}
         <dl class="facts">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
         ${folio}</div>`;
@@ -137,7 +148,7 @@
         <p class="label">Kitchen · ${t(`用${esc(p.name || p.mandarin)}做的`, `made with ${esc(p.name)}`)}</p>
         <ul class="made">${d.map((x) => `<li>
           ${x.photo ? `<img src="${esc(x.photo)}" alt="${esc(x.name)}" loading="lazy" />` : '<div></div>'}
-          <div><b>${esc(x.name)}</b>${ipa(x.ipa)} ${playBtn(x.audio, 'sm')}${field(x, 'gloss') ? `<p class="small" style="margin:6px 0 0">${esc(field(x, 'gloss'))}</p>` : ''}</div>
+          <div><b>${word(x.name, x.dict)}</b>${ipa(x.ipa)} ${sayBtn(x.dict, x.audio, 'sm')}${field(x, 'gloss') ? `<p class="small" style="margin:6px 0 0">${esc(field(x, 'gloss'))}</p>` : ''}</div>
         </li>`).join('')}</ul>${folio}</div>`;
     }
     if (kind === 'info') {
@@ -210,6 +221,15 @@
       const j = await res.json();
       plants = (Array.isArray(j) ? j : j.plants || []).filter((p) => p && p.id);
       target = (!Array.isArray(j) && j.target) || plants.length;
+      // 录音：先用图集里的，没有再用词典里的
+      try {
+        const dj = await (await fetch('./data/dict.json', { cache: 'no-cache' })).json();
+        (Array.isArray(dj) ? dj : dj.entries || []).forEach((e) => { if (e && e.id && e.audio) AUDIO.set(e.id, e.audio); });
+      } catch { /* 词典读不到就只用图集里的录音 */ }
+      plants.forEach((p) => {
+        if (p.dict && p.audio) AUDIO.set(p.dict, p.audio);
+        derivedOf(p).forEach((x) => { if (x.dict && x.audio) AUDIO.set(x.dict, x.audio); });
+      });
     } catch (err) {
       const box = $('#plantGrid') || $('#plant');
       if (box) box.innerHTML = `<p class="muted">${t('图集没有载入成功', 'The atlas could not be loaded')}（${esc(err.message)}）。${t('请刷新页面再试一次。', 'Please refresh the page.')}</p>`;
@@ -221,7 +241,8 @@
       const h = decodeURIComponent(location.hash.slice(1));
       if (h && plants.some((p) => p.id === h)) { location.replace(`./plant.html?id=${encodeURIComponent(h)}`); return; }
     }
-    const render = () => (isPlant ? renderPlant(plants) : renderIndex(plants, target));
+    const statics = () => $$('[data-say]').forEach((el) => { el.innerHTML = sayBtn(el.dataset.say, '', 'sm'); });
+    const render = () => { if (isPlant) renderPlant(plants); else { renderIndex(plants, target); statics(); } };
     $$('[data-setlang]').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.setlang, render)));
     render();
     if (isPlant) {
