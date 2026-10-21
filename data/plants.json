@@ -13,14 +13,16 @@
       "category": "块根",
       "photos": [
         {
-          "src": "images/plants/shu-tuber.jpg",
+          "src": "images/plants/shu-tuber-w.jpg",
           "caption": "整个的薯",
-          "caption_en": "Whole tuber"
+          "caption_en": "Whole tuber",
+          "cutout": true
         },
         {
-          "src": "images/plants/shu-cut.jpg",
+          "src": "images/plants/shu-cut-w.jpg",
           "caption": "切开的薯",
-          "caption_en": "Cut tuber"
+          "caption_en": "Cut tuber",
+          "cutout": true
         },
         {
           "src": "images/plants/shu-flesh.jpg",
@@ -36,27 +38,30 @@
           "name": "薯粄",
           "ipa": "seɪ³²⁴.pɑ̃⁴¹",
           "gloss": "薯做的米粄",
-          "photo": "images/plants/shu-ban.jpg",
+          "photo": "images/plants/shu-ban-w.jpg",
           "audio": "",
           "gloss_en": "ban (rice cake) made with yam",
-          "dict": "pl-shu-ban"
+          "dict": "pl-shu-ban",
+          "cutout": true
         },
         {
           "name": "薯包",
           "ipa": "seɪ³²⁴.poʊ³⁴",
           "gloss": "",
-          "photo": "images/plants/shu-bao.jpg",
+          "photo": "images/plants/shu-bao-w.jpg",
           "audio": "",
-          "dict": "pl-shu-bao"
+          "dict": "pl-shu-bao",
+          "cutout": true
         },
         {
           "name": "薯酒",
           "ipa": "seɪ³²⁴.tsy⁴¹",
           "gloss": "薯酿的酒",
-          "photo": "images/plants/shu-jiu.jpg",
+          "photo": "images/plants/shu-jiu-w.jpg",
           "audio": "",
           "gloss_en": "wine brewed from yam",
-          "dict": "pl-shu-jiu"
+          "dict": "pl-shu-jiu",
+          "cutout": true
         }
       ],
       "audio": "",
@@ -65,7 +70,10 @@
       "credit": "摄影：Juan Zhong",
       "mandarin_en": "a local variety of greater yam",
       "gloss_en": "A locally grown greater yam with purple flesh.",
-      "dict": "pl-shu"
+      "dict": "pl-shu",
+      "aliases": [],
+      "collected": {},
+      "refs": []
     },
     {
       "id": "ai",
@@ -90,17 +98,19 @@
           "name": "艾粄",
           "ipa": "ŋa⁵³.pɑ̃⁴¹",
           "gloss": "",
-          "photo": "images/plants/ai-ban.jpg",
+          "photo": "images/plants/ai-ban-w.jpg",
           "audio": "",
-          "dict": "pl-ai-ban"
+          "dict": "pl-ai-ban",
+          "cutout": true
         },
         {
           "name": "艾蛋",
           "ipa": "ŋa⁵³.tʰɑ̃⁴⁵",
           "gloss": "",
-          "photo": "images/plants/ai-dan.jpg",
+          "photo": "images/plants/ai-dan-w.jpg",
           "audio": "",
-          "dict": "pl-ai-dan"
+          "dict": "pl-ai-dan",
+          "cutout": true
         }
       ],
       "audio": "",
@@ -108,7 +118,10 @@
       "notes": "",
       "credit": "摄影：Juan Zhong",
       "mandarin_en": "mugwort",
-      "dict": "pl-ai"
+      "dict": "pl-ai",
+      "aliases": [],
+      "collected": {},
+      "refs": []
     },
     {
       "id": "zhugaohua",
@@ -132,7 +145,10 @@
       "variety": "欣山镇",
       "notes": "",
       "credit": "摄影：Juan Zhong",
-      "dict": "pl-zhugaohua"
+      "dict": "pl-zhugaohua",
+      "aliases": [],
+      "collected": {},
+      "refs": []
     },
     {
       "id": "congzi",
@@ -158,8 +174,18 @@
       "notes": "",
       "credit": "摄影：Juan Zhong · 欣山大市场",
       "mandarin_en": "scallion (Welsh onion)",
-      "dict": "pl-congzi"
+      "dict": "pl-congzi",
+      "aliases": [],
+      "collected": {},
+      "refs": []
     }
   ],
-  "note_en": "Names and IPA follow speaker checks. Empty fields mean the information has not been recorded yet."
+  "note_en": "Names and IPA follow speaker checks. Empty fields mean the information has not been recorded yet.",
+  "schema": {
+    "photos": "[{src, caption, caption_en, cutout}] 第一张是标本页的大图；cutout=true 表示白底照片，放在色块上会融进底色",
+    "aliases": "[{name, ipa, place}] 其他乡镇、村的叫法",
+    "collected": "{place, date, by} 采集/拍摄地点、日期、记录者",
+    "refs": "[{text, text_en, work, edition, page, url}] 文献：text 写自己概括的要点（不要整段抄原文），work 写书名",
+    "color": "可选：ochre / mauve / sage / slate / lilac / bone，不填就按顺序轮换"
+  }
 }
