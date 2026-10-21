@@ -74,7 +74,21 @@
       "aliases": [],
       "collected": {},
       "refs": [],
-      "latin_status": "to verify"
+      "latin_status": "to verify",
+      "name_en": "",
+      "family": "",
+      "latin_basis": "",
+      "edible": {
+        "part": "",
+        "stage": "",
+        "how": ""
+      },
+      "medicinal": {
+        "local": [],
+        "literature": [],
+        "research": []
+      },
+      "recordings": []
     },
     {
       "id": "ai",
@@ -123,7 +137,21 @@
       "aliases": [],
       "collected": {},
       "refs": [],
-      "latin_status": "to verify"
+      "latin_status": "to verify",
+      "name_en": "",
+      "family": "",
+      "latin_basis": "",
+      "edible": {
+        "part": "",
+        "stage": "",
+        "how": ""
+      },
+      "medicinal": {
+        "local": [],
+        "literature": [],
+        "research": []
+      },
+      "recordings": []
     },
     {
       "id": "zhugaohua",
@@ -151,7 +179,21 @@
       "dict": "pl-zhugaohua",
       "aliases": [],
       "collected": {},
-      "refs": []
+      "refs": [],
+      "name_en": "",
+      "family": "",
+      "latin_basis": "",
+      "edible": {
+        "part": "",
+        "stage": "",
+        "how": ""
+      },
+      "medicinal": {
+        "local": [],
+        "literature": [],
+        "research": []
+      },
+      "recordings": []
     },
     {
       "id": "congzi",
@@ -182,7 +224,21 @@
       "aliases": [],
       "collected": {},
       "refs": [],
-      "latin_status": "to verify"
+      "latin_status": "to verify",
+      "name_en": "",
+      "family": "",
+      "latin_basis": "",
+      "edible": {
+        "part": "",
+        "stage": "",
+        "how": ""
+      },
+      "medicinal": {
+        "local": [],
+        "literature": [],
+        "research": []
+      },
+      "recordings": []
     }
   ],
   "note_en": "Names and IPA follow speaker checks. Empty fields mean the information has not been recorded yet.",
@@ -192,6 +248,12 @@
     "aliases": "[{name, ipa, place}] 其他乡镇、村的叫法",
     "collected": "{place, date, by} 记录地点、时间、记录者",
     "uses / habitat / season": "地方知识（当地人实际分享的）",
-    "refs": "[{layer, text, text_en, work, edition, page, area, url}] layer: local（地方记录）/ botany（植物学资料）/ literature（文献记录）；text 写自己概括的要点；area 写研究地点"
+    "refs": "[{layer, text, text_en, work, edition, page, area, url}] layer: local（地方记录）/ botany（植物学资料）/ literature（文献记录）；text 写自己概括的要点；area 写研究地点",
+    "name_en": "英文名（可靠时才填）",
+    "family": "科属，例如 薯蓣科 Dioscoreaceae",
+    "latin_basis": "学名的鉴定依据，例如：对照《中国植物志》第 16(1) 卷形态描述，2026-11 核对标本",
+    "edible": "{part, stage, how}（可加 _en）：吃哪个部位、什么时候采、怎么处理和做；相关食物写在 derived",
+    "medicinal": "{local:[{text, place, by}], literature:[{text, work, page, area, url}], research:[{text, work, url}]}：当地说法 / 文献记录 / 研究证据，分开写；都没有就显示“暂无可靠资料”",
+    "recordings": "[{src, place, speaker, date}] 同一个叫法的多条录音（不同乡镇、不同发音人）；不填就用 audio 或词典里的录音"
   }
 }

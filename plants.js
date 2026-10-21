@@ -49,6 +49,7 @@
   /* ---------- 发音按钮、词典链接 ---------- */
   const SPEAKER = '<svg viewBox="0 0 24 24" width="17" height="17" aria-hidden="true" focusable="false"><path d="M4 9.2v5.6h3.6L12.5 19V5L7.6 9.2H4z" fill="currentColor"/><path d="M15.6 8.6a4.6 4.6 0 0 1 0 6.8M18.2 6a8.3 8.3 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>';
   const AUDIO = new Map();          // 词典编号 → 录音
+  const DICT = new Map();           // 词典编号 → 词条
   const audioOf = (dictId, src) => src || AUDIO.get(dictId) || '';
   const sayBtn = (dictId, src, cls = '') => {
     const a = audioOf(dictId, src);
@@ -68,129 +69,133 @@
   };
   const photoNote = (x) => [field(x, 'caption'), x.stage, x.place, x.date].filter(Boolean).map(esc).join(' · ');
 
-  /* ---------- plants.html：图集照片网格 ---------- */
+  /* ---------- plants.html：图集——照片为主，下面只放本地名称和喇叭 ---------- */
   function renderIndex(plants, target) {
     const words = plants.reduce((n, p) => n + (p.name ? 1 : 0) + derivedOf(p).length, 0);
     const st = $('#plantStatus');
     if (st) st.textContent = t(`已记录 ${plants.length} / ${target} 种 · ${words} 个叫法`, `${plants.length} of ${target} plants · ${words} names`);
     const grid = $('#plantGrid');
     if (!grid) return;
-    // 第一种植物用大图，其余按顺序排；照片标了 wide 的占宽一点的格子
     grid.innerHTML = plants.map((p, i) => {
       const ph = photosOf(p)[0];
-      const cls = i === 0 ? 'lead' : (ph && ph.wide ? 'wide' : '');
-      return `<article class="spec ${cls}">
+      const cls = [i === 0 ? 'lead' : '', ph && ph.cutout ? 'mat' : ''].join(' ');
+      return `<figure class="pl ${cls}">
         <a class="ph" href="./plant.html?id=${encodeURIComponent(p.id)}" aria-label="${esc(p.name)}">${ph ? img(ph, p.name) : pending('照片待补', 'photo pending')}</a>
-        <div class="cap"><span class="no">${no(i)}</span>
-          <div class="nm"><b>${word(p.name || '', p.dict)}</b>${ipa(p.ipa)}${sayBtn(p.dict, p.audio, 'sm')}</div>
-          <span class="lt">${latin(p)}${field(p, 'mandarin') ? ` · ${esc(field(p, 'mandarin'))}` : ''}</span>
-        </div>
-      </article>`;
+        <figcaption><a class="nm" href="./plant.html?id=${encodeURIComponent(p.id)}">${esc(p.name || '')}</a>${sayBtn(p.dict, p.audio, 'sm')}</figcaption>
+      </figure>`;
     }).join('');
   }
 
-  /* ---------- plant.html：一种植物的 photo essay ---------- */
-  const chap = (n, zh, en) => `<p class="chap"><span class="num">${n}</span>${t(zh, en)}</p>`;
-  function renderPlant(plants) {
+  /* ---------- plant.html：先看植物 → 听它怎么说 → 怎么吃、怎么用 → 再看细节 → 补充资料 ---------- */
+  const fmtDur = (sec) => (isFinite(sec) && sec > 0 ? `0:${sec < 10 ? '0' : ''}${sec.toFixed(1)}` : '');
+  function fillDurations() {
+    $$('[data-dur]').forEach((el) => {
+      const a = new Audio(); a.preload = 'metadata';
+      a.onloadedmetadata = () => { const d = fmtDur(a.duration); if (d) el.textContent = d; };
+      a.src = el.dataset.dur;
+    });
+  }
+  function renderPlant(plants, dictById) {
     const id = new URL(location.href).searchParams.get('id');
     const i = Math.max(0, plants.findIndex((p) => p.id === id));
     const p = plants[i];
     const ph = photosOf(p);
     const d = derivedOf(p);
     const col = p.collected || {};
-    const audio = audioOf(p.dict, p.audio);
+    const ed = p.edible || {};
+    const med = p.medicinal || {};
+    const de = dictById.get(p.dict) || {};
     document.title = `${p.name || p.mandarin} · ${t('安远话植物图集', 'Plants and Plant Knowledge in Anyuan Hakka')} · AYHAK`;
-    let n = 0;
-    const next = () => String(++n).padStart(2, '0');
-    let html = '';
 
-    // 标题
-    html += `<header class="wrap p-head">
-      <div>
-        <p class="crumb"><a href="./plants.html">${t('安远话植物图集', 'Plants of Anyuan')}</a> / <a href="./plants.html#plates">${t('图集', 'Plates')}</a> / No. ${no(i)}</p>
-        <p class="p-no">No. ${no(i)}</p>
-        <h1 class="p-name">${word(p.name || p.mandarin, p.dict)}</h1>
-        <p class="p-ipa">${ipa(p.ipa) || pending('IPA 待补', 'IPA pending')} ${sayBtn(p.dict, p.audio)}${audio ? '' : ` ${pending('录音待补', 'recording pending')}`}</p>
-        <p class="p-lat">${latin(p)}</p>
-      </div>
-      <div>
-        ${field(p, 'gloss') ? `<p class="p-gloss">${esc(field(p, 'gloss'))}</p>` : ''}
-        <p class="p-meta">${[p.variety || col.place, field(p, 'mandarin')].filter(Boolean).map(esc).join(' · ')}</p>
-        ${p.dict ? `<p class="p-meta"><a class="more" href="./dict.html?w=${encodeURIComponent(p.dict)}">${t('在词典里查这个词 →', 'See this word in the dictionary →')}</a></p>` : ''}
-      </div>
-    </header>`;
+    // 录音：p.recordings；没有就用 audio 或词典里的录音；其他乡镇的叫法有录音也列出来比较
+    let recs = (p.recordings || []).filter((r) => r && r.src);
+    const main = audioOf(p.dict, p.audio);
+    if (!recs.length && main) recs = [{ src: main, place: p.variety || col.place || de.variety || '', speaker: de.speaker || '' }];
+    const variants = (p.aliases || []).filter((x) => x && x.name);
+    const recRow = (r, label) => `<li><button type="button" class="say" data-play="${esc(r.src)}" aria-label="${t('播放', 'Play')} ${esc(label || r.place || '')}">${SPEAKER}</button>
+      <span>${label ? `<b>${label}</b> · ` : ''}${esc([r.place, r.speaker, r.date].filter(Boolean).join(' · ')) || t('安远话', 'Anyuan Hakka')}</span>
+      <span class="dur" data-dur="${esc(r.src)}"></span></li>`;
 
-    // 01 认识这种植物：Mater 式标本页
     const f = ph[0];
-    const aliases = (p.aliases || []).filter((x) => x && x.name);
-    const kv = (k, v) => (v ? `<span class="k">${k}</span><span class="v">${v}</span>` : '');
-    html += `<section class="sec wrap essay">${chap(next(), '认识这种植物', 'The plant')}
-      <div class="specimen">
-        <div class="ph">${f ? img(f, field(f, 'caption') || p.name, true) : pending('照片待补', 'photo pending')}</div>
-        <div>
-          <div class="labelblock">
-            <div class="first"><span class="k">${t('当地名称', 'Local name')}:</span><span class="v">${word(p.name || p.mandarin, p.dict)} ${ipa(p.ipa)} ${sayBtn(p.dict, p.audio, 'sm')}</span></div>
-            ${kv(t('学名', 'Scientific name') + ':', latin(p))}
-            ${kv(t('普通话', 'Mandarin') + ':', esc(field(p, 'mandarin')))}
-            ${kv(t('地点', 'Place') + ':', esc(col.place || p.variety || ''))}
-            ${kv(t('摄影', 'Photograph') + ':', esc((p.credit || '').replace(/^摄影：/, '')))}
-          </div>
-          ${f && photoNote(f) ? `<p class="small" style="margin-top:12px"><span style="font-family:var(--serif);font-style:italic;color:var(--clay)">${t('图 1', 'Fig. 1')}</span> ${photoNote(f)}</p>` : ''}
+    let html = `<article class="wrap plant">
+      <p class="crumb"><a href="./plants.html">${t('安远话植物图集', 'Plants of Anyuan')}</a> / <a href="./plants.html#plates">${t('图集', 'Plates')}</a> / ${no(i)}</p>
+
+      <!-- 01 先看植物 -->
+      <figure class="hero ${f && f.cutout ? 'mat' : ''}">${f ? img(f, field(f, 'caption') || p.name, true) : pending('照片待补', 'photo pending')}
+        ${f && photoNote(f) ? `<figcaption>${photoNote(f)}</figcaption>` : ''}</figure>
+
+      <!-- 02 听它怎么说 -->
+      <section class="voice-sec">
+        <div class="nameline">
+          <h1 class="p-name">${esc(p.name || p.mandarin)}</h1>
+          ${recs.length
+            ? `<button type="button" class="say xl" data-play="${esc(recs[0].src)}" aria-label="${t('听发音', 'Listen')}">${SPEAKER}<span>${t('听发音', 'Listen')}</span><span class="dur" data-dur="${esc(recs[0].src)}"></span></button>`
+            : `<span class="norec">${SPEAKER} ${t('还没有录音', 'No recording yet')}</span>`}
         </div>
-      </div>
-    </section>`;
+        <p class="p-ipa">${ipa(p.ipa) || pending('IPA 待补', 'IPA pending')} <span class="small">${t('安远话', 'Anyuan Hakka')}${p.variety ? ` · ${esc(p.variety)}` : ''}</span></p>
+        ${field(p, 'gloss') ? `<p class="p-gloss">${esc(field(p, 'gloss'))}</p>` : ''}
+        ${recs.length > 1 ? `<p class="sub">${t('不同发音人、不同地方的录音', 'Other recordings')}</p><ul class="recs">${recs.map((r) => recRow(r)).join('')}</ul>` : ''}
+        ${variants.length ? `<p class="sub">${t('其他地方的说法', 'Other places')}</p><ul class="recs">${variants.map((x) => x.audio ? recRow({ src: x.audio, place: x.place, speaker: x.speaker }, `${esc(x.name)} ${ipa(x.ipa)}`) : `<li><span class="say ghost">${SPEAKER}</span><span><b>${esc(x.name)}</b> ${ipa(x.ipa)}${x.place ? ` · ${esc(x.place)}` : ''}</span><span></span></li>`).join('')}</ul>` : ''}
+      </section>
 
-    // 02 不同阶段：有什么放什么；只有一张时占整行
-    if (ph.length > 1) {
-      html += `<section class="sec wrap essay">${chap(next(), '不同阶段', 'Stages')}
-        <div class="gallery">${ph.slice(1).map((x, k) => `<figure class="${x.full || ph.length === 2 ? 'full' : ''}">
-          <div class="frame${x.cutout ? '' : ' photo'}">${img(x, field(x, 'caption'))}</div>
-          <figcaption><span class="no">${t(`图 ${k + 2}`, `Fig. ${k + 2}`)}</span>${photoNote(x)}</figcaption></figure>`).join('')}</div>
-      </section>`;
-    }
+      <!-- 03 它如何进入日常生活 -->
+      <section class="blk">
+        <h2 class="h2">${t('食用与烹饪', 'Food and cooking')}</h2>
+        ${[[t('吃的部位', 'Part eaten'), field(ed, 'part')], [t('什么时候采', 'When gathered'), field(ed, 'stage')], [t('怎么处理、怎么做', 'How it is prepared'), field(ed, 'how')]].filter(([, v]) => v).map(([k, v]) => `<p><b>${k}</b>　${esc(v)}</p>`).join('')
+          || (d.length ? '' : `<p class="muted">${t('待补充：当地人吃它的哪个部分、怎么做？', 'To be added: which part is eaten, and how it is prepared.')}</p>`)}
+        ${d.length ? `<div class="made">${d.map((x) => `<figure>
+          <div class="fr ${x.cutout ? 'mat' : ''}">${x.photo ? img(x, x.name) : ''}</div>
+          <figcaption><span class="nm">${word(x.name, x.dict)}</span>${sayBtn(x.dict, x.audio, 'sm')}<br><span class="ipa">${x.ipa ? `/${esc(x.ipa)}/` : ''}</span>${field(x, 'gloss') ? `<br><span class="small">${esc(field(x, 'gloss'))}</span>` : ''}</figcaption>
+        </figure>`).join('')}</div>` : ''}
+      </section>
 
-    // 03 从植物到食物
-    if (d.length) {
-      html += `<section class="sec wrap essay">${chap(next(), '从植物到食物', 'From plant to food')}
-        <div class="made">${d.map((x) => `<div>
-          <figure class="frame">${x.photo ? img(x, x.name) : ''}</figure>
-          <div class="nm"><b>${word(x.name, x.dict)}</b>${ipa(x.ipa)}${sayBtn(x.dict, x.audio, 'sm')}</div>
-          ${field(x, 'gloss') ? `<p>${esc(field(x, 'gloss'))}</p>` : ''}
-        </div>`).join('')}</div>
-      </section>`;
-    }
+      <section class="blk">
+        <h2 class="h2">${t('药用与传统用途', 'Medicinal and traditional uses')}</h2>
+        ${(() => {
+          const L = (med.local || []).filter((x) => x && x.text), W = (med.literature || []).filter((x) => x && x.text), R = (med.research || []).filter((x) => x && x.text);
+          if (!L.length && !W.length && !R.length) return `<p class="muted">${t('暂无可靠资料。如果你知道当地人怎么用它，欢迎告诉我们。', 'No reliable information yet. If you know how it is used locally, please tell us.')}</p>`;
+          const src = (r) => esc([r.place, r.by, r.work, r.page ? t(`第 ${r.page} 页`, `p. ${r.page}`) : '', r.area ? t(`研究地点：${r.area}`, `study area: ${r.area}`) : ''].filter(Boolean).join(' · '));
+          const part = (h, list) => (list.length ? `<h3>${h}</h3>${list.map((r) => `<p>${esc(field(r, 'text'))}<br><span class="small">${src(r)}${r.url ? ` · <a href="${esc(r.url)}" rel="noopener">${t('链接', 'link')}</a>` : ''}</span></p>`).join('')}` : '');
+          return part(t('当地说法', 'Local knowledge'), L) + part(t('文献记录', 'Published records'), W) + part(t('研究证据', 'Research evidence'), R)
+            + `<p class="small">${t('传统用途不等于临床疗效，这里不提供用药建议；别的地区的记录不代表安远当地的传统。', 'Traditional use is not clinical efficacy and this is not medical advice; records from other regions do not stand for local practice in Anyuan.')}</p>`;
+        })()}
+      </section>
 
-    // 04 语言与记录
-    const rows = [
-      [t('当地名称', 'Local name'), `${word(p.name, p.dict)} ${ipa(p.ipa)}`],
-      [t('录音', 'Recording'), audio ? sayBtn(p.dict, p.audio, 'sm') : pending('待补', 'pending')],
-      [t('其他叫法', 'Other names'), aliases.length ? aliases.map((x) => `${esc(x.name)} ${ipa(x.ipa)}${x.place ? `（${esc(x.place)}）` : ''}`).join('；') : pending('待补：别的乡镇、村怎么叫？', 'pending: other townships and villages')],
-      [t('相关词', 'Related words'), d.length ? d.map((x) => word(x.name, x.dict)).join('、') : ''],
-      [t('记录地点', 'Place'), esc(col.place || p.variety || '')],
-      [t('记录时间', 'Date'), esc(col.date || '')],
-      [t('记录者', 'Recorded by'), esc(col.by || '')],
-    ].filter(([, v]) => v);
-    html += `<section class="sec wrap essay">${chap(next(), '语言与记录', 'Language and record')}
-      <dl class="record">${rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
-      <p class="small" style="margin-top:16px">${t('你们那里怎么叫？', 'Is it called something else where you are from?')} <a class="more" href="mailto:juanzhon@buffalo.edu?subject=${encodeURIComponent(`AYHAK 植物图集：${p.name || p.id}`)}">${t('发邮件告诉我们', 'Email us')}</a></p>
-      <div class="qr"><div class="qrbox" data-qr="${esc(p.id)}"></div><p class="small">${t('扫码听发音', 'Scan to listen')}<br>${esc(SITE)}plant.html?id=${esc(p.id)}</p></div>
-    </section>`;
+      ${field(p, 'uses') || field(p, 'habitat') || field(p, 'season') ? `<section class="blk">
+        <h2 class="h2">${t('地方知识', 'Local knowledge')}</h2>
+        ${[[t('用途', 'Use'), field(p, 'uses')], [t('长在哪里', 'Where it grows'), field(p, 'habitat')], [t('季节', 'Season'), field(p, 'season')]].filter(([, v]) => v).map(([k, v]) => `<p><b>${k}</b>　${esc(v)}</p>`).join('')}
+      </section>` : ''}
 
-    // 05 植物知识与文献：只有真的有资料才显示，三层分开
-    const refs = (p.refs || []).filter((r) => r && (r.text || r.text_en));
-    const local = field(p, 'uses') || field(p, 'habitat') || field(p, 'season');
-    if (refs.length || local) {
-      const layer = (k) => refs.filter((r) => (r.layer || 'literature') === k);
-      const refHtml = (list) => list.map((r) => `<p>${esc(field(r, 'text'))}<br><span class="small">${esc([r.work, r.edition, r.page ? t(`第 ${r.page} 页`, `p. ${r.page}`) : '', r.area ? t(`研究地点：${r.area}`, `study area: ${r.area}`) : ''].filter(Boolean).join(' · '))}${r.url ? ` · <a href="${esc(r.url)}" rel="noopener">${t('链接', 'link')}</a>` : ''}</span></p>`).join('');
-      html += `<section class="sec wrap essay knowledge">${chap(next(), '植物知识与文献', 'Plant knowledge and sources')}<div class="prose">
-        ${local || layer('local').length ? `<h3>${t('地方知识', 'Local knowledge')}</h3>${[[t('用途', 'Use'), field(p, 'uses')], [t('生长环境', 'Habitat'), field(p, 'habitat')], [t('季节', 'Season'), field(p, 'season')]].filter(([, v]) => v).map(([k, v]) => `<p><b>${k}</b>　${esc(v)}</p>`).join('')}${refHtml(layer('local'))}` : ''}
-        ${layer('botany').length ? `<h3>${t('植物学资料', 'Botanical information')}</h3>${refHtml(layer('botany'))}` : ''}
-        ${layer('literature').length ? `<h3>${t('文献记录', 'Published records')}</h3>${refHtml(layer('literature'))}
-          <p class="small">${t('文献记录的是传统用途，不代表实际疗效，也不是用药建议；别的地区的记录不代表安远当地的传统。', 'Published records describe traditional uses; they are not evidence of efficacy or medical advice, and records from other regions do not stand for local practice in Anyuan.')}</p>` : ''}
-      </div></section>`;
-    }
+      <!-- 04 再看细节 -->
+      ${ph.length > 1 ? `<section class="blk">
+        <h2 class="h2">${t('照片档案', 'Photo archive')}</h2>
+        <div class="archive">${ph.slice(1).map((x) => `<figure class="${x.cutout ? 'mat' : ''}">${img(x, field(x, 'caption'))}<figcaption>${photoNote(x)}</figcaption></figure>`).join('')}</div>
+      </section>` : ''}
+
+      <!-- 05 补充资料 -->
+      <section class="blk ref">
+        <h2 class="h2">${t('补充资料', 'Reference')}</h2>
+        <dl class="record">
+          ${[
+            [t('当地名称', 'Local name'), `${word(p.name, p.dict)}`],
+            ['IPA', ipa(p.ipa) || pending('待补', 'pending')],
+            [t('普通话', 'Mandarin'), esc(field(p, 'mandarin'))],
+            [t('英文', 'English'), esc(p.name_en || '')],
+            [t('学名', 'Scientific name'), latin(p) + (p.latin_basis ? `<br><span class="small">${t('鉴定依据', 'Basis')}：${esc(p.latin_basis)}</span>` : '')],
+            [t('科', 'Family'), esc(p.family || '')],
+            [t('其他叫法', 'Other names'), variants.map((x) => `${esc(x.name)}${x.place ? `（${esc(x.place)}）` : ''}`).join('；')],
+            [t('记录', 'Record'), esc([col.place || p.variety, col.date, col.by].filter(Boolean).join(' · '))],
+            [t('摄影', 'Photographs'), esc((p.credit || '').replace(/^摄影：/, ''))],
+          ].filter(([, v]) => v).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}
+        </dl>
+        ${(p.refs || []).filter((r) => r && (r.text || r.work)).length ? `<p class="sub">${t('参考文献', 'References')}</p><ul class="biblio">${p.refs.filter((r) => r && (r.text || r.work)).map((r) => `<li>${esc(field(r, 'text'))} <span class="small">${esc([r.work, r.page, r.area].filter(Boolean).join(' · '))}</span></li>`).join('')}</ul>` : ''}
+        <p class="small">${p.dict ? `<a class="more" href="./dict.html?w=${encodeURIComponent(p.dict)}">${t('在词典里查这个词 →', 'See this word in the dictionary →')}</a>　` : ''}${t('你们那里怎么叫？', 'Called something else where you are from?')} <a class="more" href="mailto:juanzhon@buffalo.edu?subject=${encodeURIComponent(`AYHAK 植物图集：${p.name || p.id}`)}">${t('告诉我们', 'Tell us')}</a></p>
+        <div class="qr"><div class="qrbox" data-qr="${esc(p.id)}"></div><p class="small">${t('扫码听发音', 'Scan to listen')}<br>${esc(SITE)}plant.html?id=${esc(p.id)}</p></div>
+      </section>
+    </article>`;
 
     $('#plant').innerHTML = html;
+    fillDurations();
     if (document.body.classList.contains('show-qr')) drawQR();
     const prev = plants[i - 1], nx = plants[i + 1];
     $('#turn').innerHTML = `
@@ -215,8 +220,11 @@
     const b = ev.target.closest('[data-play]');
     if (!b) return;
     if (player) player.pause();
+    $$('.say.playing').forEach((x) => x.classList.remove('playing'));
     player = new Audio(b.dataset.play);
-    player.play().catch(() => alert(t('录音载入失败', 'Could not load the recording')));
+    b.classList.add('playing');
+    player.onended = () => b.classList.remove('playing');
+    player.play().catch(() => { b.classList.remove('playing'); alert(t('录音载入失败', 'Could not load the recording')); });
   });
 
   async function init() {
@@ -233,7 +241,7 @@
       target = (!Array.isArray(j) && j.target) || plants.length;
       try {
         const dj = await (await fetch('./data/dict.json', { cache: 'no-cache' })).json();
-        (Array.isArray(dj) ? dj : dj.entries || []).forEach((e) => { if (e && e.id && e.audio) AUDIO.set(e.id, e.audio); });
+        (Array.isArray(dj) ? dj : dj.entries || []).forEach((e) => { if (e && e.id) { DICT.set(e.id, e); if (e.audio) AUDIO.set(e.id, e.audio); } });
       } catch { /* 词典读不到就只用图集里的录音 */ }
       plants.forEach((p) => {
         if (p.dict && p.audio) AUDIO.set(p.dict, p.audio);
@@ -251,7 +259,7 @@
       if (h && plants.some((p) => p.id === h)) { location.replace(`./plant.html?id=${encodeURIComponent(h)}`); return; }
     }
     const statics = () => $$('[data-say]').forEach((el) => { el.innerHTML = sayBtn(el.dataset.say, '', 'sm'); });
-    const render = () => { if (isPlant) renderPlant(plants); else { renderIndex(plants, target); statics(); } };
+    const render = () => { if (isPlant) renderPlant(plants, DICT); else { renderIndex(plants, target); statics(); } };
     $$('[data-setlang]').forEach((b) => b.addEventListener('click', () => setLang(b.dataset.setlang, render)));
     render();
     if (isPlant) {

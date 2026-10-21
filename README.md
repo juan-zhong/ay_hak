@@ -120,31 +120,31 @@ CSV 列名相同；`senses`、`tags` 用 `||` 分隔，`examples` 写成 `例句
 
 ## 更新植物图集
 
-植物图集是一本持续增加内容的田野摄影图册（An evolving photographic fieldbook）。网页连续浏览，不分页码；纸质版用打印样式另排。
+植物图集是一本可以看、可以听、可以不断补充的数字民族植物学图册。信息层级：**照片 → 安远话发音 → 食用、药用和地方知识 → 照片档案 → 补充资料（IPA、学名、鉴定、记录、文献）**。
 
-- `plants.html`：首页。封面大图 → 简介 → 图集（照片网格）→ 从田里到日常 → 薯 → 方法 → 植物知识与文献 → 关于本图集 → 参与。
-- `plant.html?id=shu`：每种植物一篇小型 photo essay，按数据自动生成：认识这种植物（白纸细框标本页 + 标签栏）→ 不同阶段 → 从植物到食物 → 语言与记录 → 植物知识与文献（有资料才出现）。
-- 新增植物只要加照片和 `data/plants.json` 里的一条记录，不用改页面。
-- 配色：暖纸白 `#F5F2EA`、墨黑 `#252721`、石灰灰 `#77766E`、分隔线 `#D5D0C5`；深橄榄绿 `#4D5842` 只用于链接、录音、导航；陶土红 `#A65F43` 只用于章节编号。颜色主要来自照片。
+- `plants.html`：封面（三竖列，颜色取自照片）→ 一段简介 → **图集**（照片为主，下面只有本地名称和喇叭）→ 从田里到厨房 · 薯 → 关于这份图集（方法、知识来源与参考书目、范围与授权，默认收起）→ 参与。
+- `plant.html?id=shu`：先看植物（大图）→ 听它怎么说（大号“听发音”按钮、时长、多条录音、其他地方的说法）→ 食用与烹饪 → 药用与传统用途（当地说法 / 文献记录 / 研究证据，分开写；没有就显示“暂无可靠资料”）→ 地方知识 → 照片档案 → 补充资料。
+- 新增植物只要加照片和 `data/plants.json` 里的一条记录，页面自动生成。
+- 视觉：暖纸白底、深色文字、留白和细线；照片保留原比例、不加边框；唯一的强调色是艾绿（发音、链接）。
 
 ### 数据字段（`data/plants.json`）
 
 | 字段 | 说明 |
 |---|---|
-| `id` | 唯一编号，网址和二维码都用它（`plant.html?id=shu`）。**印刷后不要再改** |
-| `name` / `ipa` | 安远话叫法和 IPA（不带斜杠，五度调值上标数字） |
-| `dict` | 词典里对应的词条编号（如 `pl-shu`），叫法链接到词典，录音也从词典里取 |
-| `gloss` / `mandarin` | 简短释义、普通话名（可加 `_en`） |
-| `latin` / `latin_status` | 学名；`latin_status: "verified"` 表示已对照标本和可靠植物志核实，否则网页显示“待核实” |
-| `photos` | 照片列表，第一张是标本页大图：`{ "src", "caption", "caption_en", "cutout": true, "wide": true, "stage": "块茎", "date": "2026-10", "place": "欣山镇", "by": "Juan Zhong", "license": "CC BY-NC" }`。`cutout` = 白底照；`wide` = 横图；`stage/place/date` 会显示在图注里 |
-| `aliases` | 其他乡镇、村的叫法：`[{ "name", "ipa", "place" }]`，分别记录，不合并 |
-| `collected` | `{ "place", "date", "by" }` 记录地点、时间、记录者 |
-| `uses` / `habitat` / `season` | **地方知识**：当地人实际分享的用途、生长环境、季节 |
-| `refs` | 资料：`[{ "layer": "local / botany / literature", "text": "自己概括的要点", "work": "书名或论文", "page", "area": "研究地点", "url" }]` |
+| `id` | 唯一编号，网址和二维码都用它。**印刷后不要再改** |
+| `name` / `ipa` / `dict` | 安远话叫法、IPA、词典词条编号（叫法链接到词典，录音也从词典里取） |
+| `recordings` | 同一个叫法的多条录音：`[{ "src", "place", "speaker", "date" }]`；不填就用 `audio` 或词典里的录音 |
+| `aliases` | 其他乡镇、村的叫法：`[{ "name", "ipa", "place", "audio" }]`，分别记录，不合并 |
+| `gloss` | 一句话释义（可加 `_en`） |
+| `edible` | `{ "part": "吃的部位", "stage": "什么时候采", "how": "怎么处理、怎么做" }`（可加 `_en`）；相关食物写在 `derived` |
 | `derived` | 用它做的东西：`[{ "name", "ipa", "gloss", "photo", "cutout", "dict" }]` |
-| `audio` / `variety` / `credit` | 录音（不填就用词典里的）、说法来源乡镇、摄影署名 |
+| `medicinal` | `{ "local": [{ "text", "place", "by" }], "literature": [{ "text", "work", "page", "area", "url" }], "research": [{ "text", "work", "url" }] }`：当地说法、文献记录、研究证据**分开写**，文献要写研究地点 `area` |
+| `uses` / `habitat` / `season` | 其他地方知识 |
+| `photos` | 第一张是大图：`{ "src", "caption", "cutout", "stage", "date", "place", "by", "license" }` |
+| `mandarin` / `name_en` / `latin` / `latin_status` / `latin_basis` / `family` | 普通话名、英文名、学名、`"verified"` 表示已核实、鉴定依据、科 |
+| `collected` / `credit` / `variety` / `refs` | 记录地点时间记录者、摄影、说法来源乡镇、参考文献 |
 
-**知识分三层，不要混在一起**：`uses` 等写当地人实际说的；`layer: "botany"` 写核对过的植物学资料；`layer: "literature"` 写文献记载的用途，必须注明文献和研究地点（`area`）。网页会自动注明“文献记录的是传统用途，不代表实际疗效，也不是用药建议”。不要从书里复制照片或扫描书页。
+药用部分只写有来源的内容：当地人说的写在 `local`，书和论文写在 `literature`，科学研究结论写在 `research`。网页会注明“传统用途不等于临床疗效，不提供用药建议”。不要从书里复制照片。
 
 ### 照片
 

@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <title>AYHAK · 安远话植物图集 · Plants and Plant Knowledge in Anyuan Hakka</title>
-  <meta name="description" content="安远话植物图集：一本持续积累的植物田野图册。安远当地可食用植物的安远话名称、发音、形态和用途。An evolving photographic fieldbook of plants and plant knowledge in Anyuan Hakka." />
+  <meta name="description" content="安远话植物图集：看植物，听安远话怎么叫，了解它怎么吃、怎么用。Plants and Plant Knowledge in Anyuan Hakka: see the plants, hear their Anyuan Hakka names, and learn how they are eaten and used." />
   <meta property="og:title" content="安远话植物图集 · Plants and Plant Knowledge in Anyuan Hakka" />
   <meta property="og:image" content="https://juan-zhong.github.io/ay_hak/images/plants/ai-dried.jpg" />
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="./plants.css?v=20261024b" />
+  <link rel="stylesheet" href="./plants.css?v=20261025c" />
   <script>try{var l=new URL(location.href).searchParams.get('lang')||localStorage.getItem('ayhak.plants.lang');if(l==='en')document.documentElement.setAttribute('data-lang','en');}catch(e){}</script>
 </head>
 
@@ -19,15 +19,14 @@
     <a class="mark" href="./index-zh.html">AYHAK</a>
     <nav aria-label="站点导航">
       <a href="#plates"><span class="zh">图集</span><span class="en" lang="en">Plates</span></a>
-      <a href="#shu"><span class="zh">薯</span><span class="en" lang="en">Yam</span></a>
-      <a href="#knowledge"><span class="zh">植物知识</span><span class="en" lang="en">Plant knowledge</span></a>
+      <a href="#field"><span class="zh">从田里到厨房</span><span class="en" lang="en">Field to kitchen</span></a>
+      <a href="#about"><span class="zh">关于</span><span class="en" lang="en">About</span></a>
       <a href="./dict.html"><span class="zh">查词典</span><span class="en" lang="en">Dictionary</span></a>
       <span class="langs" role="group" aria-label="语言 Language"><button type="button" data-setlang="zh">中文</button><span aria-hidden="true">/</span><button type="button" data-setlang="en" lang="en">English</button></span>
     </nav>
   </header>
 
   <main>
-    <!-- 01 封面 -->
     <section class="cover-tri wrap" id="cover">
       <div class="panel ochre stack">
         <figure class="frame"><img class="cut" src="images/plants/shu-tuber-w.jpg" alt="薯" /></figure>
@@ -49,132 +48,108 @@
       </div>
     </section>
 
-    <!-- 02 简介 -->
-    <section class="sec wrap two" id="intro">
-      <div><p class="chap"><span class="num">01</span><span class="zh">简介</span><span class="en" lang="en">Introduction</span></p></div>
-      <div class="prose">
-        <div class="zh">
-          <p>这本图集记录了安远当地可食用植物的安远话名称、发音、形态和用途。我们通过照片记录植物在不同生长阶段的样子，也收集与采摘、处理和食用有关的地方说法。</p>
-          <p>每种植物都是一个入口，让我们从名称出发，进一步了解语言与日常生活之间的联系。</p>
-        </div>
-        <div class="en keep" lang="en">
-          <p>This atlas documents the names, pronunciation, forms, and uses of edible plants in Anyuan Hakka, a Hakka variety spoken in Anyuan County, Jiangxi, China. Photographs capture plants at different stages of growth, alongside local expressions associated with harvesting, processing, and food preparation.</p>
-          <p>Each plant offers a starting point for exploring the connections between language and everyday life.</p>
-        </div>
-      </div>
+    <!-- 简介：一段，很短 -->
+    <section class="wrap intro">
+      <p class="zh">这本图集记录了安远当地可食用植物的安远话名称、发音、形态和用途。我们通过照片记录植物在不同生长阶段的样子，也收集与采摘、处理和食用有关的地方说法。</p>
+      <p class="en keep" lang="en">This atlas documents the names, pronunciation, forms, and uses of edible plants in Anyuan Hakka, a Hakka variety spoken in Anyuan County, Jiangxi, China. Photographs capture plants at different stages of growth, alongside local expressions associated with harvesting, processing, and food preparation.</p>
     </section>
 
-    <!-- 03 图集 -->
-    <section class="sec wrap" id="plates">
-      <p class="chap"><span class="num">02</span><span class="zh">图集</span><span class="en" lang="en">Plates</span></p>
-      <p class="note"><span class="zh">点击照片，查看这种植物的完整记录。</span><span class="en" lang="en">Click a photograph to open the full record for that plant.</span></p>
+    <!-- 图集：页面的主体 -->
+    <section class="wrap plates-sec" id="plates">
+      <div class="sec-head"><h2 class="h2"><span class="zh">图集</span><span class="en" lang="en">Plates</span></h2><p class="note"><span class="zh">点照片看这种植物，点喇叭听安远话怎么叫。</span><span class="en" lang="en">Open a photograph to see the plant; tap the speaker to hear its Anyuan Hakka name.</span></p></div>
       <div class="plates" id="plantGrid"><p class="muted"><span class="zh">载入中…</span><span class="en" lang="en">Loading…</span></p></div>
       <noscript><p class="muted">图集需要浏览器开启 JavaScript 才能显示。The plates need JavaScript. <a href="./plant.html?id=shu">薯</a> · <a href="./plant.html?id=ai">艾</a> · <a href="./plant.html?id=zhugaohua">猪膏花</a> · <a href="./plant.html?id=congzi">葱子</a></p></noscript>
     </section>
 
-    <!-- 04 植物与日常生活 -->
-    <section class="sec wrap" id="life">
-      <p class="chap"><span class="num">03</span><span class="zh">从田里到日常</span><span class="en" lang="en">Plants in everyday life</span></p>
-      <div class="strip">
-        <figure class="w3"><img src="images/plants/congzi.jpg" alt="" loading="lazy" /><figcaption><span class="zh">欣山大市场的葱子</span><span class="en" lang="en">Scallions at the Xinshan market</span></figcaption></figure>
-        <figure class="w2 paper"><img class="cut" src="images/plants/shu-tuber-w.jpg" alt="" loading="lazy" /><figcaption><span class="zh">挖出来的薯</span><span class="en" lang="en">A harvested yam tuber</span></figcaption></figure>
-        <figure class="w2 paper"><img class="cut" src="images/plants/shu-cut-w.jpg" alt="" loading="lazy" /><figcaption><span class="zh">切开的薯</span><span class="en" lang="en">Cut tuber</span></figcaption></figure>
-        <figure class="w2"><img src="images/plants/ai-dried.jpg" alt="" loading="lazy" /><figcaption><span class="zh">晒干的艾</span><span class="en" lang="en">Dried mugwort</span></figcaption></figure>
-        <figure class="w3 paper"><img class="cut" src="images/plants/ai-ban-w.jpg" alt="" loading="lazy" /><figcaption><a class="dict-link" href="./dict.html?w=pl-ai-ban">艾粄</a> <span class="ipa">/ŋa⁵³.pɑ̃⁴¹/</span><span class="say-slot" data-say="pl-ai-ban"></span></figcaption></figure>
+    <!-- 从田里到厨房：薯 -->
+    <section class="wrap field" id="field">
+      <div class="sec-head"><h2 class="h2"><span class="zh">从田里到厨房 · 薯</span><span class="en" lang="en">From field to kitchen · 薯</span></h2></div>
+      <div class="field-row">
+        <figure class="mat"><img src="images/plants/shu-tuber-w.jpg" alt="薯" loading="lazy" /><figcaption><a class="dict-link" href="./dict.html?w=pl-shu">薯</a> <span class="say-slot" data-say="pl-shu"></span></figcaption></figure>
+        <figure class="mat"><img src="images/plants/shu-cut-w.jpg" alt="切开的薯" loading="lazy" /><figcaption><span class="zh">切开的薯</span><span class="en" lang="en">Cut tuber</span></figcaption></figure>
+        <figure><img src="images/plants/shu-flesh.jpg" alt="薯肉" loading="lazy" /><figcaption><span class="zh">薯肉</span><span class="en" lang="en">Flesh</span></figcaption></figure>
+        <figure class="mat"><img src="images/plants/shu-ban-w.jpg" alt="薯粄" loading="lazy" /><figcaption><a class="dict-link" href="./dict.html?w=pl-shu-ban">薯粄</a> <span class="say-slot" data-say="pl-shu-ban"></span></figcaption></figure>
+        <figure class="mat"><img src="images/plants/shu-bao-w.jpg" alt="薯包" loading="lazy" /><figcaption><a class="dict-link" href="./dict.html?w=pl-shu-bao">薯包</a> <span class="say-slot" data-say="pl-shu-bao"></span></figcaption></figure>
+        <figure class="mat"><img src="images/plants/shu-jiu-w.jpg" alt="薯酒" loading="lazy" /><figcaption><a class="dict-link" href="./dict.html?w=pl-shu-jiu">薯酒</a> <span class="say-slot" data-say="pl-shu-jiu"></span></figcaption></figure>
       </div>
-    </section>
-
-    <!-- 05 薯 -->
-    <section class="sec wrap" id="shu">
-      <p class="chap"><span class="num">04</span><span class="zh">田地和厨房 · 薯</span><span class="en" lang="en">From field to kitchen · 薯</span></p>
-      <div class="two">
-        <figure class="sheet-photo"><img class="cut" src="images/plants/shu-tuber-w.jpg" alt="薯" loading="lazy" />
-          <figcaption><a class="dict-link" href="./dict.html?w=pl-shu">薯</a> <span class="ipa">/seɪ³²⁴/</span><span class="say-slot" data-say="pl-shu"></span></figcaption></figure>
-        <div class="prose">
-          <div class="zh">
-            <p>以 <b>薯</b> <span class="ipa">/seɪ³²⁴/</span> 为例。薯是当地种植的大薯（<i>Dioscorea alata</i>）。从田里的薯到做好的食物，我们记录了薯粄、薯包、薯酒等名称，也收集了采收、处理和制作过程中的说法。</p>
-            <p>这些词和说法，把植物、食物与日常生活联系在一起。</p>
-          </div>
-          <div class="en" lang="en">
-            <p>Take <b>薯</b> <span class="ipa">/seɪ³²⁴/</span>, the greater yam grown locally (<i>Dioscorea alata</i>). Following it from the field to finished food, we recorded names such as 薯粄, 薯包, and 薯酒, as well as expressions used in harvesting, processing, and cooking.</p>
-            <p>These words and expressions connect the plant, its foods, and everyday life.</p>
-          </div>
-          <p class="sub"><span class="zh">植物 → 食物</span><span class="en" lang="en">Plant → food</span></p>
-          <div class="foods">
-            <figure><img class="cut" src="images/plants/shu-ban-w.jpg" alt="薯粄" loading="lazy" /><figcaption><b><a class="dict-link" href="./dict.html?w=pl-shu-ban">薯粄</a></b> <span class="ipa">/seɪ³²⁴.pɑ̃⁴¹/</span><span class="say-slot" data-say="pl-shu-ban"></span><br><span class="small"><span class="zh">薯做的米粄</span><span class="en" lang="en">ban (rice cake) made with yam</span></span></figcaption></figure>
-            <figure><img class="cut" src="images/plants/shu-bao-w.jpg" alt="薯包" loading="lazy" /><figcaption><b><a class="dict-link" href="./dict.html?w=pl-shu-bao">薯包</a></b> <span class="ipa">/seɪ³²⁴.poʊ³⁴/</span><span class="say-slot" data-say="pl-shu-bao"></span></figcaption></figure>
-            <figure><img class="cut" src="images/plants/shu-jiu-w.jpg" alt="薯酒" loading="lazy" /><figcaption><b><a class="dict-link" href="./dict.html?w=pl-shu-jiu">薯酒</a></b> <span class="ipa">/seɪ³²⁴.tsy⁴¹/</span><span class="say-slot" data-say="pl-shu-jiu"></span><br><span class="small"><span class="zh">薯酿的酒</span><span class="en" lang="en">wine brewed from yam</span></span></figcaption></figure>
-          </div>
-          <p><a class="more" href="./plant.html?id=shu"><span class="zh">看薯的完整记录 →</span><span class="en" lang="en">See the full record for 薯 →</span></a></p>
+      <div class="field-text">
+        <div class="zh">
+          <p>以 <b>薯</b> <span class="ipa">/seɪ³²⁴/</span> 为例。薯是当地种植的大薯（<i>Dioscorea alata</i>）。从田里的薯到做好的食物，我们记录了薯粄、薯包、薯酒等名称，也收集了采收、处理和制作过程中的说法。</p>
+          <p>这些词和说法，把植物、食物与日常生活联系在一起。</p>
         </div>
+        <div class="en" lang="en">
+          <p>Take <b>薯</b> <span class="ipa">/seɪ³²⁴/</span>, the greater yam grown locally (<i>Dioscorea alata</i>). Following it from the field to finished food, we recorded names such as 薯粄, 薯包, and 薯酒, as well as expressions used in harvesting, processing, and cooking.</p>
+          <p>These words and expressions connect the plant, its foods, and everyday life.</p>
+        </div>
+        <p><a class="more" href="./plant.html?id=shu"><span class="zh">看薯的完整记录 →</span><span class="en" lang="en">See the full record for 薯 →</span></a></p>
       </div>
     </section>
 
-    <!-- 06 方法 -->
-    <section class="sec wrap two" id="method">
-      <div><p class="chap"><span class="num">05</span><span class="zh">拍照也是一种记录</span><span class="en" lang="en">Photography as documentation</span></p></div>
-      <div class="prose">
-        <p class="zh">在这个项目中，照片不只是展示植物的配图，也是记录过程的一部分。拍摄植物的不同生长阶段，以及采收、处理和制作后的样子，会引出不同的问题，也帮助我们记录更多名称和日常说法。</p>
-        <p class="en" lang="en">In this project, photographs are not just illustrations of plants; they are part of the documentation process. Photographing plants at different stages of growth, and after harvesting, processing, and cooking, prompts different questions and helps us record more names and everyday expressions.</p>
-        <ol class="index">
-          <li><span class="n">01</span><span><b><span class="zh">从照片引出说法</span><span class="en" lang="en">From photographs to expressions</span></b><span class="zh">拍摄植物及其加工后的样子，记录相关的名称和表达。</span><span class="en" lang="en">Photograph plants and what they become, and record the related names and expressions.</span></span></li>
-          <li><span class="n">02</span><span><b><span class="zh">把材料联系起来</span><span class="en" lang="en">Connecting the materials</span></b><span class="zh">将名称、照片、地点、录音和用途放在同一条记录中。</span><span class="en" lang="en">Keep names, photographs, places, recordings, and uses together in one record.</span></span></li>
-          <li><span class="n">03</span><span><b><span class="zh">让材料回到社区</span><span class="en" lang="en">Bringing materials back to the community</span></b><span class="zh">网页将照片与录音联系起来；纸质版计划通过二维码播放录音，让不同年龄、不同使用习惯的人都能查阅。</span><span class="en" lang="en">The website links photographs with recordings; a printed edition is planned, with QR codes that play the same recordings, so that people of different ages and habits can use it.</span></span></li>
-        </ol>
-        <p class="small"><span class="zh">录音和照片都会先征得发音人同意，署名方式由发音人决定。</span><span class="en" lang="en">Recordings and photographs are published only with speakers’ consent, credited as they choose.</span></p>
-      </div>
+    <!-- 关于：给想深入了解的人，默认收起 -->
+    <section class="wrap about-sec" id="about">
+      <div class="sec-head"><h2 class="h2"><span class="zh">关于这份图集</span><span class="en" lang="en">About this atlas</span></h2>
+        <p class="note"><span class="zh">记录方法、知识来源和授权，给想深入了解的读者。</span><span class="en" lang="en">Methods, sources, and permissions, for readers who want the details.</span></p></div>
+
+      <details>
+        <summary><span class="zh">拍照也是一种记录</span><span class="en" lang="en">Photography as documentation</span></summary>
+        <div class="det">
+          <p class="zh">在这个项目中，照片不只是展示植物的配图，也是记录过程的一部分。拍摄植物的不同生长阶段，以及采收、处理和制作后的样子，会引出不同的问题，也帮助我们记录更多名称和日常说法。</p>
+          <p class="en" lang="en">In this project, photographs are not just illustrations of plants; they are part of the documentation process. Photographing plants at different stages of growth, and after harvesting, processing, and cooking, prompts different questions and helps us record more names and everyday expressions.</p>
+          <ol class="index">
+            <li><span class="n">01</span><span><b><span class="zh">从照片引出说法</span><span class="en" lang="en">From photographs to expressions</span></b><span class="zh">拍摄植物及其加工后的样子，记录相关的名称和表达。</span><span class="en" lang="en">Photograph plants and what they become, and record the related names and expressions.</span></span></li>
+            <li><span class="n">02</span><span><b><span class="zh">把材料联系起来</span><span class="en" lang="en">Connecting the materials</span></b><span class="zh">将名称、照片、地点、录音和用途放在同一条记录中。</span><span class="en" lang="en">Keep names, photographs, places, recordings, and uses together in one record.</span></span></li>
+            <li><span class="n">03</span><span><b><span class="zh">让材料回到社区</span><span class="en" lang="en">Bringing materials back to the community</span></b><span class="zh">网页将照片与录音联系起来；纸质版计划通过二维码播放录音，让不同年龄、不同使用习惯的人都能查阅。</span><span class="en" lang="en">The website links photographs with recordings; a printed edition is planned, with QR codes that play the same recordings, so that people of different ages and habits can use it.</span></span></li>
+          </ol>
+        </div>
+      </details>
+
+      <details>
+        <summary><span class="zh">知识来源：地方知识、文献和研究证据</span><span class="en" lang="en">Sources: local knowledge, literature, and research evidence</span></summary>
+        <div class="det">
+          <dl class="layers">
+            <dt><span class="zh">地方知识</span><span class="en" lang="en">Local knowledge</span></dt><dd><span class="zh">安远居民怎么称呼、种植、食用或使用这种植物，注明来自哪个乡镇、谁分享的。</span><span class="en" lang="en">How people in Anyuan name, grow, eat, or use the plant, with the township and contributor noted.</span></dd>
+            <dt><span class="zh">文献记录</span><span class="en" lang="en">Published records</span></dt><dd><span class="zh">植物学、民族植物学、民族药物学文献记载的内容，注明文献和研究地点；别的地区的记录不能直接当成安远的传统。</span><span class="en" lang="en">What botanical, ethnobotanical, and ethnopharmacological literature records, with the source and study area noted; records from other regions are not assumed to apply to Anyuan.</span></dd>
+            <dt><span class="zh">研究证据</span><span class="en" lang="en">Research evidence</span></dt><dd><span class="zh">相关科学研究实际支持什么结论、有什么局限。传统用途不等于临床疗效，图集不提供用药建议。</span><span class="en" lang="en">What scientific studies actually support, and their limits. Traditional use is not clinical efficacy, and this atlas gives no medical advice.</span></dd>
+          </dl>
+          <p class="sub"><span class="zh">参考书目</span><span class="en" lang="en">Reference works</span></p>
+          <ul class="biblio">
+            <li><span lang="en">Gary J. Martin. <i>Ethnobotany: A Methods Manual</i>.</span> <span class="small"><span class="zh">民族植物学方法。</span><span class="en" lang="en">Ethnobotanical methods.</span></span></li>
+            <li><span lang="en">Christine Leon &amp; Lin Yu-Lin. <i>Chinese Medicinal Plants, Herbal Drugs and Substitutes: An Identification Guide</i>. Royal Botanic Gardens, Kew, 2017.</span> <span class="small"><span class="zh">药用植物和药材的鉴定。</span><span class="en" lang="en">Identification of medicinal plants and herbal drugs.</span></span></li>
+            <li><span lang="en"><i>Common Chinese Materia Medica</i> (Springer).</span> <span class="small"><span class="zh">药材名和植物名不一定一一对应。</span><span class="en" lang="en">Drug names and plant names do not always correspond one-to-one.</span></span></li>
+            <li><span lang="en">Hu H., Yang Y., Aissa A., et al. (2022). Ethnobotanical study of Hakka traditional medicine in Ganzhou, China and their antibacterial, antifungal, and cytotoxic assessments. <i>BMC Complementary Medicine and Therapies</i> 22: 244. <a href="https://doi.org/10.1186/s12906-022-03712-z">doi:10.1186/s12906-022-03712-z</a></span> <span class="small"><span class="zh">赣州 18 个县区的草药市场调查，调查点包括安远。</span><span class="en" lang="en">Herb-market survey across 18 counties and districts of Ganzhou, including Anyuan.</span></span></li>
+            <li><span lang="en">Au D. T., Wu J., Jiang Z., et al. (2008). Ethnobotanical study of medicinal plants used by Hakka in Guangdong, China. <i>Journal of Ethnopharmacology</i> 117(1): 41–50. <a href="https://doi.org/10.1016/j.jep.2008.01.016">doi:10.1016/j.jep.2008.01.016</a></span> <span class="small"><span class="zh">研究地点是广东。</span><span class="en" lang="en">Study area: Guangdong.</span></span></li>
+            <li><span lang="en">Medicinal plants traded in Hakka communities of southeastern Guangxi, China (2025). <i>Journal of Ethnobiology and Ethnomedicine</i>. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12254970/">PMC12254970</a></span> <span class="small"><span class="zh">研究地点是广西东南部。</span><span class="en" lang="en">Study area: southeastern Guangxi.</span></span></li>
+          </ul>
+          <p class="small"><span class="zh">图集只引用书目、概述要点；照片都是我们自己拍的。</span><span class="en" lang="en">We cite and summarise these works; all photographs are our own.</span></p>
+        </div>
+      </details>
+
+      <details>
+        <summary><span class="zh">范围、鉴定和授权</span><span class="en" lang="en">Scope, identification, and permissions</span></summary>
+        <div class="det">
+          <dl class="about">
+            <dt><span lang="en">Project scope</span> · 项目范围</dt>
+            <dd><span class="zh">计划记录安远当地22种可食用植物，现已上线的条目见图集；也记录这些植物在当地的药用和其他用途。每条记录标明说法来自哪个乡镇，尚未标明的写“待补”。</span><span class="en" lang="en">We plan to record 22 edible plants from Anyuan, with the entries online shown in the plates, together with their medicinal and other local uses. Each record notes the township a name comes from; where not yet recorded, it is marked as pending.</span></dd>
+            <dt><span lang="en">Language documentation</span> · 语言记录</dt>
+            <dd><span class="zh">安远话名称用汉字和国际音标（IPA）记录，声调用五度调值数字标本调。有录音的条目可以直接播放。不同乡镇的不同叫法分别记录，不合并成一个“标准”名称。</span><span class="en" lang="en">Anyuan Hakka names are written in Chinese characters and the International Phonetic Alphabet (IPA); tones are given as Chao tone numbers for citation tones. Entries with recordings can be played directly. Different names from different townships are recorded separately rather than merged into one “standard” name.</span></dd>
+            <dt><span lang="en">Plant identification</span> · 植物鉴定</dt>
+            <dd><span class="zh">学名只在能确定时列出；尚未确认的条目标注“待鉴定”或“待核实”。安远话的植物名称和普通话名称、学名不一定一一对应。</span><span class="en" lang="en">Scientific names are given only where they can be confirmed; others are marked as pending or to be verified. Anyuan Hakka plant names do not necessarily map one-to-one onto Mandarin names or scientific taxa.</span></dd>
+            <dt><span lang="en">Fieldwork and photography</span> · 田野调查与摄影</dt>
+            <dd><span class="zh">照片由 Juan Zhong 拍摄。</span><span class="en" lang="en">Photographs by Juan Zhong.</span></dd>
+            <dt><span lang="en">Contributors</span> · 参与者</dt>
+            <dd><span class="zh">参与者提供的叫法、照片和录音，按本人同意的方式署名或匿名。</span><span class="en" lang="en">Names, photographs, and recordings from contributors are credited or kept anonymous as each person chooses.</span></dd>
+            <dt><span lang="en">Use and permissions</span> · 使用与授权</dt>
+            <dd><span class="zh">文字与照片采用 CC BY-NC 4.0；录音只在本网站播放，使用范围以发音人同意的为准，转载或用于研究请先联系我们；网站代码 CC0。</span><span class="en" lang="en">Texts and photographs: CC BY-NC 4.0. Recordings are played on this site only, within the scope each speaker agreed to; please contact us before republishing them or using them in research. Website code: CC0.</span> <a href="https://github.com/juan-zhong/ay_hak/blob/main/CONTENT-LICENSE.md"><span class="zh">授权说明</span><span class="en" lang="en">License details</span></a></dd>
+          </dl>
+        </div>
+      </details>
     </section>
 
-    <!-- 07 植物知识与文献 -->
-    <section class="sec wrap two" id="knowledge">
-      <div><p class="chap"><span class="num">06</span><span class="zh">植物知识与文献</span><span class="en" lang="en">Plant knowledge and sources</span></p></div>
-      <div class="prose">
-        <p><span class="zh">图集里的知识分三层，分开标注，不混在一起：</span><span class="en" lang="en">Knowledge in this atlas comes in three layers, labelled separately:</span></p>
-        <dl class="layers">
-          <dt><span class="zh">地方知识</span><span class="en" lang="en">Local knowledge</span></dt><dd><span class="zh">安远居民怎么称呼、种植、食用或使用这种植物，注明来自哪个乡镇、谁分享的。</span><span class="en" lang="en">How people in Anyuan name, grow, eat, or use the plant, with the township and contributor noted.</span></dd>
-          <dt><span class="zh">植物学资料</span><span class="en" lang="en">Botanical information</span></dt><dd><span class="zh">形态、分类、分布和学名，用可靠的植物志核对；没有核对的学名标“待核实”。</span><span class="en" lang="en">Form, taxonomy, distribution, and scientific name, checked against reliable floras; unchecked names are marked “to be verified”.</span></dd>
-          <dt><span class="zh">文献记录</span><span class="en" lang="en">Published records</span></dt><dd><span class="zh">民族植物学、民族药物学文献记载的用途，注明文献和研究地点。文献记录的传统用途不等于临床疗效，也不是用药建议；别的地区的记录不能直接当成安远的传统。</span><span class="en" lang="en">Uses recorded in ethnobotanical and ethnopharmacological literature, with the source and study area noted. Recorded traditional uses are not evidence of clinical efficacy or medical advice, and records from other regions are not assumed to apply to Anyuan.</span></dd>
-        </dl>
-        <p class="sub"><span class="zh">参考书目</span><span class="en" lang="en">Reference works</span></p>
-        <ul class="biblio">
-          <li><span lang="en">Gary J. Martin. <i>Ethnobotany: A Methods Manual</i>.</span> <span class="small"><span class="zh">民族植物学方法：植物记录、地方知识和社区合作。</span><span class="en" lang="en">Methods: plant documentation, local knowledge, community collaboration.</span></span></li>
-          <li><span lang="en">Christine Leon &amp; Lin Yu-Lin. <i>Chinese Medicinal Plants, Herbal Drugs and Substitutes: An Identification Guide</i>. Royal Botanic Gardens, Kew, 2017.</span> <span class="small"><span class="zh">药用植物和药材的鉴定。</span><span class="en" lang="en">Identification of medicinal plants and herbal drugs.</span></span></li>
-          <li><span lang="en"><i>Common Chinese Materia Medica</i> (Springer).</span> <span class="small"><span class="zh">常用中药材的植物学信息和传统记载；药材名和植物名不一定一一对应。</span><span class="en" lang="en">Botanical information and traditional records for common materia medica; drug names and plant names do not always correspond one-to-one.</span></span></li>
-          <li><span lang="en">Hu H., Yang Y., Aissa A., et al. (2022). Ethnobotanical study of Hakka traditional medicine in Ganzhou, China and their antibacterial, antifungal, and cytotoxic assessments. <i>BMC Complementary Medicine and Therapies</i> 22: 244. <a href="https://doi.org/10.1186/s12906-022-03712-z">doi:10.1186/s12906-022-03712-z</a></span> <span class="small"><span class="zh">赣州 18 个县区的草药市场调查，调查点包括安远。</span><span class="en" lang="en">Herb-market survey across 18 counties and districts of Ganzhou, including Anyuan.</span></span></li>
-          <li><span lang="en">Au D. T., Wu J., Jiang Z., et al. (2008). Ethnobotanical study of medicinal plants used by Hakka in Guangdong, China. <i>Journal of Ethnopharmacology</i> 117(1): 41–50. <a href="https://doi.org/10.1016/j.jep.2008.01.016">doi:10.1016/j.jep.2008.01.016</a></span> <span class="small"><span class="zh">研究地点是广东，不是安远。</span><span class="en" lang="en">Study area: Guangdong, not Anyuan.</span></span></li>
-          <li><span lang="en">Medicinal plants traded in Hakka communities of southeastern Guangxi, China (2025). <i>Journal of Ethnobiology and Ethnomedicine</i>. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12254970/">PMC12254970</a></span> <span class="small"><span class="zh">研究地点是广西东南部。</span><span class="en" lang="en">Study area: southeastern Guangxi.</span></span></li>
-        </ul>
-        <p class="small"><span class="zh">图集只引用书目、概述要点；照片都是我们自己拍的，不使用书里的图片。</span><span class="en" lang="en">We cite and summarise these works; all photographs are our own, and no images are taken from the books.</span></p>
-      </div>
-    </section>
-
-    <!-- 08 关于本图集 -->
-    <section class="sec wrap two" id="about">
-      <div><p class="chap"><span class="num">07</span><span class="zh">关于本图集</span><span class="en" lang="en">About this atlas</span></p></div>
-      <dl class="about">
-        <dt><span lang="en">Project scope</span> · 项目范围</dt>
-        <dd><span class="zh">计划记录安远当地22种可食用植物，现已上线的条目见图集。每条记录标明说法来自哪个乡镇，尚未标明的写“待补”。</span><span class="en" lang="en">We plan to record 22 edible plants from Anyuan; entries now online are shown in the plates. Each record notes the township a name comes from; where this is not yet recorded, it is marked as pending.</span></dd>
-        <dt><span lang="en">Language documentation</span> · 语言记录</dt>
-        <dd><span class="zh">安远话名称用汉字和国际音标（IPA）记录，声调用五度调值数字标本调。有录音的条目可以直接播放。不同乡镇的不同叫法分别记录，不合并成一个“标准”名称。</span><span class="en" lang="en">Anyuan Hakka names are written in Chinese characters and the International Phonetic Alphabet (IPA); tones are given as Chao tone numbers for citation tones. Entries with recordings can be played directly. Different names from different townships are recorded separately rather than merged into one “standard” name.</span></dd>
-        <dt><span lang="en">Plant identification</span> · 植物鉴定</dt>
-        <dd><span class="zh">学名只在能确定时列出；尚未确认的条目标注“待鉴定”。安远话的植物名称和普通话名称、学名不一定一一对应。</span><span class="en" lang="en">Scientific names are given only where they can be confirmed; others are marked “identification pending”. Anyuan Hakka plant names do not necessarily map one-to-one onto Mandarin names or scientific taxa.</span></dd>
-        <dt><span lang="en">Fieldwork and photography</span> · 田野调查与摄影</dt>
-        <dd><span class="zh">照片由 Juan Zhong 拍摄。拍摄植物的不同阶段和用它做的食物，会引出更多名称和说法。</span><span class="en" lang="en">Photographs by Juan Zhong. Photographing plants at different stages, and the foods made from them, brings out further names and expressions.</span></dd>
-        <dt><span lang="en">Contributors</span> · 参与者</dt>
-        <dd><span class="zh">参与者提供的叫法、照片和录音，按本人同意的方式署名或匿名。</span><span class="en" lang="en">Names, photographs, and recordings from contributors are credited or kept anonymous as each person chooses.</span></dd>
-        <dt><span lang="en">Use and permissions</span> · 使用与授权</dt>
-        <dd><span class="zh">文字与照片采用 CC BY-NC 4.0；录音只在本网站播放，使用范围以发音人同意的为准，转载或用于研究请先联系我们；网站代码 CC0。</span><span class="en" lang="en">Texts and photographs: CC BY-NC 4.0. Recordings are played on this site only, within the scope each speaker agreed to; please contact us before republishing them or using them in research. Website code: CC0.</span> <a href="https://github.com/juan-zhong/ay_hak/blob/main/CONTENT-LICENSE.md"><span class="zh">授权说明</span><span class="en" lang="en">License details</span></a></dd>
-      </dl>
-    </section>
-
-    <!-- 09 参与 -->
-    <section class="sec wrap two" id="join">
-      <div><p class="chap"><span class="num">08</span><span class="zh">参与</span><span class="en" lang="en">Join us</span></p></div>
-      <div class="prose">
-        <p class="zh">你家里人怎么叫这些植物？你们村有没有别的叫法？用它们做过什么吃的？欢迎发来照片、叫法或者一段录音，会说多少都可以。</p>
-        <p class="en" lang="en">What does your family call these plants? Is there another name in your village? What have you made with them? Photographs, names, or a short recording are all welcome, however much Anyuan Hakka you speak.</p>
-        <p class="links"><a class="more" href="mailto:juanzhon@buffalo.edu?subject=AYHAK%20植物图集"><span class="zh">发邮件给我们</span><span class="en" lang="en">Email us</span></a> <a class="more" href="./index-zh.html#join"><span class="zh">参加安远话复健会</span><span class="en" lang="en">Join the Anyuan Hakka meetups</span></a> <a class="more" href="./index-zh.html"><span class="zh">回到 AYHAK 首页</span><span class="en" lang="en">Back to AYHAK</span></a></p>
-      </div>
+    <!-- 参与 -->
+    <section class="wrap join" id="join">
+      <p class="zh">你家里人怎么叫这些植物？你们村有没有别的叫法？用它们做过什么吃的？欢迎发来照片、叫法或者一段录音，会说多少都可以。</p>
+      <p class="en" lang="en">What does your family call these plants? Is there another name in your village? What have you made with them? Photographs, names, or a short recording are all welcome, however much Anyuan Hakka you speak.</p>
+      <p class="links"><a class="more" href="mailto:juanzhon@buffalo.edu?subject=AYHAK%20植物图集"><span class="zh">发邮件给我们</span><span class="en" lang="en">Email us</span></a> <a class="more" href="./index-zh.html#join"><span class="zh">参加安远话复健会</span><span class="en" lang="en">Join the Anyuan Hakka meetups</span></a> <a class="more" href="./index-zh.html"><span class="zh">回到 AYHAK 首页</span><span class="en" lang="en">Back to AYHAK</span></a></p>
     </section>
 
     <!-- ========= 会议（暂时隐藏：评审结束、录用后删掉这一行和下面的 HIDDEN-END 那一行即可恢复）=========
@@ -192,6 +167,6 @@
     <p><span class="zh">摄影</span><span class="en" lang="en">Photographs</span>：Juan Zhong · <span class="zh">联系方式</span><span class="en" lang="en">Contact</span>：juanzhon AT buffalo DOT edu · © <span id="year">2026</span> Juan Zhong</p>
   </footer>
 
-  <script src="./plants.js?v=20261024b" defer></script>
+  <script src="./plants.js?v=20261025c" defer></script>
 </body>
 </html>
