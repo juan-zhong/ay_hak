@@ -115,16 +115,23 @@ def publish_dict(dict_dir, raw):
     by_id = {e.get('id'): e for e in entries}
     out_dir = os.path.join(ROOT, 'audio', 'dict')
     os.makedirs(out_dir, exist_ok=True)
-    latest = {}
+    latest, skipped = {}, []
     for dirpath, dirs, files in os.walk(dict_dir):
         dirs[:] = [d for d in dirs if d != '__MACOSX']
         for fn in files:
             if fn.startswith('._') or not fn.lower().endswith(AUDIO_EXT):
                 continue
             eid = fn.split('_', 1)[0]
-            if eid in by_id and fn > latest.get(eid, ('', ''))[0]:
-                latest[eid] = (fn, os.path.join(dirpath, fn))
-    done, skipped = [], []
+            src = os.path.join(dirpath, fn)
+            if eid not in by_id or fn <= latest.get(eid, ('', ''))[0]:
+                continue
+            # 跳过几乎没有声音的录音（误按、没录上），同一词条有多条时用最新的一条有声音的
+            pk = peak_db(src, 'anull') if shutil.which('ffmpeg') else None
+            if pk is not None and pk < -50:
+                skipped.append(f'{fn}（几乎没有声音）')
+                continue
+            latest[eid] = (fn, src)
+    done = []
     for eid, (fn, src) in sorted(latest.items()):
         stamp = re.search(r'(\d{8}-\d{6})', fn)
         name = f'{eid}_{stamp.group(1) if stamp else "rec"}.m4a'
@@ -135,6 +142,8 @@ def publish_dict(dict_dir, raw):
         json.dump(data, f, ensure_ascii=False, indent=2)
         f.write('\n')
     print(f'词典：发布 {len(done)} 条录音：' + ('、'.join(done) if done else '无'))
+    if skipped:
+        print('跳过：' + '、'.join(skipped))
     if done:
         print('下一步：把 audio/dict/ 和 data/dict.json 上传到 GitHub。')
 
