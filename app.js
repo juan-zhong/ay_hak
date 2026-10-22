@@ -9,8 +9,13 @@
   /* ---------- 配置 ---------- */
   // 部署 apps_script.gs 后，把 Web App URL 填在这里；留空 = 关闭上传按钮
   const DRIVE_UPLOAD_ENDPOINT = 'https://script.google.com/macros/s/AKfycby7Poi19-pkfrG0Ey2JhF_GbiS4B6_CKcZ1sG6ThOta9kOYKsAh4uOnn4qDxfyB1HF5pw/exec';
-  // 换成仓库里新版 apps_script.gs 时，填和脚本里 UPLOAD_TOKEN 一样的字符串；旧版脚本不需要
-  const DRIVE_UPLOAD_TOKEN = '';
+  // 上传口令不写在这里：第一次上传时输入，只保存在你自己的浏览器里（和五百句页共用）
+  const LS_TOKEN = 'ayhak.uploadToken';
+  function uploadToken() {
+    let t = ls.get(LS_TOKEN, '');
+    if (!t) { t = (prompt('请输入上传口令（只保存在这台设备的浏览器里）') || '').trim(); if (t) ls.set(LS_TOKEN, t); }
+    return t;
+  }
 
   const DATA_URL = './data/dict.json';
   const LS_DATA = 'ayhak.dict.entries.v1';
@@ -430,8 +435,10 @@
     try {
       const b64 = await blobToBase64(rec.blob);
       // 同时带上新旧两版 Apps Script 需要的字段（data / dataBase64、entryId）
+      const token = uploadToken();
+      if (!token) throw new Error('没有输入上传口令');
       const payload = {
-        token: DRIVE_UPLOAD_TOKEN,
+        token,
         entryId: e.id,
         filename: fileName(e, rec),
         mimeType: rec.mime || 'audio/webm',
@@ -442,7 +449,7 @@
       // text/plain 避免 CORS 预检，Apps Script 才能收到
       const res = await fetch(DRIVE_UPLOAD_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
       const j = await readBackend(res);
-      if (!j.ok) throw new Error(j.error || '上传失败');
+      if (!j.ok) { if (j.code === 'token') ls.del(LS_TOKEN); throw new Error(j.error || '上传失败'); }
       rec.driveUrl = j.url || j.viewUrl || '';
       await recPut(rec);
       renderAudio(e);

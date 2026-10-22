@@ -15,6 +15,13 @@
   const MAX_BYTES = 3 * 1024 * 1024;
   const LS_ME = 'ayhak.sentences.me.v1';
   const LS_MINE = 'ayhak.sentences.mine.v1';
+  // 上传口令：第一次上传时输入，只保存在你自己的浏览器里（和词典页共用）
+  const LS_TOKEN = 'ayhak.uploadToken';
+  function uploadToken() {
+    let t = ''; try { t = JSON.parse(localStorage.getItem(LS_TOKEN) || '""'); } catch { /* ignore */ }
+    if (!t) { t = (prompt('请输入上传口令（只保存在这台设备的浏览器里）') || '').trim(); if (t) ls.set(LS_TOKEN, t); }
+    return t;
+  }
 
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -266,8 +273,10 @@
     const btn = $('#recSubmit'); btn.disabled = true;
     $('#recMsg').textContent = '上传中…';
     try {
+      const token = uploadToken();
+      if (!token) throw new Error('没有输入上传口令');
       const payload = {
-        action: 'sentence', sid: cur.id, zh: cur.zh,
+        action: 'sentence', token, sid: cur.id, zh: cur.zh,
         place: f.place.value.trim(), nick: f.nick.value.trim(), hanzi: f.hanzi.value.trim(),
         consentPublic: f.consentPublic.checked, consentResearch: f.consentResearch.checked,
         website: f.website.value,
@@ -275,7 +284,7 @@
       };
       const res = await fetch(ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
       let j; try { j = JSON.parse(await res.text()); } catch { throw new Error('录音后台没有正常回应（Apps Script 部署的访问权限需要设成“任何人”）'); }
-      if (!j.ok) throw new Error(j.error || '上传失败');
+      if (!j.ok) { if (j.code === 'token') { try { localStorage.removeItem(LS_TOKEN); } catch { /* ignore */ } } throw new Error(j.error || '上传失败'); }
       ls.set(LS_ME, { place: payload.place, nick: payload.nick });
       const mine = ls.get(LS_MINE, []); mine.push({ sid: cur.id, rid: j.rid, at: Date.now() }); ls.set(LS_MINE, mine);
       $('#recMsg').innerHTML = `收到了，谢谢！录音编号 <b>${esc(j.rid)}</b>，审核后会公开在这一句下面。`;

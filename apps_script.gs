@@ -6,9 +6,12 @@
  *
  * 部署 / 更新：
  * 1. 打开原来的 Apps Script 项目，用本文件替换全部代码。
- * 2. 部署 → 管理部署 → 编辑 → 版本选“新版本” → 部署。网址不变，网页不用改。
+ * 2. 设置上传口令（只需一次）：左侧齿轮“项目设置” → 最下面“脚本属性” → 添加脚本属性，
+ *    属性名填 UPLOAD_TOKEN，值填你自己定的口令。口令只存在这里，不写进仓库里的任何文件。
+ *    没设口令时，词典和五百句的上传都会被拒绝（点播不受影响）。
+ * 3. 部署 → 管理部署 → 编辑 → 版本选“新版本” → 部署。网址不变，网页不用改。
  *    （第一次部署：部署 → 新部署 → Web App；执行身份：我；访问权限：任何人。）
- * 3. 第一次有人上传五百句录音后，Drive 里会出现：
+ * 4. 第一次有人上传五百句录音后，Drive 里会出现：
  *      AYHAK-Sentences/            录音文件，按句子编号分文件夹
  *      AYHAK-五百句录音（表格）      每条录音一行
  *
@@ -20,7 +23,8 @@
 
 // ---------- A. 词典录音 ----------
 const FOLDER_NAME = 'AYHAK-Audio';
-const UPLOAD_TOKEN = '';                    // 词典上传口令；留空 = 不检查（和 app.js 的 DRIVE_UPLOAD_TOKEN 一致）
+// 上传口令放在“项目设置 → 脚本属性”的 UPLOAD_TOKEN 里（见文件开头），词典和五百句共用。
+// 网页上第一次上传时会请你输入口令，只保存在你自己的浏览器里。
 
 // ---------- B. 五百句 ----------
 const S_FOLDER = 'AYHAK-Sentences';
@@ -57,7 +61,7 @@ function doGet(e) {
 
 /* ===== A. 词典录音（和原来一样） ===== */
 function dictUpload_(body) {
-  if (UPLOAD_TOKEN && body.token !== UPLOAD_TOKEN) return json_({ ok: false, error: '口令不对' });
+  if (!tokenOk_(body.token)) return json_({ ok: false, error: '上传口令不对', code: 'token' });
   const cache = CacheService.getScriptCache();
   const n = Number(cache.get('d-count') || 0);                                   // 词典上传也限流，防刷
   if (n >= 30) return json_({ ok: false, error: '上传太频繁，请过几分钟再试' });
@@ -73,7 +77,7 @@ function dictUpload_(body) {
   const sub = folder_(root, clean_(meta.variety || '未标乡镇', 60));
   const file = sub.createFile(Utilities.newBlob(bytes, mime, name));
   file.setDescription(JSON.stringify(meta));
-  dictLog_(root, [new Date(), meta.id || '', meta.hanzi || '', meta.ipa || '', meta.variety || '', meta.speaker || '', name, file.getUrl()]);
+  dictLog_(root, [new Date(), cell_(meta.id, 80), cell_(meta.hanzi, 80), cell_(meta.ipa, 120), cell_(meta.variety, 60), cell_(meta.speaker, 60), cell_(name, 180), file.getUrl()]);
   return json_({ ok: true, id: file.getId(), url: file.getUrl(), viewUrl: file.getUrl(), name: name });
 }
 
@@ -93,6 +97,7 @@ function dictLog_(root, row) {
 /* ===== B. 五百句 ===== */
 function sentenceUpload_(b) {
   if (b.website) return json_({ ok: true });                                   // 机器人填的隐藏栏位
+  if (!tokenOk_(b.token)) return json_({ ok: false, error: '上传口令不对', code: 'token' });
   if (!b.consentPublic) return json_({ ok: false, error: '需要同意在网站上公开播放' });
   const sid = String(b.sid || '');
   if (!/^s\d{3}$/.test(sid)) return json_({ ok: false, error: '句子编号不对' });
@@ -117,7 +122,7 @@ function sentenceUpload_(b) {
     const root = folder_(DriveApp.getRootFolder(), S_FOLDER);
     const sub = folder_(root, sid);
     const file = sub.createFile(Utilities.newBlob(bytes, mime, sid + '_' + rid + '.' + ext));
-    sheet_().appendRow([new Date(), rid, sid, clean_(b.zh, 200), clean_(b.hanzi, 200), clean_(b.nick, 30), place,
+    sheet_().appendRow([new Date(), rid, sid, cell_(b.zh, 200), cell_(b.hanzi, 200), cell_(b.nick, 30), cell_(place, 40),
       '是', b.consentResearch ? '是' : '否', S_PENDING, file.getId(), '']);
     return json_({ ok: true, rid: rid, status: S_PENDING });
   } finally {
@@ -181,6 +186,16 @@ function publicAudio_(rid) {
 function folder_(parent, name) {
   const it = parent.getFoldersByName(name);
   return it.hasNext() ? it.next() : parent.createFolder(name);
+}
+// 上传口令：存在脚本属性 UPLOAD_TOKEN 里；没设就一律拒绝上传
+function tokenOk_(t) {
+  const want = PropertiesService.getScriptProperties().getProperty('UPLOAD_TOKEN');
+  return !!want && typeof t === 'string' && t === want;
+}
+// 写进表格的文字：以 = + - @ 开头的前面加 ' ，表格就当普通文字，不会当公式执行
+function cell_(s, max) {
+  const v = clean_(s, max);
+  return /^[=+\-@]/.test(v) ? "'" + v : v;
 }
 function clean_(s, max) {
   return String(s || '').replace(/[\u0000-\u001f<>]/g, '').trim().slice(0, max || 100);
