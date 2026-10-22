@@ -24,8 +24,10 @@ ay_hak/
 ├── sentences.html      实用安远话五百句（大家录音、审核后公开）
 ├── sentences.js        五百句逻辑（录音、上传、点播）
 ├── plants.html         植物图集页
+├── plant.html          单种植物页（plant.html?id=shu）
 ├── plants.js           图集逻辑（照片切换、二维码、打印）
 ├── style.css           全站样式（艾草绿 + 薯紫）
+├── plants.css          植物图集样式（照片书）
 ├── apps_script.gs      录音上传到 Google Drive 的 Apps Script
 ├── data/
 │   ├── dict.json       词典数据
@@ -40,6 +42,8 @@ ay_hak/
 ├── audio/              录音文件（mp3 / m4a / wav）
 ├── tools/publish_recordings.py  把审核通过的五百句录音发布到网站（国内可播）
 ├── vendor/qrcode.js    二维码库（qrcode-generator，MIT），本地存放，不依赖 CDN
+├── vendor/fonts/       植物图集用的字体（EB Garamond、Oswald，OFL）
+├── CONTENT-LICENSE.md  内容授权（文字、照片、数据、录音）
 ├── LICENSE
 └── .nojekyll           让 GitHub Pages 按原样发布
 ```
@@ -57,9 +61,9 @@ git commit -m "说明这次改了什么"
 git push
 ```
 
-> 仓库名或域名改了的话，记得同步修改 `plants.js` 顶部的 `CANONICAL_URL`，否则纸质版上的二维码会指错地址。
+> 仓库名或域名改了的话，记得同步修改 `plants.js` 顶部的 `SITE`，否则纸质版上的二维码会指错地址。
 >
-> 改了 `style.css` 或 `.js` 之后，把各个 HTML 里 `?v=20261019b` 这样的版本号改成新的（比如当天日期），浏览器才会读取新文件。
+> 改了 `style.css` 或 `.js` 之后，把各个 HTML 里 `?v=20261022b` 这样的版本号改成新的（比如当天日期），浏览器才会读取新文件。
 
 ## 管理模式
 
@@ -97,13 +101,14 @@ python3 -m http.server 8000
 | `hanzi` | 汉字写法 |
 | `roman` | 拼写（可选） |
 | `ipa` | IPA，不带方括号，例如 `vu⁴⁵.ha³⁴` |
-| `pos` | 词性：`n` `v` `adj` `pron` `part` `other` |
+| `pos` | 词性：`n` `v` `adj` `pron` `num` `part` `other` |
 | `variety` | 乡镇 / 村，例如 `欣山镇`、`孔田镇·某村`。乡镇筛选按这个字段自动生成 |
 | `senses` | 释义列表 |
 | `examples` | 例句：`{ "text": "", "ipa": "", "gloss": "" }` |
 | `tags` | 标签（语义类别等） |
 | `audio` | 录音路径，例如 `audio/vu-xa.mp3` |
-| `notes` | 备注 |
+| `notes` | 备注（公开显示，例如“汉字写法待定”） |
+| `internal` | 维护备注（旧记音、待办等），只在管理模式（`?admin=1`）里显示，也只在管理模式里参与搜索 |
 | `speaker` | 发音人署名（按发音人意愿填写） |
 | `variants` | 其他地方的说法：`[{ "form": "", "ipa": "", "variety": "某乡镇", "note": "" }]`。CSV 写成 `说法::IPA::乡镇::备注`，用 `||` 分隔 |
 | `verified` | `true` = 已和发音人核实；不填 = 待核实 |
@@ -112,11 +117,11 @@ CSV 列名相同；`senses`、`tags` 用 `||` 分隔，`examples` 写成 `例句
 
 ### 2021 词表
 
-`data/dict.json` 里 id 以 `w21-` 开头的 65 条来自 2021 年的词表（发音人 Juan Zhong，欣山镇）。当时的记音没有标声调，符号也和现在的体例不同，所以**放在 `notes` 里，没有填进 `ipa`**，状态都是“待核实”。按现行体例重新转写后，把 IPA 填进 `ipa`、`verified` 改成 `true`，备注里那句可以删掉。
+`data/dict.json` 里 id 以 `w21-` 开头的 65 条来自 2021 年的词表（发音人 Juan Zhong，欣山镇）。当时的记音没有标声调，符号也和现在的体例不同，所以**放在 `internal`（维护备注）里，没有填进 `ipa`**，状态都是“待核实”。其中一、五、七、八、十、黄、嘴 7 条已按现行体例转写并填了 `ipa`。按现行体例重新转写后，把 IPA 填进 `ipa`、`verified` 改成 `true`，`internal` 里那句可以删掉。
 
 ### 征集词表
 
-`data/wanted.json` 是还没记音的词（亲属称谓、时间、节日、地方、姓氏），显示在词典页的“征集”一节，点一个词就会写好邮件。词典里已经有的词会自动隐藏，所以收到说法、加进 `dict.json` 之后，不用改这个文件。
+`data/wanted.json` 是还没记音的词（亲属称谓、时间、节日、地方、姓氏），显示在词典页的“征集”一节，点一个词就会写好邮件。词典里已经有的词会自动隐藏，所以收到说法、加进 `dict.json` 之后，不用改这个文件。加了 `"keep": true` 的组（目前是姓氏）不自动隐藏，因为“黄”“龙”作姓氏和作颜色、动物不是同一个词。
 
 ## 更新植物图集
 

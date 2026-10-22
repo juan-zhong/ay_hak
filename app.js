@@ -70,6 +70,8 @@
       tags: toList(raw.tags),
       audio: String(raw.audio || '').trim(),
       notes: String(raw.notes || '').trim(),
+      // 维护用备注（旧记音、待办等），只在管理模式里显示
+      internal: String(raw.internal || '').trim(),
       // 植物图集里的条目：plant.html?id=…
       plant: String(raw.plant || '').trim(),
       speaker: String(raw.speaker || '').trim(),
@@ -113,7 +115,7 @@
       hanzi: norm(e.hanzi), roman: norm(e.roman), ipa: norm(e.ipa),
       senses: norm(e.senses.join(' ')),
       ex: norm(e.examples.map((x) => `${x.text} ${x.ipa} ${x.gloss}`).join(' ')),
-      rest: norm(`${e.tags.join(' ')} ${e.notes} ${e.variety} ${e.variants.map((v) => `${v.form} ${v.ipa} ${v.variety}`).join(' ')}`),
+      rest: norm(`${e.tags.join(' ')} ${e.notes} ${ADMIN ? e.internal : ''} ${e.variety} ${e.variants.map((v) => `${v.form} ${v.ipa} ${v.variety}`).join(' ')}`),
     };
     return e;
   }
@@ -227,7 +229,7 @@
         <span class="tag">${esc(POS_LABEL[e.pos] || '其他')}</span>
         ${e.variety ? `<span class="tag">${esc(e.variety)}</span>` : '<span class="tag pending">乡镇待补</span>'}
         ${e.verified ? '<span class="tag done">已核实</span>' : '<span class="tag pending">待核实</span>'}
-        ${e.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join('')}
+        ${e.tags.filter((t) => ADMIN || !NON_THEME.has(t)).map((t) => `<span class="tag">${esc(t)}</span>`).join('')}
       </div>
 
       ${e.senses.length ? `<h4>释义</h4><ol class="senses">${e.senses.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>` : ''}
@@ -244,6 +246,7 @@
       <p class="small"><a href="mailto:juanzhon@buffalo.edu?subject=${encodeURIComponent(`AYHAK 词典：${e.hanzi}`)}">你们那里怎么说？告诉我们 →</a></p>
 
       ${e.notes ? `<h4>备注</h4><p class="notes">${esc(e.notes)}</p>` : ''}
+      ${ADMIN && e.internal ? `<h4>维护备注</h4><p class="notes">${esc(e.internal)}</p>` : ''}
       ${e.plant ? `<p class="notes"><a href="./plant.html?id=${encodeURIComponent(e.plant)}">在植物图集里看照片 →</a></p>` : ''}
 
       ${state.showAudio ? `<h4>发音</h4><div class="audio-box" id="audioBox"><p class="small">载入中…</p></div>` : ''}
@@ -260,7 +263,8 @@
       const j = await (await fetch('./data/wanted.json', { cache: 'no-cache' })).json();
       const have = new Set(state.entries.map((e) => e.hanzi));
       box.innerHTML = (j.groups || []).map((g) => {
-        const ws = g.words.filter((w) => !have.has(w.replace(/（.*?）/g, '')));
+        // keep: true 的组（如姓氏）不自动隐藏：“黄”“龙”作姓氏和作颜色、动物是不同的词
+        const ws = g.keep ? g.words : g.words.filter((w) => !have.has(w.replace(/（.*?）/g, '')));
         if (!ws.length) return '';
         return `<div class="wanted-group"><h3 class="wg-title">${esc(g.name)} <span class="small">${ws.length}</span></h3><div class="try">${ws.map((w) =>
           `<a class="chip-link" href="mailto:juanzhon@buffalo.edu?subject=${encodeURIComponent(`AYHAK 征集：${w.replace(/（.*?）/g, '')}`)}&body=${encodeURIComponent(`“${w}”在我们这里说：\n\n我的乡镇或村子：\n`)}">${esc(w)}</a>`).join('')}</div></div>`;
@@ -518,7 +522,7 @@
   }
 
   /* ---------- CSV ---------- */
-  const CSV_COLS = ['id', 'hanzi', 'roman', 'ipa', 'sandhi', 'pos', 'variety', 'senses', 'examples', 'variants', 'tags', 'audio', 'notes', 'speaker', 'verified', 'plant'];
+  const CSV_COLS = ['id', 'hanzi', 'roman', 'ipa', 'sandhi', 'pos', 'variety', 'senses', 'examples', 'variants', 'tags', 'audio', 'notes', 'internal', 'speaker', 'verified', 'plant'];
   function parseCSV(text) {
     const rows = []; let row = []; let cell = ''; let q = false;
     text = text.replace(/^﻿/, '');
@@ -572,6 +576,7 @@
     renderVarietyChips();
     renderThemeChips();
     runSearch();
+    renderWanted();   // 词条读完再渲染征集表，已经收录的词才会被隐藏
   }
   async function loadRepo() {
     const res = await fetch(DATA_URL, { cache: 'no-cache' });
@@ -674,7 +679,6 @@
 
     bindChips();
     bindManage();
-    renderWanted();
     renderExamples();
 
     const local = ls.get(LS_DATA, null);

@@ -1,6 +1,6 @@
 {
   "name": "AYHAK 安远话词典",
-  "note": "示例 3 条 + 2021 年词表 65 条。2021 词表的记音放在 notes 里，未标声调，按现行体例转写后再填入 ipa。",
+  "note": "示例 3 条 + 2021 年词表 65 条 + 植物图集 9 条。2021 词表的旧记音放在 internal（维护备注，只在管理模式显示）里，未标声调，按现行体例转写后再填入 ipa。",
   "entries": [
     {
       "id": "vu-xa",
@@ -77,7 +77,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：tsʰən（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "notes": "汉字写法待定",
+      "internal": "2021 年初步记音：tsʰən（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -99,7 +100,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：ci（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ci（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -121,7 +123,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：ɕiən（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ɕiən（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -143,7 +146,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-snow-white_20261021-030249.m4a",
-      "notes": "2021 年初步记音：ɕiəpʰa; ɕiəɕiəpʰa（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ɕiəpʰa; ɕiəɕiəpʰa（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -165,7 +169,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：ɕiətʰykuei（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ɕiətʰykuei（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -187,7 +192,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：ɕy（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ɕy（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -209,7 +215,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：ɕy（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ɕy（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -231,7 +238,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：ə（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ə（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -253,7 +261,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：fu（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：fu（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -275,7 +284,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：hapʰa（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：hapʰa（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -297,7 +307,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：iə（已按现行体例转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：iə（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -319,7 +330,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：iɔ（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：iɔ（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -341,7 +353,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：jaŋ（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：jaŋ（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -363,7 +376,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：kei（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：kei（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -385,7 +399,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：kʰʌnvaŋ; kʰʌnkʰʌnvaŋ（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "notes": "汉字写法待定",
+      "internal": "2021 年初步记音：kʰʌnvaŋ; kʰʌnkʰʌnvaŋ（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -407,7 +422,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：tiŋ（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：tiŋ（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -429,7 +445,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：lʌn（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：lʌn（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -451,7 +468,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-two_20261021-030648.m4a",
-      "notes": "2021 年初步记音：m（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：m（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -473,7 +491,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：m（已按现行体例转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：m（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -495,7 +514,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-you_20261021-030434.m4a",
-      "notes": "2021 年初步记音：m（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：m（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -517,7 +537,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：m（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：m（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -539,7 +560,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：n（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：n（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -561,7 +583,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-yall_20261021-030450.m4a",
-      "notes": "2021 年初步记音：m-tsʰən-ɲən（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：m-tsʰən-ɲən（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -583,7 +606,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：ma（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ma（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -605,7 +629,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：meimɔ（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：meimɔ（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -627,7 +652,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：miavu; miamiavu（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "notes": "汉字写法待定",
+      "internal": "2021 年初步记音：miavu; miamiavu（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -649,7 +675,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：ɲy（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ɲy（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -671,7 +698,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-i-me_20261021-030543.m4a",
-      "notes": "2021 年初步记音：ŋa（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ŋa（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -693,7 +721,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-we-us_20261021-030558.m4a",
-      "notes": "2021 年初步记音：ŋa-cən-ɲiən（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ŋa-cən-ɲiən（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -715,7 +744,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：ŋʌn（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ŋʌn（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -737,7 +767,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：ŋʌnmən（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ŋʌnmən（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -759,7 +790,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：ŋʌnzi（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ŋʌnzi（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -781,7 +813,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-hundred_20261021-030631.m4a",
-      "notes": "2021 年初步记音：pa（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：pa（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -803,7 +836,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-eight_20261019-212302.m4a",
-      "notes": "2021 年初步记音：pə（已按现行体例转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：pə（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -825,7 +859,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-white_20261021-025852.m4a",
-      "notes": "2021 年初步记音：pʰa（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：pʰa（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -847,7 +882,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：pʰikən（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "notes": "汉字写法待定",
+      "internal": "2021 年初步记音：pʰikən（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -869,7 +905,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：sa（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：sa（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -891,7 +928,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：sei（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：sei（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -913,7 +951,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：sə（已按现行体例转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：sə（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -935,7 +974,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：si（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：si（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -957,7 +997,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：sʌn（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：sʌn（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -989,7 +1030,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-seven_20261021-030738.m4a",
-      "notes": "2021 年初步记音：t͡ɕʰiə（已按现行体例转写）；汉字写法待定",
+      "notes": "汉字写法待定",
+      "internal": "2021 年初步记音：t͡ɕʰiə（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1011,7 +1053,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：t͡ɕʰiʌn（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "notes": "汉字写法待定",
+      "internal": "2021 年初步记音：t͡ɕʰiʌn（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1033,7 +1076,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-she-he-it_20261021-030505.m4a",
-      "notes": "2021 年初步记音：t͡ɕi（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：t͡ɕi（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1055,7 +1099,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-they_20261021-030523.m4a",
-      "notes": "2021 年初步记音：t͡ɕi-cən-ɲiən（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：t͡ɕi-cən-ɲiən（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1077,7 +1122,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：t͡ɕiou（未标声调，待按现行体例重新转写）；汉字写法待定",
+      "notes": "汉字写法待定",
+      "internal": "2021 年初步记音：t͡ɕiou（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1099,7 +1145,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：t͡ɕioupi（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：t͡ɕioupi（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1121,7 +1168,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：t͡ɕitʰy（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：t͡ɕitʰy（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1143,7 +1191,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：t͡ɕjʌnpʌn（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：t͡ɕjʌnpʌn（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1165,7 +1214,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-nine_20261021-030700.m4a",
-      "notes": "2021 年初步记音：t͡ɕy（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：t͡ɕy（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1187,7 +1237,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：t͡ɕy（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：t͡ɕy（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1209,7 +1260,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：tʰu（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：tʰu（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1231,7 +1283,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：tʰy（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：tʰy（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1253,7 +1306,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：tʰyfə（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：tʰyfə（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1275,7 +1329,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：tʰyna（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：tʰyna（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1297,7 +1352,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-six_20261021-030720.m4a",
-      "notes": "2021 年初步记音：ti（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ti（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1319,7 +1375,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：ti（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：ti（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1341,7 +1398,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：tu（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：tu（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1363,7 +1421,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-finless-eel_20261021-030355.m4a",
-      "notes": "2021 年初步记音：vaɱɕiuŋ（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：vaɱɕiuŋ（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1385,7 +1444,8 @@
         "2021 词表"
       ],
       "audio": "audio/dict/w21-yellow_20261021-030338.m4a",
-      "notes": "2021 年初步记音：vaŋ（已按现行体例转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：vaŋ（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1407,7 +1467,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：vu（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：vu（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1429,7 +1490,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：vʌn（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：vʌn（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1451,7 +1513,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：zei（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：zei（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1473,7 +1536,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：zi（未标声调，待按现行体例重新转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：zi（未标声调，待按现行体例重新转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },
@@ -1495,7 +1559,8 @@
         "2021 词表"
       ],
       "audio": "",
-      "notes": "2021 年初步记音：zuei（已按现行体例转写）",
+      "notes": "",
+      "internal": "2021 年初步记音：zuei（已按现行体例转写）",
       "speaker": "Juan Zhong（2021）",
       "verified": false
     },

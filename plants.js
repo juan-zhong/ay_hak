@@ -18,7 +18,7 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const ipa = (s) => (s ? `<span class="ipa">/${esc(s)}/</span>` : '');
+  const ipa = (s) => (s ? `<span class="ipa">[${esc(s)}]</span>` : '');
   const no = (i) => String(i + 1).padStart(2, '0');
 
   /* ---------- 语言 ---------- */
@@ -30,6 +30,8 @@
     document.documentElement.setAttribute('data-lang', l);
     document.documentElement.setAttribute('lang', l === 'en' ? 'en' : 'zh-CN');
     try { localStorage.setItem('ayhak.plants.lang', l); } catch { /* ignore */ }
+    // 回首页的链接跟着语言走：中文 → index-zh.html，English → index.html
+    document.querySelectorAll('[data-home]').forEach((a) => { a.setAttribute('href', `./${l === 'en' ? 'index.html' : 'index-zh.html'}${a.dataset.home}`); });
     if (rerender) rerender();
   }
   (() => {
@@ -111,6 +113,12 @@
   }
   function renderPlant(plants, dictById) {
     const id = new URL(location.href).searchParams.get('id');
+    if (id && !plants.some((p) => p.id === id)) {
+      document.title = `${t('找不到这种植物', 'Plant not found')} · AYHAK`;
+      $('#plant').innerHTML = `<p class="muted" style="text-align:center;padding:60px 0">${t('图集里还没有这种植物。', 'This plant is not in the atlas yet.')} <a class="ulink" href="./plants.html#plates">${t('回到图集', 'Back to the atlas')}</a></p>`;
+      const turn = $('#turn'); if (turn) turn.innerHTML = '';
+      return;
+    }
     const i = Math.max(0, plants.findIndex((p) => p.id === id));
     const p = plants[i];
     const ph = photosOf(p);
@@ -139,9 +147,9 @@
     const pg1 = `<div class="page sheet specimen">${head}
       <div class="ph">${f ? img(f, field(f, 'caption') || p.name, true) : pending('照片待补', 'photo pending')}<span class="ph-say">${sayBtn(p.dict, p.audio)}</span></div>
       <div class="labelblock">
-        <div class="first"><span class="k">${t('当地名称', 'Local name')}:</span><span class="v">${word(p.name || p.mandarin, p.dict)} ${ipa(p.ipa)} ${sayBtn(p.dict, p.audio, 'sm')}</span></div>
-        ${kv(t('地点', 'Place') + ':', esc(p.variety || col.place || ''))}
-        ${kv(t('图', 'Fig.') + ' 1:', f ? photoNote(f) : '')}
+        <div class="first"><span class="k">${t('当地名称：', 'Local name:')}</span><span class="v">${word(p.name || p.mandarin, p.dict)} ${ipa(p.ipa)} ${sayBtn(p.dict, p.audio, 'sm')}</span></div>
+        ${kv(t('地点：', 'Place:'), esc(p.variety || col.place || ''))}
+        ${kv(t('图 1：', 'Fig. 1:'), f ? photoNote(f) : '')}
       </div>${folio(0)}</div>`;
     // 1 右：听它怎么说
     const pg2 = `<div class="page panel-${color}">${head}
@@ -188,7 +196,7 @@
       <dl class="facts">${[
         [t('当地名称', 'Local name'), word(p.name, p.dict)],
         ['IPA', ipa(p.ipa) || pending('待补', 'pending')],
-        [t('普通话', 'Mandarin'), esc(field(p, 'mandarin'))],
+        [t('普通话', 'Mandarin'), esc(p.mandarin || '') + (lang() === 'en' && p.mandarin_en ? `${p.mandarin ? ' ' : ''}(${esc(p.mandarin_en)})` : '')],
         [t('英文', 'English'), esc(p.name_en || '')],
         [t('学名', 'Scientific name'), latin(p) + (p.latin_basis ? `<br><span class="small">${t('鉴定依据', 'Basis')}：${esc(p.latin_basis)}</span>` : '')],
         [t('科', 'Family'), esc(p.family || '')],
