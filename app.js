@@ -546,7 +546,8 @@
       } else cell += c;
     }
     if (cell !== '' || row.length) { row.push(cell); rows.push(row); }
-    const head = (rows.shift() || []).map((h) => h.trim().toLowerCase());
+    // 表头可以写成“hanzi 汉字”：只看第一个词，后面的中文说明忽略
+    const head = (rows.shift() || []).map((h) => (h.trim().split(/\s+/)[0] || '').toLowerCase());
     return rows.filter((r) => r.some((c) => c.trim())).map((r) => Object.fromEntries(head.map((h, i) => [h, r[i] ?? ''])));
   }
   const csvCell = (v) => /[",\n\r]/.test(v) ? `"${v.replace(/"/g, '""')}"` : v;
@@ -612,7 +613,8 @@
     });
     $('#btnExport').addEventListener('click', () => {
       const out = { name: 'AYHAK 安远话词典', exported: today(), entries: state.entries.map(clean) };
-      download(`ayhak-dict-${today()}.json`, JSON.stringify(out, null, 2), 'application/json');
+      // 文件名直接叫 dict.json，下载后可以原样上传到仓库的 data/ 文件夹
+      download('dict.json', JSON.stringify(out, null, 2) + '\n', 'application/json');
       $('#exportStatus').textContent = `已导出 ${state.entries.length} 条`;
     });
     $('#btnExportCSV').addEventListener('click', () => {
