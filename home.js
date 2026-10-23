@@ -3,6 +3,9 @@
   'use strict';
   const $ = (s, r = document) => r.querySelector(s);
   const lang = document.documentElement.lang.startsWith('zh') ? 'zh' : 'en';
+  // 播放 / 暂停图标用 SVG，不用 ▶ 字符（苹果设备会显示成彩色 emoji）
+  const PLAY = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg>';
+  const PAUSE = '<svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3h3v10H4zM9 3h3v10H9z"/></svg>';
   const T = {
     zh: { next: '下一次', bj: '北京时间', local: '你所在地是', none: '具体日期请看日历，或发邮件问我们。', wk: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'] },
     en: { next: 'Next meetup', bj: 'Beijing time', local: 'Your time:', none: 'See the calendar for dates, or email us.', wk: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'] },
@@ -76,16 +79,16 @@
       if (!s) return;
       const esc = (t) => String(t ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
       const zh = lang === 'zh';
-      box.innerHTML = `<button class="play" type="button" aria-label="${zh ? '播放' : 'Play'}">▶</button>
+      box.innerHTML = `<button class="play" type="button" aria-label="${zh ? '播放' : 'Play'}">${PLAY}</button>
         <span>${zh ? '听一句，跟着说：' : 'Listen and repeat: '}<b>${esc(rec.hanzi || s.zh)}</b> <span class="small">${esc(rec.place)}</span></span>
         <a href="./sentences.html">${zh ? '去五百句听更多 →' : 'More in the 500 sentences →'}</a>`;
       const audio = new Audio(); audio.preload = 'none';
       const btn = $('.play', box);
       btn.addEventListener('click', () => {
         if (!audio.src) audio.src = rec.file;
-        if (audio.paused) { audio.currentTime = 0; audio.play(); btn.textContent = '❚❚'; } else { audio.pause(); btn.textContent = '▶'; }
+        if (audio.paused) { audio.currentTime = 0; audio.play(); btn.innerHTML = PAUSE; } else { audio.pause(); btn.innerHTML = PLAY; }
       });
-      audio.addEventListener('ended', () => { btn.textContent = '▶'; });
+      audio.addEventListener('ended', () => { btn.innerHTML = PLAY; });
       box.hidden = false;
     } catch { /* 没有录音就不显示 */ }
   }

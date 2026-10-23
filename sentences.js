@@ -123,7 +123,7 @@
       </div>
       ${recs.length ? `<div class="s-recs">${recs.map((r) => `
         <button class="rec-chip" data-rid="${esc(r.rid)}" aria-label="播放 ${esc(r.place)} 的录音">
-          <span class="play-ico">▶</span><span>${esc(r.place)}${r.nick ? ` · ${esc(r.nick)}` : ''}</span>
+          <span class="play-ico"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg></span><span>${esc(r.place)}${r.nick ? ` · ${esc(r.nick)}` : ''}</span>
         </button>${r.hanzi ? `<span class="small rec-hz">${esc(r.hanzi)}</span>` : ''}`).join('')}</div>` : ''}
       ${mine.length ? `<p class="small mine">你已提交 ${mine.length} 条录音，审核后会出现在这里。</p>` : ''}
     </article>`;

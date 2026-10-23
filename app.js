@@ -290,7 +290,7 @@
         <td><b>${esc(r.form)}</b>${r.note ? `<br><span class="small">${esc(r.note)}</span>` : ''}</td>
         ${state.showIPA ? `<td>${ipaCell(r.ipa)}</td><td>${ipaCell(r.sandhi)}</td>` : ''}
         <td>${r.variety ? esc(r.variety) : '<span class="tag pending">待补</span>'}</td>
-        <td>${r.audio ? `<button class="play" data-play="${esc(r.audio)}" aria-label="播放 ${esc(r.form)} 的录音">▶</button>` : '<span class="small">—</span>'}</td>
+        <td>${r.audio ? `<button class="play" data-play="${esc(r.audio)}" aria-label="播放 ${esc(r.form)} 的录音"><svg class="ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 2.8v10.4L13 8z"/></svg></button>` : '<span class="small">—</span>'}</td>
         <td>${r.verified ? '<span class="tag done">已核实</span>' : '<span class="tag pending">待核实</span>'}</td>
       </tr>`).join('')}</tbody></table></div>
       ${e.variants.length ? '' : '<p class="small">还没有记录到其他地方的说法。</p>'}`;
