@@ -4,6 +4,7 @@
 |---|---|
 | 网站代码（HTML、CSS、JavaScript、`apps_script.gs`） | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)，见 `LICENSE` |
 | 文字、照片、词典与植物数据（`data/`、`images/` 及页面文字） | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/deed.zh-hans)：可以转载和改编，须署名“AYHAK 安远话记录计划”并注明来源链接，不得用于商业目的 |
+| 字体（`vendor/fonts/`：EB Garamond、Oswald、Gentium Plus） | 不属于本项目，按各自的 [SIL Open Font License 1.1](https://openfontlicense.org) 使用，许可证全文在同一文件夹 |
 | 录音（`audio/`） | **不适用上述授权。** 只在本网站播放，使用范围以每位发音人同意的为准。转载、下载再发布或用于研究，请先联系我们 |
 
 ## 发音人与贡献者
@@ -22,4 +23,5 @@ AYHAK 安远话记录计划. https://juan-zhong.github.io/ay_hak/ （访问日�
 |---|---|
 | Website code | CC0 1.0 (see `LICENSE`) |
 | Texts, photographs, dictionary and plant data | CC BY-NC 4.0: credit "AYHAK Anyuan Hakka Documentation Project" with a link; no commercial use |
+| Fonts (`vendor/fonts/`: EB Garamond, Oswald, Gentium Plus) | Third-party fonts used under the SIL Open Font License 1.1; license texts are in the same folder |
 | Audio recordings | Not covered by the above. Played on this site only, within the scope each speaker agreed to. Contact us before any other use, including research. |

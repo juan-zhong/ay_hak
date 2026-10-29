@@ -10,6 +10,7 @@
 @font-face { font-family: 'EB Garamond'; font-style: italic; font-weight: 400; font-display: swap; src: url('./vendor/fonts/eb-garamond-latin-400-italic.woff2') format('woff2'); }
 @font-face { font-family: 'EB Garamond'; font-style: normal; font-weight: 500; font-display: swap; src: url('./vendor/fonts/eb-garamond-latin-500-normal.woff2') format('woff2'); }
 @font-face { font-family: 'Oswald'; font-style: normal; font-weight: 600; font-display: swap; src: url('./vendor/fonts/oswald-latin-600-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Gentium Plus'; font-style: normal; font-weight: 400; font-display: swap; src: url('./vendor/fonts/GentiumPlus-Regular.woff2') format('woff2'); }
 
 :root {
   --table: #f4f1ea;          /* 书外面的底色 */
@@ -31,7 +32,7 @@
   --serif: 'EB Garamond', Georgia, 'Times New Roman', serif;
   --cond: 'Oswald', 'Arial Narrow', 'Helvetica Neue', 'PingFang SC', sans-serif;
   --mono: 'SFMono-Regular', Menlo, Consolas, monospace;
-  --ipa-font: 'Lucida Grande', 'Segoe UI', 'Noto Sans', 'DejaVu Sans', 'Arial Unicode MS', sans-serif;
+  --ipa-font: 'Gentium Plus', 'Charis SIL', 'Doulos SIL', 'Noto Serif', 'DejaVu Serif', serif;
   --page-pad: clamp(22px, 3.6vw, 52px);
 }
 * { box-sizing: border-box; }

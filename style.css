@@ -1,3 +1,4 @@
+@font-face { font-family: 'Gentium Plus'; font-style: normal; font-weight: 400; font-display: swap; src: url('./vendor/fonts/GentiumPlus-Regular.woff2') format('woff2'); }
 /* =========================================================
    AYHAK · 安远话 — shared stylesheet
    Visual language follows juan-zhong.github.io/me (fieldwork page):
@@ -31,8 +32,8 @@
   --font: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans SC', 'Source Han Sans SC', 'Microsoft YaHei', Arial, sans-serif;
   /* 全站一套无衬线：拉丁字母 Helvetica Neue，汉字苹方（与 juan-zhong.github.io/me 一致） */
   --head-font: var(--font);
-  /* IPA：用覆盖国际音标的无衬线系统字体，避免和正文混出两种字形；不加载外部字体（国内可能打不开） */
-  --ipa-font: 'Lucida Grande', 'Segoe UI', 'Noto Sans', 'DejaVu Sans', 'Helvetica Neue', Arial, sans-serif;
+  /* IPA：Gentium Plus（SIL，OFL），字体文件放在本站 vendor/fonts，不依赖外部字体服务 */
+  --ipa-font: 'Gentium Plus', 'Charis SIL', 'Doulos SIL', 'Noto Serif', 'DejaVu Serif', serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
